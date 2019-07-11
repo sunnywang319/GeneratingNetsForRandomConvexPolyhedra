@@ -37,11 +37,11 @@ I then used the graph to generate different paths in which a polyhedron could un
 To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using connections between vertices from the spanning tree. 
 
 I first created a function to find the normal vector to a plane using the cross product.
-<br>
+
 	normvector[coords_] := Cross[coords[[2]] - coords[[1]], coords[[3]] - coords[[1]]];  
-<br>
+
 I then use transformation matrices so that one face is lying on the xy plane, and convert the new mesh into a list of it's primitives. The next step is to begin unfolding the polyhedron from its bottom face using the list of spanning trees. To perform an algorithm on each step of the unfolding process, I use the function BreadthFirstScan, which can call the unfold function (defined next) whenever a new vertex is reached. Finally, the function returns a list a coordinates of the completed net.
-   <br> 
+ 
 	generatenetcoords[mesh_, tree_]:=
     
 		Block[{transformations, transformedmesh, meshlist, transformedmeshlist, normals, polygonfaces, transformedrotation},
@@ -67,9 +67,9 @@ I then use transformation matrices so that one face is lying on the xy plane, an
 				{"flat"}][[-1, All, 1]];
 			Chop[polygonfaces]
 	]
-<br>	
+	
 I then utilize the unfold function, which finds the intersection of two polygons, calculates the angle between them, and applies transformations using normal vectors to unfold the face. The function returns coordinates of the transformed polygons.
-<br>
+
 	unfold[meshlist_, normals_, transformedrotation_][u_, v_, _] /; (u =!= v) :=
 
 		Block[{edgecoord1, edgecoord2, angle, rotation},
@@ -80,7 +80,6 @@ I then utilize the unfold function, which finds the intersection of two polygons
 			transformedrotation[u] = transformedrotation[v] @* rotation;
 			Sow[transformedrotation[u] @ meshlist[[u]], "flat"];
 	]
-    <br>
     
 ## Generating Possible Nets
 <br>
