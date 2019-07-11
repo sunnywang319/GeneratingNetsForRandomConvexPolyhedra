@@ -109,3 +109,7 @@ Finally, we put all the functions together. The program iterates through every s
 
 ## Outputs
 Upon taking a polyhedron object in as its argument, the function returns a 3D graphic of the original polyhedron and a list of all possible nets.
+[INSERT Image]
+
+## Summary 
+With the help of my mentor, I was able to create a program that creates non-overlapping nets for random polyhedra. The process consisted of extracting graphs, creating spanning trees, generating nets, and checking for overlap. The function returns several successful results for every random polyhedron that I tested, although the program does run quite slowly for polyhedra with high numbers of faces, as the complexity of the graph and number of spanning trees increase drastically as the number of faces increase. From this project, I acquired knowledge of many aspects of three dimensional modeling and geometric transformations, and I hope to work on extensions of this project in the future.
