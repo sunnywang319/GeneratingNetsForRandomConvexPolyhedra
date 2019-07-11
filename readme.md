@@ -1,6 +1,6 @@
 ## Abstract
 <br>
-This project is a visualization of Shephard's conjecture, which states that every convex polyhedron admits a self-nonoverlapping unfolding. The conjecture remains unsolved to this day. Currently, there exists unfolding data for several predefined polyhedra in the Wolfram Language, and my goal is to create a function that can do this for any random convex polyhedron. I chose this project because of my love for origami and art, and my interest in 
+This project is a visualization of Shephard's conjecture, which states that every convex polyhedron admits a self-nonoverlapping unfolding. The conjecture remains unsolved to this day. Currently, there exists unfolding data for several predefined polyhedra in the Wolfram Language, and my goal is to create a function that can do this for any random convex polyhedron. I chose this project because of my love for origami and art, and my interest in 3D visualization.
 
 ## Generating a Graph for Connectivity Between Faces
 <br>
