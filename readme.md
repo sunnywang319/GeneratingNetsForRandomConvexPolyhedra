@@ -42,7 +42,7 @@ I first created a function to find the normal vector to a plane using the cross 
 
 	normvector[coords_] := Cross[coords[[2]] - coords[[1]], coords[[3]] - coords[[1]]];  
 
-I then use transformation matrices so that one face is lying on the xy plane, and convert the new mesh into a list of it's primitives. The next step is to begin unfolding the polyhedron from its bottom face using the list of spanning trees. To perform an algorithm on each step of the unfolding process, I use the function BreadthFirstScan, which can call the unfold function (defined next) whenever a new vertex is reached. Finally, the function returns a list a coordinates of the completed net.
+I then use transformation matrices so that one face is lying on the xy plane, and convert the new mesh into a list of it's primitives. The next step is to begin unfolding the polyhedron from its bottom face using the list of spanning trees. To perform an algorithm on each step of the unfolding process, I use the function BreadthFirstScan, which can call the unfold function (discussed next) whenever a new vertex is reached. Finally, the function returns a list a coordinates of the completed net.
  
 	generatenetcoords[mesh_, tree_]:=
     
@@ -70,7 +70,7 @@ I then use transformation matrices so that one face is lying on the xy plane, an
 			Chop[polygonfaces]
 	]
 	
-I then utilize the unfold function, which finds the intersection of two polygons, calculates the angle between them, and applies transformations using normal vectors to unfold the face. The function returns coordinates of the transformed polygons.
+The unfold function operates by finding the intersection of two polygons, calculating the angle between them, and applying transformations using normal vectors to unfold the face. The function returns coordinates of the transformed polygons.
 
 	unfold[meshlist_, normals_, transformedrotation_][u_, v_, _] /; (u =!= v) :=
 
