@@ -6,22 +6,22 @@ This project is a visualization of Shephard's conjecture, which states that ever
 <br>
 The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
 <br>
-    polyhedronfacegraph[polyhedron_]:= 
+	polyhedronfacegraph[polyhedron_]:= 
     
-    	Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
+		Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
 
-	dualpolyhedron = DualPolyhedron[polyhedron];  
-	vertexlist = dualpolyhedron[[2]];   
+		dualpolyhedron = DualPolyhedron[polyhedron];  
+		vertexlist = dualpolyhedron[[2]];   
 
-	vertexpairings = Flatten[Table[Append[
-	    
-		Partition[vertexlist[[n]], 2, 1], 
-		{Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  
-		{n, 1, Length[vertexlist]}], 1];
+		vertexpairings = Flatten[Table[Append[
 
-	sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; 
+			Partition[vertexlist[[n]], 2, 1], 
+			{Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  
+			{n, 1, Length[vertexlist]}], 1];
 
-    Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
+		sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; 
+
+	        Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
     ]
     
 [PUT IMAGE HERE]
