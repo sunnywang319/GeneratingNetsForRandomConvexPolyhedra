@@ -113,3 +113,9 @@ Upon taking a polyhedron object in as its argument, the function returns a 3D gr
 
 ## Summary 
 With the help of my mentor, I was able to create a program that creates non-overlapping nets for random polyhedra. The process consisted of extracting graphs, creating spanning trees, generating nets, and checking for overlap. The function returns several successful results for every random polyhedron that I tested, although the program does run quite slowly for polyhedra with high numbers of faces, as the complexity of the graph and number of spanning trees increase drastically as the number of faces increase. From this project, I acquired knowledge of many aspects of three dimensional modeling and geometric transformations, and I hope to work on extensions of this project in the future.
+
+## Future Work
+A possible extension would be applying a similar algorithm to non convex polyhedra and showing that it is impossible to generate a non overlapping net in some cases. Additionally, optimization algorithms could also be implemented to speed up the unfolding process. For example, another function could also be created to generate the first net that is valid, which would greatly increase speed if only one net is desired.
+
+## Acknowledgements
+I would like to sincerely thank my mentor, Jeremy Stratton-Smith, for providing advice and help throughout the entire project process. I would also like to thank Chip Hurst for his unfolding algorithm and tips for 3D transformations. Lastly, I would like to thank the Wolfram Summer Camp team for providing me with this opportunity to pursue a project of my choice.
