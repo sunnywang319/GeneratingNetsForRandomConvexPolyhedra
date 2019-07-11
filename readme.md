@@ -6,6 +6,7 @@ This project is a visualization of Shephard's conjecture, which states that ever
 <br>
 The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
 
+
 	polyhedronfacegraph[polyhedron_]:= 
     
 		Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
@@ -23,6 +24,7 @@ The first step was to create a graph that captures the relationship between face
 
 	        Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
     ]
+    
     
 [PUT IMAGE HERE]
 
@@ -84,7 +86,7 @@ I then utilize the unfold function, which finds the intersection of two polygons
 ## Generating Possible Nets
 <br>
 Finally, we put all the functions together. The program iterates through every spanning tree to produce nets using netcoordinates. The third element of each coordinate is deleted to convert the net to 2D. Each net is then tested for overlap by calculating the surface area of the original polyhedron and comparing it to the surface area of the net. Only nets where the two surface areas are equal are appended to the list that is returned. 
-<br>
+
 	generateallnets[polyhedron_] := 
     
 	    Block[{netcoords, trees, graph, mesh, surfacearea, netsurfacearea, goodnets},
@@ -111,7 +113,7 @@ Finally, we put all the functions together. The program iterates through every s
 
 	    Row[{Graphics3D[polyhedron], goodnets}]
 	]
-<br>
+
 
 ## Outputs
 <br>
