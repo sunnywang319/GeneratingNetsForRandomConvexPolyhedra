@@ -1,8 +1,8 @@
-## Abstract##
+## Abstract
 
 This project is essentially a visualization of Shephard's conjecture, which states that every convex polyhedron admits a self-nonoverlapping unfolding. Currently, there exists unfolding data for several predefined polyhedra in the Wolfram Language, and my goal is to create a function that can do this for any random convex polyhedron. I chose this project because of my love for origami and interest in 3D modeling.
 
-## Generating a graph for the faces of the polyhedron
+## Generating a Graph for Connectivity Between Faces
 
 The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
 
@@ -33,10 +33,36 @@ I then used the graph to generate different paths in which a polyhedron could un
     generatetrees[graph_] := Table[FindSpanningTree[{graph, n}], {n, 1, VertexCount[graph]}]
 
 ## Generating Net Coordinates
-To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using the vertices on the spanning tree. 
+To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using vertices connections from the spanning tree. 
 
 ## Generating Possible Nets
-Here I put everything together then iterates through every spanning tree to produce a net using unfold. Each net is tested for overlap by calculating the surface area of the original polyhedron and comparing it to the surface area of the net. Only nets where the two surface areas are equal are appended to the list that is returned.
+Finally, we put all the functions together. The program iterates through every spanning tree to produce a net using netcoordinates. Each net is then tested for overlap by calculating the surface area of the original polyhedron and comparing it to the surface area of the net. Only nets where the two surface areas are equal are appended to the list that is returned.
+
+    generateallnets[polyhedron_] := 
+    Block[{netcoords, trees, graph, mesh, surfacearea, netsurfacearea, goodnets},
+
+    mesh = BoundaryDiscretizeGraphics[polyhedron];    (* Assign values using other functions *)
+    graph = polyhedronfacegraph[polyhedron];
+    trees = generatetrees[graph];
+
+    goodnets = {};   (* Start with an empty list of non overlapping nets *)
+
+    Table[     (* Iterate through every spanning tree in the list of trees *)
+
+    netcoords = First@generatenetcoords[mesh, trees[[treeposition]]];        (* generates coordinates for  *)
+    netcoords = Table[Delete[netcoords[[n, m]], {3}], {n, 1, Length[netcoords]}, {m, 1, 3}];        (* Delete the third element of each coordinate so it becomes two dimensional *)
+
+    surfacearea = SurfaceArea[polyhedron];
+    netsurfacearea = RegionMeasure[RegionUnion[Polygon /@ netcoords]];
+
+    If[surfacearea == netsurfacearea,             (* Check if the two surface areas are equal *)
+    AppendTo[goodnets, Graphics[{Hue[0.94, 0.22, 1.], EdgeForm[{Thin, Pink}], Polygon /@ netcoords}]]         (* Append it to the list *)
+    ];,  
+
+    {treeposition, 1, Length[trees]}];    
+
+    Row[{Graphics3D[polyhedron], goodnets}]
+    ]
 
 ## Outputs
 Upon taking a polyhedron object in as its argument, generateallnets returns a 3D graphic of the original polyhedron and a list of all possible nets.
