@@ -1,55 +1,32 @@
-This is a sample student repository for the Wolfram Summer School, you should clone or fork this repository to get started.
+##Abstract
 
-## GETTING STARTED
+This project is essentially a visualization of Shephard's conjecture, which states that every convex polyhedron admits a self-nonoverlapping unfolding. Currently, there exists unfolding data for several predefined polyhedra in the Wolfram Language, and my goal is to create a function that can do this for any random convex polyhedron. I chose this project because of my love for origami and interest in 3D modeling.
 
-### Create a GitHub account
-https://github.com/join
+##Generating a graph for the faces of the polyhedron
 
-### Create a repo to submit your work
-fork this repo, clone local copy, and push your updates to GitHub.com (see below for more details)
+The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
 
-### Give your instructor write permissions
-you need to give write permission to that repo to your tutor and to @WolframSummerSchoolProjects. Additionally please give write permissions to @kylekeane and @swedewhite for organizational purposes (you can revoke these at the end of school).
+    ClearAll[polyhedronfacegraph];
+    
+    polyhedronfacegraph[polyhedron_]:= 
+    Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
+    
+    	 dualpolyhedron = DualPolyhedron[polyhedron];  (* Generate the dual polyhedron *)
+         vertexlist = dualpolyhedron[[2]];   
+         
+         vertexpairings = Flatten[Table[
+         Append[
+         Partition[vertexlist[[n]], 2, 1], (* Partitions into groups of two *)
+         {Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  (* Appends the case where the last should be connected to the first *)
+         {n, 1, Length[vertexlist]}], 
+         1];
+         
+         sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; (* Deletes duplicates by sorting them first *)
+    
+    Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] (* Graphs the sorted vertices and labels it *)
+    ]
+[PUT IMAGE HERE]
 
-## CONTENT
-
-### "Final Project" folder
-the place to submit your entire final project, including draft work if you want. There are templates and instructions in the subdirectories described in the readme.md of the "Final Project" folder.
-
-### "Homework" folder
-the place to submit your homework assignment (computational essay). There are templates and instructions in the subdirectories described in the readme.md of the "Homework" folder.
-
-### "Contributions" folder
-the place to store extra work products such as draft submissions to the data repo, function repo, neural net repo, and notebook archive. Follow the conventions described in the readme.md of that directory. There are instructions in the readme.md of the "Contributions" folder.
-
-### "Wolfram Community Post" folder
-the place to save versions of your community post so you can collaborate with your mentor if needed. There are instructions in the readme.md of the "Wolfram Community Post" folder.
-
-## MORE INFO ABOUT USING GITHUB
-
-### Download and install a Git UI
-*On OSX / Wndows*:  
-Download and install github desktop:  
-https://desktop.github.com  
-
-*On Ubuntu*:  
-Download and install git kraken:  
-https://www.gitkraken.com  
-Login and authenticate with GitHub  
-https://support.gitkraken.com/integrations/github
-
-### Install command line utility (optional)
-https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-
-### Clone the repo locally
-by clicking on the button CLONE OR DOWNLOAD and then to OPEN IN DESKTOP
-
-### Edit your files locally
-work on your computer and push to the cloud when you are ready to save your work
-
-### Write/edit readme files using MarkDown
-a nice cheatsheet can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
-the readme should contain:
-1. what your project is about
-2. how to run your code
-3. examples, code documentation, etc
+##Generating Spanning Trees 
+I then used the graph to generate different paths in which a polyhedron could unfold. One way to do this is by using a spanning tree, a tree generated from a graph that retains the same amount of vertices while having the minimum amount of edges. This essentially creates a simple version of what the final net should look like. Each vertex represents a face, and connections between them signify that they are adjacent. It is important to note that not every spanning tree will correspond to a non overlapping net, which is why I generate a spanning tree from every possible vertex.
+    generatetrees[graph_] := Table[FindSpanningTree[{graph, n}], {n, 1, VertexCount[graph]}]
