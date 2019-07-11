@@ -6,25 +6,24 @@ This project is essentially a visualization of Shephard's conjecture, which stat
 
 The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
 
-    ClearAll[polyhedronfacegraph];
-    
     polyhedronfacegraph[polyhedron_]:= 
-    Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
     
-    	 dualpolyhedron = DualPolyhedron[polyhedron];  (* Generate the dual polyhedron *)
-         vertexlist = dualpolyhedron[[2]];   
-         
-         vertexpairings = Flatten[Table[
-         Append[
-         Partition[vertexlist[[n]], 2, 1], (* Partitions into groups of two *)
-         {Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  (* Appends the case where the last should be connected to the first *)
-         {n, 1, Length[vertexlist]}], 
-         1];
-         
-         sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; (* Deletes duplicates by sorting them first *)
-    
-    Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] (* Graphs the sorted vertices and labels it *)
+    	Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
+
+	    dualpolyhedron = DualPolyhedron[polyhedron];  
+	    vertexlist = dualpolyhedron[[2]];   
+
+	    vertexpairings = Flatten[Table[Append[
+	    
+		 Partition[vertexlist[[n]], 2, 1], 
+		 {Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  
+		 {n, 1, Length[vertexlist]}], 1];
+
+		 sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; 
+
+    Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
     ]
+    
 [PUT IMAGE HERE]
 
 ## Generating Spanning Trees 
@@ -35,7 +34,7 @@ I then used the graph to generate different paths in which a polyhedron could un
 ## Generating Net Coordinates
 To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using vertices connections from the spanning tree. 
 
-I first created a function to find the normal vector to a plane.
+I first created a function to find the normal vector to a plane using the cross product.
 
     normvector[coords_] := Cross[coords[[2]] - coords[[1]], coords[[3]] - coords[[1]]];  
     
@@ -84,13 +83,13 @@ Finally, we put all the functions together. The program iterates through every s
     generateallnets[polyhedron_] := 
     Block[{netcoords, trees, graph, mesh, surfacearea, netsurfacearea, goodnets},
 
-    mesh = BoundaryDiscretizeGraphics[polyhedron];    (* Assign values using other functions *)
+    mesh = BoundaryDiscretizeGraphics[polyhedron];   
     graph = polyhedronfacegraph[polyhedron];
     trees = generatetrees[graph];
 
-    goodnets = {};   (* Start with an empty list of non overlapping nets *)
+    goodnets = {};   
 
-    Table[     (* Iterate through every spanning tree in the list of trees *)
+    Table[     
 
     netcoords = First@generatenetcoords[mesh, trees[[treeposition]]];        (* generates coordinates for  *)
     netcoords = Table[Delete[netcoords[[n, m]], {3}], {n, 1, Length[netcoords]}, {m, 1, 3}];        (* Delete the third element of each coordinate so it becomes two dimensional *)
