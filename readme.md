@@ -35,6 +35,49 @@ I then used the graph to generate different paths in which a polyhedron could un
 ## Generating Net Coordinates
 To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using vertices connections from the spanning tree. 
 
+I first created a function to find the normal vector to a plane.
+
+    normvector[coords_] := Cross[coords[[2]] - coords[[1]], coords[[3]] - coords[[1]]];  
+    
+I then use Chip's magical unfolding algorithm.
+
+    unfold[meshlist_, normals_, transformedrotation_][u_, v_, _] /; (u =!= v) :=
+
+	Block[{edgecoord1, edgecoord2, angle, rotation},
+		{edgecoord1, edgecoord2} = Intersection @@ meshlist[[{u, v}]]; 
+		angle = DihedralAngle[{edgecoord1, edgecoord2}, normals[[{u, v}]]];
+		rotation = RotationTransform[angle, edgecoord2 - edgecoord1, Mean[{edgecoord1, edgecoord2}]];
+		transformedrotation[u] = transformedrotation[v]@*rotation;
+		Sow[transformedrotation[u] @ meshlist[[u]], "flat"];
+	]
+    
+I then use transformation matrices so that one face is lying on the xy plane, then apply unfold using the list of spanning trees.
+    
+    generatenetcoords[mesh_, tree_]:=
+	Block[{transformations, transformedmesh, meshlist, transformedmeshlist, normals, polygonfaces, transformedrotation},
+		polygonfaces = Reap[
+		
+		    meshlist = MeshPrimitives[mesh, 2][[All, 1]];
+		    
+			transformations =      (* Creates a transformation matrix *)
+			RotationTransform[{normvector[meshlist[[1]]], {0, 0, -1}}] @*     (* rotates the normal vector of the face so that it is pointing down *)
+			TranslationTransform[-PropertyValue[{mesh, {2, 1}}, MeshCellCentroid]];   (* translates the face *)
+			
+			transformedmesh = TransformedRegion[mesh, transformations];      (* Applies the transformation matrix *)
+			
+			transformedmeshlist = MeshPrimitives[transformedmesh, 2][[All, 1]];      (* Creates mesh primitives for the transformed mesh *)
+			
+			normals = normvector[#] &/@ transformedmeshlist;     (* Finds all the normal vectors for the faces *)
+
+			Sow[transformedmeshlist[[1]], "flat"];
+			
+			transformedrotation[1] = TransformationFunction[IdentityMatrix[4]];
+			
+			BreadthFirstScan[tree, 1, "DiscoverVertex" -> unfold[transformedmeshlist, normals, transformedrotation]];,   (* Runs unfold on each discovered vertex *)
+			 {"flat"}][[-1, All, 1]];
+		Chop[polygonfaces]
+	]
+    
 ## Generating Possible Nets
 Finally, we put all the functions together. The program iterates through every spanning tree to produce a net using netcoordinates. Each net is then tested for overlap by calculating the surface area of the original polyhedron and comparing it to the surface area of the net. Only nets where the two surface areas are equal are appended to the list that is returned.
 
@@ -64,5 +107,6 @@ Finally, we put all the functions together. The program iterates through every s
     Row[{Graphics3D[polyhedron], goodnets}]
     ]
 
+
 ## Outputs
-Upon taking a polyhedron object in as its argument, generateallnets returns a 3D graphic of the original polyhedron and a list of all possible nets.
+Upon taking a polyhedron object in as its argument, the function returns a 3D graphic of the original polyhedron and a list of all possible nets.
