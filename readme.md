@@ -10,16 +10,16 @@ The first step was to create a graph that captures the relationship between face
     
     	Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
 
-	    dualpolyhedron = DualPolyhedron[polyhedron];  
-	    vertexlist = dualpolyhedron[[2]];   
+	dualpolyhedron = DualPolyhedron[polyhedron];  
+	vertexlist = dualpolyhedron[[2]];   
 
-	    vertexpairings = Flatten[Table[Append[
+	vertexpairings = Flatten[Table[Append[
 	    
-		 Partition[vertexlist[[n]], 2, 1], 
-		 {Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  
-		 {n, 1, Length[vertexlist]}], 1];
+		Partition[vertexlist[[n]], 2, 1], 
+		{Last[vertexlist[[n]]], First[vertexlist[[n]]]}],  
+		{n, 1, Length[vertexlist]}], 1];
 
-		 sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; 
+	sortedvertices = Sort /@ vertexpairings // DeleteDuplicates; 
 
     Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
     ]
