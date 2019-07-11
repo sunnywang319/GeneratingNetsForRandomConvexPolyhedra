@@ -5,7 +5,7 @@ This project is a visualization of Shephard's conjecture, which states that ever
 ## Generating a Graph for Connectivity Between Faces
 <br>
 The first step was to create a graph that captures the relationship between faces of the polyhedron so that it could be used later to generate the net. The built-in function DualPolyhedron converts the polyhedron to one where each vertex corresponds to a face on the original. I then extracted the vertices of the dual polyhedron and partitioned and sorted them, allowing me to create a graph using those vertices.
-<br>
+
 	polyhedronfacegraph[polyhedron_]:= 
     
 		Block[{dualpolyhedron, vertexlist, vertexpairings, sortedvertices},
@@ -29,9 +29,9 @@ The first step was to create a graph that captures the relationship between face
 ## Generating Spanning Trees 
 <br>
 I then used the graph to generate different paths in which a polyhedron could unfold. One way to do this is by using a spanning tree, a tree generated from a graph that retains the same amount of vertices while having the minimum amount of edges. This essentially creates a simple version of what the final net should look like. Each vertex represents a face, and connections between them signify that they are adjacent. It is important to note that not every spanning tree will correspond to a non overlapping net, which is why I generate a spanning tree from every possible vertex.
-<br>
+
 	generatetrees[graph_] := Table[FindSpanningTree[{graph, n}], {n, 1, VertexCount[graph]}]
-<br>
+	
 ## Generating Net Coordinates
 <br>
 To create the net of the polyhedron, I had to implement an unfolding algorithm. My first approach was to extract each face individually, but that ended up complicating the transformations. My final algorithm consisted of applying one transformation to move one face to the xy plane, then unfolding using connections between vertices from the spanning tree. 
