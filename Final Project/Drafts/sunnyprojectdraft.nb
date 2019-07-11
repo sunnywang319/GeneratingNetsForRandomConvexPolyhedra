@@ -1,0 +1,4145 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[    184459,       4137]
+NotebookOptionsPosition[    182027,       4093]
+NotebookOutlinePosition[    182400,       4109]
+CellTagsIndexPosition[    182357,       4106]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ StyleBox["Outline", "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "Decompose"}], " ", "a", " ", "polyhedron", " ", "into", " ",
+     "its", " ", "vertices"}], " "}], "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", 
+    StyleBox[
+     RowBox[{
+      StyleBox[
+       StyleBox["M", "Section",
+        FontSize->18], "Section",
+       FontSize->18], "ak", 
+      StyleBox[
+       StyleBox[
+        StyleBox[
+         StyleBox["e", "Section",
+          FontSize->18], "Section",
+         FontSize->18], "Section",
+        FontSize->18], "Section",
+       FontSize->18]}]]}], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    StyleBox["a", "Section",
+     FontSize->18], "Section",
+    FontSize->18], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["f", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "unctio", 
+     StyleBox[
+      StyleBox[
+       StyleBox["n", "Section",
+        FontSize->18], "Section",
+       FontSize->18], "Section",
+      FontSize->18]}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    StyleBox[
+     RowBox[{"t", 
+      StyleBox["o", "Section",
+       FontSize->18]}], "Section",
+     FontSize->18], "Section",
+    FontSize->18], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["g", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "enerat", 
+     StyleBox[
+      StyleBox[
+       StyleBox["e", "Section",
+        FontSize->18], "Section",
+       FontSize->18], "Section",
+      FontSize->18]}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    StyleBox["a", "Section",
+     FontSize->18], "Section",
+    FontSize->18], 
+   StyleBox[" ", "Section",
+    FontSize->18], "graph", " ", "for", " ", 
+   StyleBox[
+    RowBox[{"th", 
+     StyleBox[
+      StyleBox["e", "Section",
+       FontSize->18], "Section",
+      FontSize->18]}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], "dual", " ", "polyhedron"}], "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", 
+    StyleBox[
+     RowBox[{"Trans", 
+      StyleBox["f", "Section",
+       FontSize->18], "or", 
+      StyleBox["m", "Section",
+       FontSize->18]}]]}], " ", "the", " ", "polyhedron", " ", 
+   StyleBox[
+    RowBox[{
+     StyleBox["u", "Section",
+      FontSize->18], "sing"}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["r", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "otation"}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["a", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "nd"}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["t", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "ranslation"}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], "so", " ", "that", " ", "one", " ", "face", " ", "is", " ",
+    "touching", " ", "the", " ", "ground"}], "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", "Rotate"}], " ", "and", " ", "translate", " ", "each", " ", 
+   "adjacent", " ", "face", " ", "so", " ", "that", " ", "they", " ", "are", 
+   " ", "touching", " ", "the", " ", "ground"}], "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "Order"}], " ", "them", " ", "using", " ", "the", " ", 
+    "branches", " ", "of", " ", "the", " ", "spanning", " ", "tree", " ", 
+    "of", " ", "the", " ", "graph"}], " "}], "Section",
+  FontSize->18], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", 
+    StyleBox[
+     RowBox[{
+      StyleBox[
+       StyleBox["C", "Section",
+        FontSize->18], "Section",
+       FontSize->18], "reate"}]]}], " ", 
+   StyleBox["all", "Section",
+    FontSize->18], 
+   StyleBox[" ", "Section",
+    FontSize->18], 
+   StyleBox[
+    RowBox[{
+     StyleBox[
+      StyleBox["p", "Section",
+       FontSize->18], "Section",
+      FontSize->18], "ossible"}]], " ", "nets", " ", "from", " ", "that"}], 
+  "Section",
+  FontSize->18], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", "Check"}], " ", "for", " ", "overlaps", " ", "and", " ", 
+   "delete", " ", "those"}], "Section",
+  FontSize->18], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"-", "Return"}], " ", "one", " ", "random", " ", 
+   StyleBox[
+    RowBox[{
+     StyleBox["v", "Section",
+      FontSize->18], "alid"}]], 
+   StyleBox[" ", "Section",
+    FontSize->18], "net"}], "Section",
+  FontSize->18]}], "Input",
+ CellChangeTimes->{{3.7717556151731725`*^9, 3.771755694087211*^9}, {
+  3.7717557353668613`*^9, 3.7717557441793365`*^9}, {3.7717558506468043`*^9, 
+  3.7717558509001293`*^9}, {3.7717605154862957`*^9, 
+  3.7717605737426043`*^9}},ExpressionUUID->"42c3fc0f-2975-4372-89a3-\
+7b0e9c979d95"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyhedronfacegraph", "[", "polyhedron_", "]"}], ":=", " ", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "dualpolyhedron", ",", " ", "vertexlist", ",", " ", "vertexpairings", 
+      ",", " ", "sortedvertices"}], "}"}], ",", "\[IndentingNewLine]", "\n", 
+    "\t ", 
+    RowBox[{
+     RowBox[{"dualpolyhedron", " ", "=", " ", 
+      RowBox[{"DualPolyhedron", "[", "polyhedron", "]"}]}], ";", 
+     "\[IndentingNewLine]", "     ", 
+     RowBox[{"vertexlist", " ", "=", " ", 
+      RowBox[{"dualpolyhedron", "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "\n", "     ", 
+     "\[IndentingNewLine]", "     ", 
+     RowBox[{"vertexpairings", " ", "=", " ", 
+      RowBox[{"Flatten", "[", "\n", "     ", 
+       RowBox[{
+        RowBox[{"Table", "[", "\n", "     ", 
+         RowBox[{
+          RowBox[{"Append", "[", "\n", "     ", 
+           RowBox[{
+            RowBox[{"Partition", "[", 
+             RowBox[{
+              RowBox[{"vertexlist", "[", 
+               RowBox[{"[", "n", "]"}], "]"}], ",", " ", "2", ",", " ", "1"}],
+              "]"}], ",", "\n", "     ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Last", "[", 
+               RowBox[{"vertexlist", "[", 
+                RowBox[{"[", "n", "]"}], "]"}], "]"}], ",", 
+              RowBox[{"First", "[", 
+               RowBox[{"vertexlist", "[", 
+                RowBox[{"[", "n", "]"}], "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+          "\n", "     ", 
+          RowBox[{"{", 
+           RowBox[{"n", ",", " ", "1", ",", " ", 
+            RowBox[{"Length", "[", "vertexlist", "]"}]}], "}"}]}], "]"}], ",",
+         " ", "\n", "     ", "1"}], "]"}]}], ";", "\n", "     ", 
+     "\[IndentingNewLine]", "     ", 
+     RowBox[{"sortedvertices", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"Sort", " ", "/@", " ", "vertexpairings"}], " ", "//", " ", 
+       "DeleteDuplicates"}]}], ";", "\n", "\[IndentingNewLine]", 
+     RowBox[{"Graph", "[", 
+      RowBox[{
+       RowBox[{"UndirectedEdge", "@@@", "sortedvertices"}], ",", 
+       RowBox[{"VertexLabels", " ", "\[Rule]", " ", "\"\<Name\>\""}]}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Code",
+ CellChangeTimes->{{3.771601963953556*^9, 3.771601988336049*^9}, {
+  3.771602028325727*^9, 3.77160206466757*^9}, {3.7716021096754637`*^9, 
+  3.7716022972399006`*^9}, {3.7716023631441092`*^9, 3.771602383741837*^9}, {
+  3.7716025084266634`*^9, 3.771602749434835*^9}, {3.7716913822825613`*^9, 
+  3.7716914385362015`*^9}, {3.771692430186652*^9, 3.77169245412607*^9}, {
+  3.7717248703261776`*^9, 3.77172487744613*^9}, {3.771791096707431*^9, 
+  3.771791101895564*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"e69950e2-ef85-4786-af8b-dcaa6db9b247"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"normvector", "[", "coords_", "]"}], " ", ":=", "\n", 
+   RowBox[{"Cross", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"coords", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], " ", "-", " ", 
+      RowBox[{"coords", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"coords", "[", 
+       RowBox[{"[", "3", "]"}], "]"}], " ", "-", " ", 
+      RowBox[{"coords", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ";"}]], "Code",
+ CellChangeTimes->{{3.771601963953556*^9, 3.771601988336049*^9}, {
+  3.771602028325727*^9, 3.77160206466757*^9}, {3.7716021096754637`*^9, 
+  3.7716022972399006`*^9}, {3.7716023631441092`*^9, 3.771602383741837*^9}, {
+  3.7716025084266634`*^9, 3.771602749434835*^9}, {3.7716913822825613`*^9, 
+  3.7716914385362015`*^9}, {3.771692430186652*^9, 3.7716924613799553`*^9}, {
+  3.771780317228669*^9, 3.771780323107957*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"d782312f-9ff0-4dbe-8ed2-5f60b2d8d4aa"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"extractfaces", "[", "polyhedron_", "]"}], " ", ":=", "\n", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "transform", ",", "coordinatelist", ",", "vertexassoc", ",", 
+       "edgeassoc", ",", "coordinategroups", ",", "vertexlist", ",", 
+       "transformedvertices", ",", "polygoncoords"}], "}"}], ",", "\n", "\n", 
+     RowBox[{
+      RowBox[{"coordinatelist", " ", "=", " ", 
+       RowBox[{"polyhedron", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"vertexlist", " ", "=", " ", 
+       RowBox[{"polyhedron", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\n", "\n", 
+      RowBox[{"vertexassoc", " ", "=", " ", 
+       RowBox[{"Merge", "[", 
+        RowBox[{
+         RowBox[{"Join", "@", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"<|", 
+             RowBox[{"n", " ", "\[Rule]", " ", 
+              RowBox[{"coordinatelist", "[", 
+               RowBox[{"[", "n", "]"}], "]"}]}], "|>"}], ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"n", ",", " ", "1", ",", " ", 
+              RowBox[{"Length", "[", "coordinatelist", "]"}]}], "}"}]}], 
+           "]"}]}], ",", "Total"}], "]"}]}], ";", "\n", 
+      RowBox[{"coordinategroups", " ", "=", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"vertexassoc", " ", "/@", " ", 
+          RowBox[{"vertexlist", "[", 
+           RowBox[{"[", "n", "]"}], "]"}]}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", " ", "1", ",", " ", 
+           RowBox[{"Length", "[", "vertexlist", "]"}]}], "}"}]}], "]"}]}], 
+      ";", "\n", 
+      RowBox[{"edgeassoc", " ", "=", " ", 
+       RowBox[{"Merge", "[", 
+        RowBox[{
+         RowBox[{"Join", "@", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"<|", 
+             RowBox[{"n", " ", "\[Rule]", " ", 
+              RowBox[{
+               RowBox[{"EdgeList", "[", 
+                RowBox[{"polyhedronfacegraph", "@", "polyhedron"}], "]"}], 
+               "[", 
+               RowBox[{"[", "n", "]"}], "]"}]}], "|>"}], ",", "\n", 
+            RowBox[{"{", 
+             RowBox[{"n", ",", "1", ",", 
+              RowBox[{"Length", "[", 
+               RowBox[{"EdgeList", "[", 
+                RowBox[{"polyhedronfacegraph", "@", "polyhedron"}], "]"}], 
+               "]"}]}], "}"}]}], "]"}]}], ",", "Total"}], "]"}]}], ";", "\n", 
+      "\n", 
+      RowBox[{
+       RowBox[{"transform", "[", "n_", "]"}], " ", ":=", " ", "\n", 
+       RowBox[{"N", "@", 
+        RowBox[{"RotationTransform", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"normvector", "[", 
+             RowBox[{"coordinategroups", "[", 
+              RowBox[{"[", "n", "]"}], "]"}], "]"}], ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], "}"}], ",", " ", 
+          RowBox[{"Mean", "[", 
+           RowBox[{"coordinategroups", "[", 
+            RowBox[{"[", "n", "]"}], "]"}], "]"}]}], "]"}]}]}], ";", "\n", 
+      "\n", 
+      RowBox[{"transformedvertices", " ", "=", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"transform", "[", "n", "]"}], "@", 
+          RowBox[{"coordinategroups", "[", 
+           RowBox[{"[", "n", "]"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", " ", "1", ",", " ", 
+           RowBox[{"Length", "[", "coordinategroups", "]"}]}], "}"}]}], 
+        "]"}]}], ";", "\n", "\n", 
+      RowBox[{"polygoncoords", " ", "=", " ", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Delete", "[", 
+          RowBox[{
+           RowBox[{"transformedvertices", "[", 
+            RowBox[{"[", 
+             RowBox[{"n", ",", " ", "m"}], "]"}], "]"}], ",", 
+           RowBox[{"{", "3", "}"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", " ", "1", ",", " ", 
+           RowBox[{"Length", "[", "transformedvertices", "]"}]}], "}"}], ",", 
+         " ", 
+         RowBox[{"{", 
+          RowBox[{"m", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], ";", 
+      "\n", "\n", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Graphics", "[", 
+         RowBox[{"Polygon", "[", 
+          RowBox[{"polygoncoords", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], "]"}], "]"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", "1", ",", 
+          RowBox[{"Length", "[", "polygoncoords", "]"}]}], "}"}]}], "]"}]}]}],
+     "\n", "]"}]}], "\n"}]], "Code",
+ CellChangeTimes->{{3.771601963953556*^9, 3.771601988336049*^9}, {
+   3.771602028325727*^9, 3.77160206466757*^9}, {3.7716021096754637`*^9, 
+   3.7716022972399006`*^9}, {3.7716023631441092`*^9, 3.771602383741837*^9}, {
+   3.7716025084266634`*^9, 3.771602749434835*^9}, {3.7716913822825613`*^9, 
+   3.7716914385362015`*^9}, {3.771692430186652*^9, 3.7716924690662794`*^9}, {
+   3.771724918921282*^9, 3.7717249356515384`*^9}, 3.771780243147683*^9},
+ CellLabel->"In[3]:=",ExpressionUUID->"f4e28692-b050-4765-8bc0-c1d614c18794"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"rotationtransform", "[", 
+     RowBox[{"referenceface_", ",", "meshlist_"}], "]"}], ":=", " ", "\n", 
+    RowBox[{"RotationTransform", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"normvector", "[", 
+         RowBox[{
+          RowBox[{"meshlist", "[", 
+           RowBox[{"[", "referenceface", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", "0", ",", " ", 
+          RowBox[{"-", "1"}]}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"Mean", "[", 
+       RowBox[{
+        RowBox[{"meshlist", "[", 
+         RowBox[{"[", "referenceface", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
+   RowBox[{
+    RowBox[{"translationtransform", "[", "mesh_", "]"}], " ", ":=", " ", "\n", 
+    RowBox[{"TranslationTransform", "[", 
+     RowBox[{"-", 
+      RowBox[{"PropertyValue", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"mesh", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "1"}], "}"}]}], "}"}], ",", " ", 
+        "MeshCellCentroid"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
+   RowBox[{
+    RowBox[{"replacemesh", "[", 
+     RowBox[{"referenceface_", ",", "n_", ",", "meshes_"}], "]"}], " ", ":=", 
+    " ", "\n", 
+    RowBox[{"ReplacePart", "[", 
+     RowBox[{"meshes", ",", " ", 
+      RowBox[{"n", " ", "\[Rule]", " ", 
+       RowBox[{"translationtransform", "[", 
+        RowBox[{"referenceface", ",", " ", "meshes", ",", " ", 
+         RowBox[{"meshes", "[", 
+          RowBox[{"[", "n", "]"}], "]"}]}], "]"}]}]}], "]"}]}], ";", " ", 
+   "\n", "\n", 
+   RowBox[{"transformedmesh", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"rotationtransform", "[", 
+      RowBox[{"4", ",", " ", "meshlist"}], "]"}], "/@", " ", 
+     RowBox[{
+      RowBox[{"translationtransform", "[", "mesh", "]"}], "/@", " ", 
+      "meshlist"}]}]}], ";", "\n", "\n", " ", 
+   RowBox[{"transformedmesh2", " ", "=", " ", 
+    RowBox[{"ReplacePart", "[", 
+     RowBox[{"transformedmesh", ",", " ", 
+      RowBox[{"1", " ", "\[Rule]", " ", "\n", 
+       RowBox[{
+        RowBox[{"rotationtransform", "[", 
+         RowBox[{"1", ",", " ", "transformedmesh"}], "]"}], "/@", 
+        RowBox[{
+         RowBox[{"translationtransform", "[", "mesh", "]"}], "/@", 
+         RowBox[{"transformedmesh", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}]}]}], "]"}]}], ";", " ", "\n", 
+   "\n", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{"transformedmesh", ",", " ", 
+     RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]}], "\n", "*)"}]], "Code",
+ CellChangeTimes->{
+  3.7716027558072143`*^9, {3.771631243282548*^9, 3.7716312469777174`*^9}, {
+   3.7716312924265294`*^9, 3.771631335635*^9}, {3.7716314509987555`*^9, 
+   3.7716314559970455`*^9}, 3.7716328580233335`*^9, {3.7716692381507783`*^9, 
+   3.7716692442504773`*^9}, {3.7716692999522953`*^9, 
+   3.7716693288627996`*^9}, {3.771669383315794*^9, 3.7716693932343273`*^9}, {
+   3.771669450293007*^9, 3.771669475323207*^9}, {3.7716698569694552`*^9, 
+   3.771669915688258*^9}, {3.771684162389679*^9, 3.7716841686040697`*^9}, {
+   3.7716915611668463`*^9, 3.7716915755946593`*^9}, {3.771755935168919*^9, 
+   3.77175593545615*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"2ae9432a-32f6-4a15-815d-74a3ecf24914"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generatenetcoords", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"generatenetcoords", "[", 
+    RowBox[{"mesh_", ",", " ", "tree_"}], "]"}], ":=", "\n", "\t", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "transformations", ",", " ", "transformedmesh", ",", " ", "meshlist", 
+       ",", " ", "transformedmeshlist", ",", " ", "normals", ",", " ", 
+       "polygonfaces", ",", " ", "transformedrotation"}], "}"}], ",", "\n", 
+     "\t\t", 
+     RowBox[{
+      RowBox[{"polygonfaces", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Reap", "[", "\n", "\t\t", "\n", "\t\t    ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"meshlist", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"MeshPrimitives", "[", 
+              RowBox[{"mesh", ",", " ", "2"}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", 
+           "\t\t    ", "\n", "\t\t\t", 
+           RowBox[{"transformations", " ", "=", " ", "\n", "\t\t\t", 
+            RowBox[{
+             RowBox[{"RotationTransform", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"normvector", "[", 
+                 RowBox[{"meshlist", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", " ", "0", ",", " ", 
+                  RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", 
+             "\n", "\t\t\t", 
+             RowBox[{"TranslationTransform", "[", 
+              RowBox[{"-", 
+               RowBox[{"PropertyValue", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"mesh", ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"2", ",", " ", "1"}], "}"}]}], "}"}], ",", " ", 
+                 "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "\n", 
+           "\t\t\t", "\n", "\t\t\t", 
+           RowBox[{"transformedmesh", " ", "=", " ", 
+            RowBox[{"TransformedRegion", "[", 
+             RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", 
+           "\n", "\t\t\t", "\n", "\t\t\t", 
+           RowBox[{"transformedmeshlist", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"MeshPrimitives", "[", 
+              RowBox[{"transformedmesh", ",", " ", "2"}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", 
+           "\t\t\t", "\n", "\t\t\t", 
+           RowBox[{"normals", " ", "=", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"normvector", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+             "transformedmeshlist"}]}], ";", "\n", "\n", "\t\t\t", 
+           RowBox[{"Sow", "[", 
+            RowBox[{
+             RowBox[{"transformedmeshlist", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", " ", "\"\<flat\>\""}], 
+            "]"}], ";", "\n", "\t\t\t", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{"transformedrotation", "[", "1", "]"}], " ", "=", " ", 
+            RowBox[{"TransformationFunction", "[", 
+             RowBox[{"IdentityMatrix", "[", "4", "]"}], "]"}]}], ";", "\n", 
+           "\t\t\t", "\n", "\t\t\t", 
+           RowBox[{"BreadthFirstScan", "[", 
+            RowBox[{"tree", ",", " ", "1", ",", " ", 
+             RowBox[{"\"\<DiscoverVertex\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"unfold", "[", 
+               RowBox[{
+               "transformedmeshlist", ",", " ", "normals", ",", " ", 
+                "transformedrotation"}], "]"}]}]}], "]"}], ";"}], ",", "\n", 
+          "\t\t\t", 
+          RowBox[{"{", "\"\<flat\>\"", "}"}]}], "\n", "\t\t", "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", " ", "All", ",", " ", "1"}], "]"}], 
+        "]"}]}], ";", "\n", "\t\t", 
+      RowBox[{"Chop", "[", "polygonfaces", "]"}]}]}], "\n", "\t", "]"}]}], 
+  "\n", "\t"}], "\n", 
+ RowBox[{"\t", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "unfold", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"unfold", "[", 
+     RowBox[{
+     "meshlist_", ",", " ", "normals_", ",", " ", "transformedrotation_"}], 
+     "]"}], "[", 
+    RowBox[{"u_", ",", " ", "v_", ",", " ", "_"}], "]"}], " ", "/;", " ", 
+   RowBox[{"(", 
+    RowBox[{"u", " ", "=!=", " ", "v"}], ")"}]}], " ", ":=", "\n", "\n", "\t", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "edgecoord1", ",", " ", "edgecoord2", ",", " ", "angle", ",", " ", 
+      "rotation"}], "}"}], ",", "\n", "\t\t", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], " ", "=", " ", 
+      RowBox[{"Intersection", " ", "@@", " ", 
+       RowBox[{"meshlist", "\[LeftDoubleBracket]", 
+        RowBox[{"{", 
+         RowBox[{"u", ",", " ", "v"}], "}"}], "\[RightDoubleBracket]"}]}]}], 
+     ";", " ", "\n", "\t\t", 
+     RowBox[{"angle", " ", "=", " ", 
+      RowBox[{"DihedralAngle", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], ",", " ", 
+        RowBox[{"normals", "\[LeftDoubleBracket]", 
+         RowBox[{"{", 
+          RowBox[{"u", ",", " ", "v"}], "}"}], "\[RightDoubleBracket]"}]}], 
+       "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{"rotation", " ", "=", " ", 
+      RowBox[{"RotationTransform", "[", 
+       RowBox[{"angle", ",", " ", 
+        RowBox[{"edgecoord2", " ", "-", " ", "edgecoord1"}], ",", " ", 
+        RowBox[{"Mean", "[", 
+         RowBox[{"{", 
+          RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], "]"}]}], 
+       "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{"transformedrotation", "[", "u", "]"}], " ", "=", " ", 
+      RowBox[{
+       RowBox[{"transformedrotation", "[", "v", "]"}], "@*", "rotation"}]}], 
+     ";", "\n", "\t\t", 
+     RowBox[{"Sow", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"transformedrotation", "[", "u", "]"}], " ", "@", " ", 
+        RowBox[{
+        "meshlist", "\[LeftDoubleBracket]", "u", "\[RightDoubleBracket]"}]}], 
+       ",", " ", "\"\<flat\>\""}], "]"}], ";"}]}], "\n", "\t", 
+   "]"}]}]}], "Code",
+ CellChangeTimes->{
+  3.7716297600715723`*^9, {3.7716309345195827`*^9, 3.7716309964801235`*^9}, 
+   3.7716314255803604`*^9, {3.7716314935648384`*^9, 3.7716314951038027`*^9}, 
+   3.7716316734688644`*^9, 3.771632560978156*^9, {3.771635850354471*^9, 
+   3.77163586793192*^9}, 3.771635949244791*^9, {3.7716359966331453`*^9, 
+   3.7716360134332523`*^9}, {3.771636078644968*^9, 3.7716360858637075`*^9}, 
+   3.7716361876267138`*^9, {3.7716372700190115`*^9, 3.7716373204143295`*^9}, {
+   3.7716373929794006`*^9, 3.7716373934182253`*^9}, {3.7716378711066003`*^9, 
+   3.771637895239105*^9}, {3.771637948623435*^9, 3.7716379487401233`*^9}, {
+   3.771664760262701*^9, 3.7716647656104417`*^9}, {3.771664820496725*^9, 
+   3.771664826975412*^9}, {3.771664917680827*^9, 3.77166494190309*^9}, {
+   3.771664977368227*^9, 3.7716650198995547`*^9}, {3.771665084964764*^9, 
+   3.771665121474186*^9}, {3.771665175242401*^9, 3.771665217763796*^9}, {
+   3.771665255973528*^9, 3.7716652823470287`*^9}, {3.7716653524395723`*^9, 
+   3.771665356615297*^9}, {3.7716663851663218`*^9, 3.7716663957350845`*^9}, 
+   3.771666447231454*^9, {3.7716665988951645`*^9, 3.7716666017194176`*^9}, {
+   3.771666876701855*^9, 3.7716668844958553`*^9}, {3.7716673521273375`*^9, 
+   3.771667356373603*^9}, {3.7716674147011356`*^9, 3.771667416098443*^9}, {
+   3.7716674487473326`*^9, 3.7716674990513306`*^9}, {3.771667642292543*^9, 
+   3.7716676678456993`*^9}, {3.771669978370865*^9, 3.7716699850918293`*^9}, 
+   3.7716700249513116`*^9, {3.7716734655391493`*^9, 3.7716734659540043`*^9}, {
+   3.7716737542864337`*^9, 3.77167375468437*^9}, {3.7716740841632805`*^9, 
+   3.7716740890103545`*^9}, {3.771675629590114*^9, 3.7716757463171606`*^9}, {
+   3.771675797416597*^9, 3.7716758003826704`*^9}, {3.771677806881572*^9, 
+   3.771677810020215*^9}, {3.771677895731118*^9, 3.771677899220792*^9}, {
+   3.771683223200944*^9, 3.7716832565248847`*^9}, {3.771683597845379*^9, 
+   3.771683632881706*^9}, {3.771683843942831*^9, 3.7716838489524765`*^9}, {
+   3.771684315740472*^9, 3.7716843300059414`*^9}, 3.7716847809607353`*^9, {
+   3.7716848977126107`*^9, 3.771684897858222*^9}, {3.771684971845153*^9, 
+   3.7716850169714937`*^9}, {3.771685108877225*^9, 3.771685121267192*^9}, {
+   3.7716852345928297`*^9, 3.7716852973470173`*^9}, {3.771685329651557*^9, 
+   3.7716853316382127`*^9}, {3.771685361993222*^9, 3.771685366693673*^9}, {
+   3.771685405018839*^9, 3.7716854058114023`*^9}, {3.7716854493396854`*^9, 
+   3.771685475667547*^9}, {3.771685510994481*^9, 3.771685514159257*^9}, {
+   3.771685602467209*^9, 3.771685603296508*^9}, 3.7716856817000237`*^9, {
+   3.7716857438120327`*^9, 3.7716857727296333`*^9}, {3.771685804757196*^9, 
+   3.7716858323563848`*^9}, {3.7716860650353413`*^9, 3.771686079833682*^9}, {
+   3.771686118616107*^9, 3.77168614971061*^9}, {3.7716861992753115`*^9, 
+   3.7716862069376326`*^9}, {3.7716862445084953`*^9, 3.771686245808469*^9}, {
+   3.771686277824997*^9, 3.771686278526137*^9}, {3.771686310124778*^9, 
+   3.7716863566079016`*^9}, {3.7716866308079*^9, 3.7716866337504873`*^9}, {
+   3.771686805147974*^9, 3.7716868363991876`*^9}, {3.7716869698437376`*^9, 
+   3.771686970435177*^9}, 3.7716896374329977`*^9, {3.7716898042893047`*^9, 
+   3.7716898044629593`*^9}, {3.771690024754593*^9, 3.771690032510835*^9}, {
+   3.7716903571535225`*^9, 3.771690374137698*^9}, {3.7716905193013268`*^9, 
+   3.7716905231205187`*^9}, {3.7716907349860945`*^9, 
+   3.7716907497956657`*^9}, {3.771691270524158*^9, 3.7716912948402953`*^9}, {
+   3.771691742365549*^9, 3.7716917593796525`*^9}, 3.7716919547042184`*^9, {
+   3.771692059447937*^9, 3.77169207973015*^9}, {3.771693295110836*^9, 
+   3.771693317401388*^9}, {3.771693897490312*^9, 3.7716938977024574`*^9}, 
+   3.771694340925264*^9, {3.771695908389228*^9, 3.7716959202067075`*^9}, {
+   3.7716962028569007`*^9, 3.771696213346686*^9}, {3.771714315762173*^9, 
+   3.7717143160205145`*^9}, {3.7717157618538465`*^9, 3.77171577738423*^9}, 
+   3.7717158374836955`*^9, {3.771715961100851*^9, 3.771715965245905*^9}, {
+   3.7717160120046825`*^9, 3.7717160161818514`*^9}, {3.77172058299738*^9, 
+   3.771720586159958*^9}, {3.771723975870564*^9, 3.771723984082614*^9}, {
+   3.7717246912108097`*^9, 3.7717247050617914`*^9}, {3.7717252445819235`*^9, 
+   3.7717252488584905`*^9}, {3.771841470327345*^9, 3.771841490080931*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"271f6dcb-037f-4931-b0eb-8845c8464935"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"generatetrees", "[", "graph_", "]"}], " ", ":=", " ", 
+  RowBox[{"DeleteDuplicates", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"FindSpanningTree", "[", 
+      RowBox[{"{", 
+       RowBox[{"graph", ",", " ", "n"}], "}"}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"n", " ", ",", "1", " ", ",", " ", 
+       RowBox[{"VertexCount", "[", "graph", "]"}]}], "}"}]}], "]"}], 
+   "]"}]}]], "Code",
+ CellChangeTimes->{{3.7717551922104497`*^9, 3.771755198054892*^9}, {
+  3.771778637653521*^9, 3.771778644293775*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"bd2f519b-4f5a-48e3-9721-2a9ee060bcf0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generateallnets", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"generateallnets", "[", "polyhedron_", "]"}], " ", ":=", " ", "\n", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "netcoords2D", ",", " ", "trees", ",", " ", "graph", ",", " ", "mesh", 
+      ",", " ", "surfacearea", ",", " ", "netsurfacearea", ",", " ", 
+      "goodnets"}], "}"}], ",", "\n", "\n", 
+    RowBox[{
+     RowBox[{"mesh", " ", "=", " ", 
+      RowBox[{"BoundaryDiscretizeGraphics", "[", "polyhedron", "]"}]}], ";", 
+     " ", "\n", 
+     RowBox[{"graph", " ", "=", " ", 
+      RowBox[{"polyhedronfacegraph", "[", "polyhedron", "]"}]}], ";", "\n", 
+     RowBox[{"trees", " ", "=", " ", 
+      RowBox[{"generatetrees", "[", "graph", "]"}]}], ";", "\n", "\n", 
+     RowBox[{"goodnets", " ", "=", " ", 
+      RowBox[{"{", "}"}]}], ";", "\n", "\n", 
+     RowBox[{"Table", "[", "\n", "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"netcoords2D", " ", "=", " ", 
+         RowBox[{"First", "@", 
+          RowBox[{"generatenetcoords", "[", 
+           RowBox[{"mesh", ",", " ", 
+            RowBox[{"trees", "[", 
+             RowBox[{"[", "treeposition", "]"}], "]"}]}], "]"}]}]}], ";", 
+        "\n", 
+        RowBox[{"netcoords2D", " ", "=", " ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Delete", "[", 
+            RowBox[{
+             RowBox[{"netcoords2D", "[", 
+              RowBox[{"[", 
+               RowBox[{"n", ",", " ", "m"}], "]"}], "]"}], ",", " ", 
+             RowBox[{"{", "3", "}"}]}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"n", ",", " ", "1", ",", " ", 
+             RowBox[{"Length", "[", "netcoords2D", "]"}]}], "}"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"m", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], 
+        ";", "\n", "\n", 
+        RowBox[{"surfacearea", " ", "=", " ", 
+         RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
+        RowBox[{"netsurfacearea", " ", "=", " ", 
+         RowBox[{"RegionMeasure", "[", 
+          RowBox[{"RegionUnion", "[", 
+           RowBox[{"Polygon", " ", "/@", " ", "netcoords2D"}], "]"}], "]"}]}],
+         ";", "\n", "\n", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"surfacearea", " ", "\[Equal]", " ", "netsurfacearea"}], 
+          ",", "\n", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"goodnets", ",", " ", 
+            RowBox[{"Graphics", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Hue", "[", 
+                RowBox[{"0.94", ",", " ", "0.22", ",", " ", "1."}], "]"}], 
+               ",", " ", 
+               RowBox[{"EdgeForm", "[", 
+                RowBox[{"{", 
+                 RowBox[{"Thin", ",", " ", "Pink"}], "}"}], "]"}], ",", " ", 
+               RowBox[{"Polygon", " ", "/@", " ", "netcoords2D"}]}], "}"}], 
+             "]"}]}], "]"}]}], "\n", "]"}], ";"}], ",", " ", "\n", "\n", 
+       RowBox[{"{", 
+        RowBox[{"treeposition", ",", " ", "1", ",", " ", 
+         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], "]"}], ";", "\n", 
+     "\n", 
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Graphics3D", "[", "polyhedron", "]"}], ",", " ", 
+        "goodnets"}], "}"}], "]"}]}]}], "\n", "\n", "]"}]}]}], "Code",
+ CellChangeTimes->{{3.7717247215706716`*^9, 3.7717248633089094`*^9}, {
+   3.7717249558146563`*^9, 3.7717250034064856`*^9}, {3.7717251602762585`*^9, 
+   3.7717251656349387`*^9}, {3.771725266114406*^9, 3.7717254044427233`*^9}, {
+   3.7717259397221837`*^9, 3.7717259641718416`*^9}, {3.771726098019101*^9, 
+   3.771726124631013*^9}, 3.7717527415817957`*^9, {3.7717541667990637`*^9, 
+   3.7717541742052717`*^9}, {3.7717544446524906`*^9, 3.7717544454473653`*^9}, 
+   3.7717545324458914`*^9, {3.7717546779889*^9, 3.771754696123405*^9}, {
+   3.7717547490649385`*^9, 3.7717547495166965`*^9}, {3.7717547906697145`*^9, 
+   3.7717548435244913`*^9}, {3.771755214007198*^9, 3.7717552522909155`*^9}, {
+   3.7717552918132606`*^9, 3.7717553780378556`*^9}, {3.7717554170107036`*^9, 
+   3.771755418999386*^9}, 3.7717554688980317`*^9, {3.771758500030353*^9, 
+   3.7717585876491637`*^9}, {3.7717586524699306`*^9, 3.771758662179978*^9}, 
+   3.771758712846597*^9, {3.7717590771828766`*^9, 3.7717591308804007`*^9}, {
+   3.7717597134445148`*^9, 3.7717597301947403`*^9}, {3.771759978330552*^9, 
+   3.771760112942836*^9}, {3.7717609870296392`*^9, 3.7717609894272285`*^9}, {
+   3.7717610234113812`*^9, 3.771761033224156*^9}, {3.7717611144690304`*^9, 
+   3.771761120511879*^9}, {3.7717615213805847`*^9, 3.771761582042466*^9}, {
+   3.7717618913538256`*^9, 3.7717619009890785`*^9}, {3.7717690563924427`*^9, 
+   3.771769056456441*^9}, {3.771769136199092*^9, 3.771769136552539*^9}, {
+   3.771769315364571*^9, 3.771769333488084*^9}, {3.771769382223835*^9, 
+   3.771769383796667*^9}, {3.7717694497204494`*^9, 3.7717694643144474`*^9}, {
+   3.7717696002183013`*^9, 3.7717696014699345`*^9}, {3.771769684866021*^9, 
+   3.771769685535267*^9}, 3.771769736523985*^9, {3.771769788629713*^9, 
+   3.771769804037565*^9}, {3.771770035799187*^9, 3.7717700462941284`*^9}, {
+   3.7717701451399717`*^9, 3.771770146061475*^9}, {3.771770255048258*^9, 
+   3.7717702555349083`*^9}, {3.7717703177895546`*^9, 
+   3.7717703203327312`*^9}, {3.771770382247264*^9, 3.771770385157527*^9}, {
+   3.7717704250259686`*^9, 3.771770439673791*^9}, {3.771770732885004*^9, 
+   3.7717707360934267`*^9}, {3.7717707836832156`*^9, 
+   3.7717707957160945`*^9}, {3.7717709792854705`*^9, 3.771771004744458*^9}, {
+   3.7717713967667785`*^9, 3.771771403196561*^9}, {3.771771485223341*^9, 
+   3.7717714872529745`*^9}, {3.7717719985783978`*^9, 
+   3.7717720306955643`*^9}, {3.7717722133733883`*^9, 3.771772313977519*^9}, {
+   3.771772420646447*^9, 3.771772495459479*^9}, {3.771772538844532*^9, 
+   3.7717726125316305`*^9}, {3.771772710795952*^9, 3.771772760197507*^9}, {
+   3.771772808167657*^9, 3.7717728390832667`*^9}, {3.771772877059253*^9, 
+   3.771772962379567*^9}, {3.7717730420757236`*^9, 3.7717730504904165`*^9}, {
+   3.7717734744891086`*^9, 3.771773479211791*^9}, {3.771773533955119*^9, 
+   3.7717735544251804`*^9}, {3.771773629399731*^9, 3.7717736297048388`*^9}, 
+   3.771773709564793*^9, {3.771773772326703*^9, 3.7717737802634654`*^9}, 
+   3.7717741284917994`*^9, {3.7717742421700954`*^9, 3.771774268839902*^9}, {
+   3.7717743067458286`*^9, 3.7717743500024233`*^9}, {3.7717748118464527`*^9, 
+   3.7717748124917307`*^9}, {3.7717749287324147`*^9, 3.771774980355416*^9}, {
+   3.7717750164649124`*^9, 3.771775075297683*^9}, {3.7717751186138067`*^9, 
+   3.771775163728202*^9}, 3.7717752777714233`*^9, {3.771776042464431*^9, 
+   3.7717760453357553`*^9}, {3.771778675897346*^9, 3.771778682600401*^9}, {
+   3.771779019445181*^9, 3.771779020084471*^9}, {3.7717790744441957`*^9, 
+   3.7717790932828493`*^9}, {3.7717791243099284`*^9, 
+   3.7717791420545063`*^9}, {3.771779227847224*^9, 3.7717792642808924`*^9}, {
+   3.771779306740384*^9, 3.771779309746379*^9}, {3.771781164111595*^9, 
+   3.77178117192272*^9}, {3.771782237416214*^9, 3.7717822985508585`*^9}, {
+   3.771782378413364*^9, 3.771782427829299*^9}, {3.7717824885261335`*^9, 
+   3.771782494703608*^9}, {3.771803754846196*^9, 3.771803767699057*^9}, {
+   3.7718049308746085`*^9, 3.7718049334203234`*^9}, 3.7718050181330547`*^9, {
+   3.771841273733876*^9, 3.7718412889615407`*^9}, {3.7718414392368274`*^9, 
+   3.7718414494872065`*^9}, {3.771841500823102*^9, 3.7718415122593513`*^9}, {
+   3.7718415994269166`*^9, 3.771841609217863*^9}, {3.771841646480081*^9, 
+   3.7718416723735433`*^9}, {3.771841710914074*^9, 3.7718417273721085`*^9}, {
+   3.7718417876316233`*^9, 3.77184179460232*^9}, {3.771841865651407*^9, 
+   3.77184189255548*^9}, {3.7718419586232824`*^9, 3.771841964647211*^9}, {
+   3.7718420053049183`*^9, 3.771842040382079*^9}, {3.7718420856217127`*^9, 
+   3.7718420942901263`*^9}, {3.7718426245773764`*^9, 3.771842632239149*^9}, {
+   3.771842689614525*^9, 3.771842689758379*^9}, {3.7718429190483847`*^9, 
+   3.7718429195637074`*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"8d73e2cb-30bc-4caf-ac4e-3272c1b8f626"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.77184299932918*^9, 3.7718430525780945`*^9}, 
+   3.771843090884405*^9, {3.7718431370993414`*^9, 
+   3.771843146652935*^9}},ExpressionUUID->"2da825c1-814a-4c6a-bb3a-\
+aed951a52e4d"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{
+  3.7717752859186506`*^9},ExpressionUUID->"068710eb-4908-4055-bb76-\
+2aecf32856e0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sunny", " ", "=", " ", 
+  RowBox[{"RandomPolyhedron", "[", 
+   RowBox[{"{", 
+    RowBox[{"\"\<ConvexHull\>\"", ",", "10"}], "}"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7717706802037983`*^9, 3.771770698205654*^9}, {
+   3.7717707493071175`*^9, 3.7717707494696493`*^9}, 3.771770803824384*^9, {
+   3.7717720453813143`*^9, 3.7717720467436724`*^9}, {3.771773796703185*^9, 
+   3.7717737968976645`*^9}, 3.7717740306808977`*^9, {3.771774277910137*^9, 
+   3.771774280659245*^9}, {3.7717744252148633`*^9, 3.771774460807517*^9}, 
+   3.771775050153879*^9, 3.771775324693023*^9, 3.7717786939809895`*^9, 
+   3.7717787284109716`*^9, {3.7717788322843695`*^9, 3.771778833132105*^9}, {
+   3.7717788896301126`*^9, 3.7717788921683283`*^9}, {3.7717790968443313`*^9, 
+   3.771779097118597*^9}, {3.771779608857745*^9, 3.7717796099089146`*^9}, {
+   3.77178077912551*^9, 3.7717807837850227`*^9}, 3.771781316432518*^9, {
+   3.771781467024098*^9, 3.7717814885485353`*^9}, 3.771782319674374*^9, {
+   3.7717825268068123`*^9, 3.7717825272087383`*^9}, {3.771782560219544*^9, 
+   3.7717825608039246`*^9}, {3.7718036319718895`*^9, 3.7718036381222515`*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"9f07e1d7-9bfc-49b6-8db5-d4490063cc5d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["Polyhedron",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready", 
+    Typeset`spolyhedron$$ = Quiet[
+     Polyhedron[{{0.7148693223911688, 0.8755834607290225, 
+      0.1153121203031644}, {0.023264083170432714`, 0.10990203567022827`, 
+      0.9680470884011987}, {0.9497023655057628, 0.9251749960024642, 
+      0.3913069718579256}, {0.9348338153213456, 0.5502445081224867, 
+      0.8880295838112906}, {0.6395905469778413, 0.8093490547822169, 
+      0.7027721992387947}, {0.23465754633139335`, 0.8891593812927439, 
+      0.11923083479547936`}, {0.8778607842790584, 0.20796943130384826`, 
+      0.8025561041491356}, {0.3272361834835127, 0.724408098811751, 
+      0.8709575369304954}}, {{6, 8, 5}, {4, 7, 3}, {6, 7, 2}, {2, 7, 4}, {2, 
+      4, 8}, {7, 1, 3}, {6, 2, 8}, {7, 6, 1}, {8, 4, 5}, {4, 3, 5}, {1, 6, 
+      3}, {3, 6, 5}}]]}, 
+    TemplateBox[{PaneSelectorBox[{False -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquarePlusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            Graphics3DBox[{
+              Directive[
+               Hue[0.58, 0.4, 1], 
+               Opacity[0.5], 
+               EdgeForm[
+                GrayLevel[1]]], 
+              TagBox[
+               
+               GraphicsComplex3DBox[{{0.7148693223911688, 0.8755834607290225, 
+                0.1153121203031644}, {0.023264083170432714`, 
+                0.10990203567022827`, 0.9680470884011987}, {
+                0.9497023655057628, 0.9251749960024642, 0.3913069718579256}, {
+                0.9348338153213456, 0.5502445081224867, 0.8880295838112906}, {
+                0.6395905469778413, 0.8093490547822169, 0.7027721992387947}, {
+                0.23465754633139335`, 0.8891593812927439, 
+                0.11923083479547936`}, {0.8778607842790584, 
+                0.20796943130384826`, 0.8025561041491356}, {
+                0.3272361834835127, 0.724408098811751, 0.8709575369304954}}, 
+                
+                Polygon3DBox[{{6, 8, 5}, {4, 7, 3}, {6, 7, 2}, {2, 7, 4}, {2, 
+                 4, 8}, {7, 1, 3}, {6, 2, 8}, {7, 6, 1}, {8, 4, 5}, {4, 3, 
+                 5}, {1, 6, 3}, {3, 6, 5}}]], "Polyhedron"]}, ImageSize -> 
+             Dynamic[{5.25, 3.5} CurrentValue["FontCapHeight"]/
+               AbsoluteCurrentValue[Magnification]], Boxed -> False, 
+             Lighting -> {{"Ambient", 
+                RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{2, 0, 2}]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{2, 2, 2}]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["8", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["12", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquareMinusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            Graphics3DBox[{
+              Directive[
+               Hue[0.58, 0.4, 1], 
+               Opacity[0.5], 
+               EdgeForm[
+                GrayLevel[1]]], 
+              TagBox[
+               
+               GraphicsComplex3DBox[{{0.7148693223911688, 0.8755834607290225, 
+                0.1153121203031644}, {0.023264083170432714`, 
+                0.10990203567022827`, 0.9680470884011987}, {
+                0.9497023655057628, 0.9251749960024642, 0.3913069718579256}, {
+                0.9348338153213456, 0.5502445081224867, 0.8880295838112906}, {
+                0.6395905469778413, 0.8093490547822169, 0.7027721992387947}, {
+                0.23465754633139335`, 0.8891593812927439, 
+                0.11923083479547936`}, {0.8778607842790584, 
+                0.20796943130384826`, 0.8025561041491356}, {
+                0.3272361834835127, 0.724408098811751, 0.8709575369304954}}, 
+                
+                Polygon3DBox[{{6, 8, 5}, {4, 7, 3}, {6, 7, 2}, {2, 7, 4}, {2, 
+                 4, 8}, {7, 1, 3}, {6, 2, 8}, {7, 6, 1}, {8, 4, 5}, {4, 3, 
+                 5}, {1, 6, 3}, {3, 6, 5}}]], "Polyhedron"]}, ImageSize -> 
+             Dynamic[{5.25, 3.5} CurrentValue["FontCapHeight"]/
+               AbsoluteCurrentValue[Magnification]], Boxed -> False, 
+             Lighting -> {{"Ambient", 
+                RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{2, 0, 2}]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{2, 2, 2}]}, {"Directional", 
+                RGBColor[0.24, 0.27, 0.3], 
+                ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["8", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["12", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Embedding dimension: \"", "SummaryItemAnnotation"],
+                  "\[InvisibleSpace]", 
+                 TagBox["3", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Type: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  DynamicBox[
+                   ToBoxes[
+                    Quiet[
+                    Apply[Region`PolyhedronDump`polyhedronType, 
+                    Region`PolyhedronDump`computeType[
+                    Typeset`spolyhedron$$]]], StandardForm], 
+                   SynchronousUpdating -> False, TrackedSymbols :> {}, 
+                   CachedValue :> 
+                   AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Bounds: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  DynamicBox[
+                   ToBoxes[
+                    Region`PolyhedronDump`iRegionBounds[
+                    Typeset`spolyhedron$$], StandardForm], 
+                   SynchronousUpdating -> False, TrackedSymbols :> {}, 
+                   CachedValue :> 
+                   AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Volume: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  DynamicBox[
+                   ToBoxes[
+                    Region`PolyhedronDump`iVolume[Typeset`spolyhedron$$], 
+                    StandardForm], SynchronousUpdating -> False, 
+                   TrackedSymbols :> {}, CachedValue :> 
+                   AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  Polyhedron[{{0.7148693223911688, 0.8755834607290225, 0.1153121203031644}, {
+   0.023264083170432714`, 0.10990203567022827`, 0.9680470884011987}, {
+   0.9497023655057628, 0.9251749960024642, 0.3913069718579256}, {
+   0.9348338153213456, 0.5502445081224867, 0.8880295838112906}, {
+   0.6395905469778413, 0.8093490547822169, 0.7027721992387947}, {
+   0.23465754633139335`, 0.8891593812927439, 0.11923083479547936`}, {
+   0.8778607842790584, 0.20796943130384826`, 0.8025561041491356}, {
+   0.3272361834835127, 0.724408098811751, 0.8709575369304954}}, {{6, 8, 5}, {
+   4, 7, 3}, {6, 7, 2}, {2, 7, 4}, {2, 4, 8}, {7, 1, 3}, {6, 2, 8}, {7, 6, 
+   1}, {8, 4, 5}, {4, 3, 5}, {1, 6, 3}, {3, 6, 5}}],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{3.7718429316555424`*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"953364b4-ac5b-46bd-8fe4-fb1196d16e85"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"generateallnets", "[", "sunny", "]"}]], "Input",
+ CellChangeTimes->{{3.771842768065998*^9, 3.771842770019759*^9}, {
+  3.771842934272065*^9, 3.7718429453731885`*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"b174fd92-a1b6-4628-aafb-7b523b55b4b6"],
+
+Cell[BoxData[
+ TemplateBox[{Graphics3DBox[
+    TagBox[
+     GraphicsComplex3DBox[{{0.7148693223911688, 0.8755834607290225, 
+      0.1153121203031644}, {0.023264083170432714`, 0.10990203567022827`, 
+      0.9680470884011987}, {0.9497023655057628, 0.9251749960024642, 
+      0.3913069718579256}, {0.9348338153213456, 0.5502445081224867, 
+      0.8880295838112906}, {0.6395905469778413, 0.8093490547822169, 
+      0.7027721992387947}, {0.23465754633139335`, 0.8891593812927439, 
+      0.11923083479547936`}, {0.8778607842790584, 0.20796943130384826`, 
+      0.8025561041491356}, {0.3272361834835127, 0.724408098811751, 
+      0.8709575369304954}}, 
+      Polygon3DBox[{{6, 8, 5}, {4, 7, 3}, {6, 7, 2}, {2, 7, 4}, {2, 4, 8}, {7,
+        1, 3}, {6, 2, 8}, {7, 6, 1}, {8, 4, 5}, {4, 3, 5}, {1, 6, 3}, {3, 6, 
+       5}}]], "Polyhedron"]],RowBox[{"{", 
+     RowBox[{
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{-0.12853274041623133`, 0.29966643615492455`}, {
+           0.4590251562642849, 0.5332793882140694}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172193, -0.474261275603974}, \
+{-1.2338554861620659`, -0.31243954416176617`}, {-0.8042233919138931, 
+           0.4509451983454138}}], 
+          
+          PolygonBox[{{-0.8042233919138931, 0.4509451983454137}, {
+           0.11463646890929094`, 0.8833341746478289}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{0.4787032425849299, 0.5190212890051386}, {
+           0.5799259307265617, -0.09521096768418552}, {0.21413855675795276`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{-1.233855486162066, -0.3124395441617661}, \
+{-0.08560581634172165, -0.474261275603974}, {-0.41023256942927194`, \
+-0.8284088196992898}}], 
+          
+          PolygonBox[{{-0.8042233919138932, 
+           0.45094519834541363`}, {-1.2338554861620659`, -0.312439544161766}, \
+{-1.5759529539438015`, -0.20912839887612122`}}], 
+          
+          PolygonBox[{{1.3615176114537522`, -0.37411117968864527`}, {
+           0.39021131793223257`, -0.40792074093451103`}, {
+           0.5799259307265618, -0.09521096768418547}}], 
+          
+          PolygonBox[{{0.4787032425849298, 0.5190212890051384}, {
+           0.7807588050475802, 0.7099828227973635}, {
+           0.5799259307265617, -0.09521096768418555}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{0.4787032425849299, 0.5190212890051386}, {
+           0.5799259307265617, -0.09521096768418552}, {0.21413855675795276`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{0.4787032425849298, 0.5190212890051384}, {
+           0.7807588050475802, 0.7099828227973635}, {
+           0.5799259307265617, -0.09521096768418555}}], 
+          
+          PolygonBox[{{-0.12100102378601008`, 0.3186364437250787}, {
+           0.4787032425849299, 0.5190212890051387}, {0.21413855675795268`, 
+           0.1745948394490494}}], 
+          
+          PolygonBox[{{0.7807588050475801, 0.7099828227973634}, {
+           0.9097477844387339, -0.2533140397853917}, {
+           0.5799259307265616, -0.09521096768418576}}], 
+          
+          PolygonBox[{{0.48497303647578144`, 1.5345134654124297`}, {
+           0.7807588050475803, 0.7099828227973634}, {0.47870324258492986`, 
+           0.5190212890051384}}], 
+          
+          PolygonBox[{{0.7807588050475802, 0.7099828227973635}, {
+           1.3895867289787602`, -0.2769275764036647}, {
+           0.9097477844387339, -0.2533140397853917}}], 
+          
+          PolygonBox[{{0.909747784438734, -0.2533140397853917}, {
+           1.0224737935164623`, -0.7203213830748915}, {
+           0.5799259307265617, -0.0952109676841858}}], 
+          
+          PolygonBox[{{1.6548076133339786`, 1.472021048703786}, {
+           0.7807588050475801, 0.7099828227973635}, {0.4849730364757814, 
+           1.5345134654124297`}}], 
+          
+          PolygonBox[{{0.48497303647578144`, 1.53451346541243}, {
+           0.47870324258492986`, 0.5190212890051382}, {0.057024829393008764`, 
+           0.9901758381388222}}], 
+          
+          PolygonBox[{{1.6548076133339786`, 1.4720210487037857`}, {
+           0.48497303647578116`, 1.5345134654124295`}, {1.0416816988451254`, 
+           1.9462398134327574`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{-0.08560581634172193, -0.474261275603974}, \
+{-1.2338554861620659`, -0.31243954416176617`}, {-0.8042233919138931, 
+           0.4509451983454138}}], 
+          
+          PolygonBox[{{-1.233855486162066, -0.3124395441617661}, \
+{-0.08560581634172165, -0.474261275603974}, {-0.41023256942927194`, \
+-0.8284088196992898}}], 
+          
+          PolygonBox[{{-0.8042233919138932, 
+           0.45094519834541363`}, {-1.2338554861620659`, -0.312439544161766}, \
+{-1.5759529539438015`, -0.20912839887612122`}}], 
+          
+          PolygonBox[{{-1.2338554861620663`, -0.312439544161766}, \
+{-0.41023256942927205`, -0.8284088196992898}, {-0.7425362372025643, \
+-0.9812267145231294}}], 
+          
+          PolygonBox[{{-0.41023256942927194`, -0.82840881969929}, \
+{-0.08560581634172149, -0.47426127560397396`}, {-0.35737812133959923`, \
+-1.1903279320864488`}}], 
+          
+          PolygonBox[{{-0.804223391913893, 
+           0.4509451983454139}, {-1.5759529539438017`, \
+-0.20912839887612145`}, {-1.4958610829997554`, 0.4180753842200135}}], 
+          
+          PolygonBox[{{-1.5759529539438017`, -0.20912839887612117`}, \
+{-1.2338554861620659`, -0.3124395441617659}, {-1.973992278790744, \
+-0.6877639529542405}}], 
+          
+          PolygonBox[{{-0.35737812133959923`, -1.1903279320864488`}, \
+{-0.08560581634172149, -0.47426127560397396`}, {
+           0.09646715156361896, -1.165427233681165}}], 
+          
+          PolygonBox[{{-1.4958610829997554`, 
+           0.4180753842200135}, {-1.5759529539438017`, \
+-0.20912839887612134`}, {-1.771213962586109, 0.17881127509978118`}}], 
+          
+          PolygonBox[{{-1.5759529539438017`, -0.20912839887612128`}, \
+{-1.973992278790744, -0.6877639529542406}, {-2.0095125437209838`, \
+-0.23462612922182144`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{-0.08560581634172193, -0.474261275603974}, \
+{-1.2338554861620659`, -0.31243954416176617`}, {-0.8042233919138931, 
+           0.4509451983454138}}], 
+          
+          PolygonBox[{{-1.233855486162066, -0.3124395441617661}, \
+{-0.08560581634172165, -0.474261275603974}, {-0.41023256942927194`, \
+-0.8284088196992898}}], 
+          
+          PolygonBox[{{-0.8042233919138932, 
+           0.45094519834541363`}, {-1.2338554861620659`, -0.312439544161766}, \
+{-1.5759529539438015`, -0.20912839887612122`}}], 
+          
+          PolygonBox[{{-0.41023256942927194`, -0.82840881969929}, \
+{-0.08560581634172149, -0.47426127560397396`}, {-0.35737812133959923`, \
+-1.1903279320864488`}}], 
+          
+          PolygonBox[{{-0.804223391913893, 
+           0.4509451983454139}, {-1.5759529539438017`, \
+-0.20912839887612145`}, {-1.4958610829997554`, 0.4180753842200135}}], 
+          
+          PolygonBox[{{-1.5759529539438017`, -0.20912839887612117`}, \
+{-1.2338554861620659`, -0.3124395441617659}, {-1.973992278790744, \
+-0.6877639529542405}}], 
+          
+          PolygonBox[{{-1.4958610829997554`, 
+           0.4180753842200135}, {-1.5759529539438017`, \
+-0.20912839887612134`}, {-1.771213962586109, 0.17881127509978118`}}], 
+          
+          PolygonBox[{{-1.2338554861620659`, -0.3124395441617658}, \
+{-1.8775799092598229`, -1.0405864176520059`}, {-1.973992278790744, \
+-0.6877639529542406}}], 
+          
+          PolygonBox[{{-1.5759529539438017`, -0.20912839887612128`}, \
+{-1.973992278790744, -0.6877639529542406}, {-2.0095125437209838`, \
+-0.23462612922182144`}}], 
+          
+          PolygonBox[{{-1.9739922787907438`, -0.6877639529542409}, \
+{-2.6962259393260384`, -0.43283223291995654`}, {-2.0095125437209838`, \
+-0.23462612922182124`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{-0.8042233919138931, 0.4509451983454137}, {
+           0.11463646890929094`, 0.8833341746478289}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{-0.8042233919138932, 
+           0.45094519834541336`}, {-0.18794044336415855`, 
+           1.0734685543953448`}, {0.11463646890929104`, 0.8833341746478292}}], 
+          
+          PolygonBox[{{-0.12853274041623128`, 0.29966643615492483`}, {
+           0.1146364689092909, 0.8833341746478289}, {0.20030828598813039`, 
+           0.45755912617862793`}}], 
+          
+          PolygonBox[{{-1.2524670763750363`, 
+           1.5333018118050366`}, {-0.18794044336415872`, 
+           1.0734685543953446`}, {-0.8042233919138932, 
+           0.45094519834541325`}}], 
+          
+          PolygonBox[{{0.11463646890929108`, 
+           0.8833341746478292}, {-0.1879404433641586, 1.0734685543953448`}, {
+           0.625119971271343, 1.2396120038323735`}}], 
+          
+          PolygonBox[{{0.11463646890929091`, 0.8833341746478289}, {
+           0.6440737188870063, 0.5558841844381601}, {0.20030828598813044`, 
+           0.4575591261786278}}], 
+          
+          PolygonBox[{{-0.1879404433641585, 
+           1.0734685543953446`}, {-1.2524670763750365`, 
+           1.5333018118050366`}, {-0.8457146092390344, 1.7889489167909618`}}], 
+          
+          PolygonBox[{{-0.18794044336415866`, 1.0734685543953448`}, {
+           0.6254843324791255, 1.6053699891654118`}, {0.6251199712713431, 
+           1.2396120038323735`}}], 
+          
+          PolygonBox[{{-0.8457146092390342, 
+           1.788948916790962}, {-1.2524670763750363`, 
+           1.5333018118050368`}, {-0.8009377106444759, 
+           2.151955894611259}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{1.3615176114537522`, -0.37411117968864527`}, {
+           0.39021131793223257`, -0.40792074093451103`}, {
+           0.5799259307265618, -0.09521096768418547}}], 
+          
+          PolygonBox[{{1.3615176114537522`, -0.3741111796886453}, {
+           0.31961118841073205`, -0.8831245219805541}, {
+           0.3902113179322326, -0.4079207409345111}}], 
+          
+          PolygonBox[{{1.2011278307811648`, -0.05476968777331917}, {
+           1.3615176114537524`, -0.3741111796886452}, {
+           0.5799259307265617, -0.09521096768418544}}], 
+          
+          PolygonBox[{{0.3196111884107318, -0.8831245219805542}, {
+           1.3615176114537524`, -0.37411117968864516`}, {
+           1.4331176991195278`, -1.2471595339892967`}}], 
+          
+          PolygonBox[{{2.211100473072017, -0.16068915002594886`}, {
+           1.3615176114537526`, -0.3741111796886451}, {
+           1.2011278307811648`, -0.05476968777331909}}], 
+          
+          PolygonBox[{{1.2011278307811648`, -0.05476968777331909}, {
+           0.5799259307265618, -0.09521096768418535}, {0.8843341831605968, 
+           0.24232598194907154`}}], 
+          
+          PolygonBox[{{0.31961118841073166`, -0.8831245219805544}, {
+           1.4331176991195278`, -1.247159533989297}, {
+           0.7886118534715088, -1.5002510892351266`}}], 
+          
+          PolygonBox[{{2.211100473072017, -0.1606891500259488}, {
+           1.2011278307811648`, -0.05476968777331909}, {1.711398678100835, 
+           0.31862414679962403`}}], 
+          
+          PolygonBox[{{1.0605772189518776`, 0.5617080643279496}, {
+           1.2011278307811648`, -0.05476968777331903}, {0.8843341831605966, 
+           0.2423259819490717}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{-0.08560581634172193, -0.474261275603974}, \
+{-1.2338554861620659`, -0.31243954416176617`}, {-0.8042233919138931, 
+           0.4509451983454138}}], 
+          
+          PolygonBox[{{-0.8042233919138931, 0.4509451983454137}, {
+           0.11463646890929094`, 0.8833341746478289}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{-1.233855486162066, -0.3124395441617661}, \
+{-0.08560581634172165, -0.474261275603974}, {-0.41023256942927194`, \
+-0.8284088196992898}}], 
+          
+          PolygonBox[{{-0.8042233919138932, 
+           0.45094519834541363`}, {-1.2338554861620659`, -0.312439544161766}, \
+{-1.5759529539438015`, -0.20912839887612122`}}], 
+          
+          PolygonBox[{{-0.12853274041623128`, 0.29966643615492483`}, {
+           0.1146364689092909, 0.8833341746478289}, {0.20030828598813039`, 
+           0.45755912617862793`}}], 
+          
+          PolygonBox[{{-1.2338554861620663`, -0.312439544161766}, \
+{-0.41023256942927205`, -0.8284088196992898}, {-0.7425362372025643, \
+-0.9812267145231294}}], 
+          
+          PolygonBox[{{-0.41023256942927194`, -0.82840881969929}, \
+{-0.08560581634172149, -0.47426127560397396`}, {-0.35737812133959923`, \
+-1.1903279320864488`}}], 
+          
+          PolygonBox[{{-1.5759529539438017`, -0.20912839887612117`}, \
+{-1.2338554861620659`, -0.3124395441617659}, {-1.973992278790744, \
+-0.6877639529542405}}], 
+          
+          PolygonBox[{{0.11463646890929091`, 0.8833341746478289}, {
+           0.6440737188870063, 0.5558841844381601}, {0.20030828598813044`, 
+           0.4575591261786278}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{
+           0.6966885919807092, -1.3302280014274364`}, {-0.0856058163417221, \
+-0.47426127560397363`}, {0.3902113179322325, -0.407920740934511}}], 
+          
+          PolygonBox[{{0.6966885919807093, -1.3302280014274361`}, {
+           0.3902113179322326, -0.40792074093451103`}, {
+           0.7437424758686861, -0.5017011064812655}}], 
+          
+          PolygonBox[{{-0.08560581634172229, -0.47426127560397346`}, {
+           0.6966885919807094, -1.3302280014274364`}, {-0.12069043995684889`, \
+-1.6452383499076793`}}], 
+          
+          PolygonBox[{{0.9578047147823637, -1.0862561985158323`}, {
+           0.6966885919807093, -1.3302280014274364`}, {
+           0.7437424758686862, -0.5017011064812653}}], 
+          
+          PolygonBox[{{-0.1206904399568487, -1.6452383499076793`}, {
+           0.6966885919807093, -1.3302280014274368`}, {
+           0.8946701427145314, -1.6277295573425918`}}], 
+          
+          PolygonBox[{{-0.08560581634172243, -0.47426127560397335`}, \
+{-0.12069043995684903`, -1.6452383499076793`}, {-0.5453387638366585, \
+-1.0983225232603884`}}], 
+          
+          PolygonBox[{{0.9578047147823638, -1.0862561985158323`}, {
+           0.7437424758686862, -0.5017011064812654}, {
+           1.1534514828546931`, -0.6985109286757061}}], 
+          
+          PolygonBox[{{-0.12069043995684892`, -1.6452383499076795`}, {
+           0.8946701427145317, -1.6277295573425918`}, {
+           0.43351799374799616`, -2.0603240427731935`}}], 
+          
+          PolygonBox[{{1.5095830542247966`, -0.7774845070614955}, {
+           0.957804714782364, -1.0862561985158323`}, {
+           1.1534514828546933`, -0.6985109286757059}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.12853274041623133`, 0.29966643615492455`}, {
+           0.4590251562642849, 0.5332793882140694}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.4921812409171054, 0.8889056817035269}, {
+           0.45902515626428475`, 0.5332793882140694}, {-0.12853274041623128`, 
+           0.29966643615492455`}}], 
+          
+          PolygonBox[{{0.4590251562642849, 0.5332793882140695}, {
+           0.5944437315719674, -0.07432994944781628}, {0.21413855675795299`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{-0.4921812409171057, 0.8889056817035269}, {
+           0.383775685599948, 0.8826236129661672}, {0.45902515626428503`, 
+           0.5332793882140694}}], 
+          
+          PolygonBox[{{-0.6524415786767808, -0.27158338050267783`}, \
+{-0.49218124091710547`, 0.888905681703527}, {-0.12853274041623122`, 
+           0.2996664361549246}}], 
+          
+          PolygonBox[{{0.4590251562642851, 0.5332793882140694}, {
+           0.7499273204045764, 0.7408361300978306}, {
+           0.5944437315719674, -0.07432994944781626}}], 
+          
+          PolygonBox[{{
+           0.5944437315719676, -0.07432994944781639}, {-0.04884574983626335, \
+-0.4900104582516081}, {0.2141385567579529, 0.17459483944904958`}}], 
+          PolygonBox[{{-0.030615730884008596`, 1.9656486962185828`}, {
+           0.3837756855999479, 0.8826236129661672}, {-0.49218124091710563`, 
+           0.8889056817035269}}], 
+          
+          PolygonBox[{{0.7499273204045767, 0.7408361300978308}, {
+           0.9325920912781267, -0.21373842631348755`}, {
+           0.5944437315719675, -0.0743299494478164}}], 
+          
+          PolygonBox[{{
+           0.4225161090266447, -0.3971610650483511}, {-0.048845749836263386`, \
+-0.4900104582516082}, {0.5944437315719675, -0.07432994944781643}}], 
+          
+          PolygonBox[{{0.383775685599948, 
+           0.8826236129661671}, {-0.0306157308840087, 1.965648696218583}, {
+           0.4364321271447902, 1.8530906662090816`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{0.4787032425849299, 0.5190212890051386}, {
+           0.5799259307265617, -0.09521096768418552}, {0.21413855675795276`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{0.4787032425849298, 0.5190212890051384}, {
+           0.7807588050475802, 0.7099828227973635}, {
+           0.5799259307265617, -0.09521096768418555}}], 
+          
+          PolygonBox[{{-0.12100102378601008`, 0.3186364437250787}, {
+           0.4787032425849299, 0.5190212890051387}, {0.21413855675795268`, 
+           0.1745948394490494}}], 
+          
+          PolygonBox[{{0.7807588050475801, 0.7099828227973634}, {
+           0.9097477844387339, -0.2533140397853917}, {
+           0.5799259307265616, -0.09521096768418576}}], 
+          
+          PolygonBox[{{0.48497303647578144`, 1.5345134654124297`}, {
+           0.7807588050475803, 0.7099828227973634}, {0.47870324258492986`, 
+           0.5190212890051384}}], 
+          
+          PolygonBox[{{-0.4511238293013943, 0.9272923840475837}, {
+           0.47870324258492986`, 0.5190212890051387}, {-0.12100102378601005`, 
+           0.31863644372507877`}}], 
+          
+          PolygonBox[{{0.7807588050475802, 0.7099828227973635}, {
+           1.3895867289787602`, -0.2769275764036647}, {
+           0.9097477844387339, -0.2533140397853917}}], 
+          
+          PolygonBox[{{1.6548076133339786`, 1.472021048703786}, {
+           0.7807588050475801, 0.7099828227973635}, {0.4849730364757814, 
+           1.5345134654124297`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{0.4787032425849299, 0.5190212890051386}, {
+           0.5799259307265617, -0.09521096768418552}, {0.21413855675795276`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{1.3615176114537522`, -0.37411117968864527`}, {
+           0.39021131793223257`, -0.40792074093451103`}, {
+           0.5799259307265618, -0.09521096768418547}}], 
+          
+          PolygonBox[{{
+           0.6966885919807092, -1.3302280014274364`}, {-0.0856058163417221, \
+-0.47426127560397363`}, {0.3902113179322325, -0.407920740934511}}], 
+          
+          PolygonBox[{{-0.12100102378601008`, 0.3186364437250787}, {
+           0.4787032425849299, 0.5190212890051387}, {0.21413855675795268`, 
+           0.1745948394490494}}], 
+          
+          PolygonBox[{{1.2011278307811648`, -0.05476968777331917}, {
+           1.3615176114537524`, -0.3741111796886452}, {
+           0.5799259307265617, -0.09521096768418544}}], 
+          
+          PolygonBox[{{-0.08560581634172229, -0.47426127560397346`}, {
+           0.6966885919807094, -1.3302280014274364`}, {-0.12069043995684889`, \
+-1.6452383499076793`}}], 
+          
+          PolygonBox[{{2.211100473072017, -0.16068915002594886`}, {
+           1.3615176114537526`, -0.3741111796886451}, {
+           1.2011278307811648`, -0.05476968777331909}}], 
+          
+          PolygonBox[{{-0.08560581634172243, -0.47426127560397335`}, \
+{-0.12069043995684903`, -1.6452383499076793`}, {-0.5453387638366585, \
+-1.0983225232603884`}}], 
+          
+          PolygonBox[{{2.211100473072017, -0.1606891500259488}, {
+           1.2011278307811648`, -0.05476968777331909}, {1.711398678100835, 
+           0.31862414679962403`}}]}}], ",", 
+       GraphicsBox[{
+         Hue[0.94, 0.22, 1.], 
+         EdgeForm[{
+           Thickness[Tiny], 
+           RGBColor[1, 0.5, 0.5]}], {
+          
+          PolygonBox[{{-0.08560581634172204, -0.4742612756039738}, \
+{-0.1285327404162313, 0.29966643615492455`}, {0.21413855675795307`, 
+           0.17459483944904958`}}], 
+          
+          PolygonBox[{{-0.08560581634172201, -0.474261275603974}, \
+{-0.804223391913893, 0.45094519834541363`}, {-0.1285327404162313, 
+           0.2996664361549248}}], 
+          
+          PolygonBox[{{
+           0.5799259307265616, -0.0952109676841854}, {-0.08560581634172194, \
+-0.4742612756039737}, {0.21413855675795296`, 0.17459483944904938`}}], 
+          
+          PolygonBox[{{
+           0.39021131793223246`, -0.4079207409345111}, {-0.08560581634172199, \
+-0.47426127560397363`}, {0.579925930726562, -0.09521096768418542}}], 
+          
+          PolygonBox[{{0.4787032425849299, 0.5190212890051386}, {
+           0.5799259307265617, -0.09521096768418552}, {0.21413855675795276`, 
+           0.17459483944904947`}}], 
+          
+          PolygonBox[{{1.3615176114537522`, -0.37411117968864527`}, {
+           0.39021131793223257`, -0.40792074093451103`}, {
+           0.5799259307265618, -0.09521096768418547}}], 
+          
+          PolygonBox[{{
+           0.6966885919807092, -1.3302280014274364`}, {-0.0856058163417221, \
+-0.47426127560397363`}, {0.3902113179322325, -0.407920740934511}}], 
+          
+          PolygonBox[{{0.4787032425849298, 0.5190212890051384}, {
+           0.7807588050475802, 0.7099828227973635}, {
+           0.5799259307265617, -0.09521096768418555}}], 
+          
+          PolygonBox[{{-0.12100102378601008`, 0.3186364437250787}, {
+           0.4787032425849299, 0.5190212890051387}, {0.21413855675795268`, 
+           0.1745948394490494}}], 
+          
+          PolygonBox[{{-0.08560581634172229, -0.47426127560397346`}, {
+           0.6966885919807094, -1.3302280014274364`}, {-0.12069043995684889`, \
+-1.6452383499076793`}}], 
+          
+          PolygonBox[{{0.48497303647578144`, 1.5345134654124297`}, {
+           0.7807588050475803, 0.7099828227973634}, {0.47870324258492986`, 
+           0.5190212890051384}}], 
+          
+          PolygonBox[{{-0.4511238293013943, 0.9272923840475837}, {
+           0.47870324258492986`, 0.5190212890051387}, {-0.12100102378601005`, 
+           0.31863644372507877`}}]}}]}], "}"}]},
+  "RowDefault"]], "Output",
+ CellChangeTimes->{3.771842946487734*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"10dd99ae-5db3-4c5a-b825-0b422a4ad1cc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FeatureSpacePlot", "[", "%", "]"}]], "Input",
+ CellChangeTimes->{
+  3.771756217849454*^9, {3.7717565704820395`*^9, 3.7717565968256383`*^9}},
+ CellLabel->
+  "In[170]:=",ExpressionUUID->"e284060e-a320-4947-a4b5-ad4bd4a299cb"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {
+    {Opacity[0], 
+     PointBox[{{-100.0967788696289, -100.54360961914062`}, \
+{-45.231292724609375`, 
+      211.6888885498047}, {-22.090890884399414`, -374.4704895019531}, \
+{-45.54082489013672, 7.634821891784668}, {-299.9474792480469, 
+      67.71321868896484}, {254.6508331298828, -55.32960510253906}, {
+      169.15274047851562`, 36.686676025390625`}, {47.55296325683594, 
+      308.2659912109375}, {132.70042419433594`, 
+      245.53692626953125`}, {-72.71351623535156, -439.48809814453125`}, \
+{-177.16444396972656`, 97.8382339477539}, {131.1194610595703, 
+      369.1589050292969}, {71.60282135009766, -70.49549102783203}, {
+      63.41759490966797, -155.6385040283203}, {-27.646203994750977`, \
+-273.6886901855469}, {-79.76543426513672, 125.13074493408203`}}]}, {
+     {Opacity[0]}, {}}, {
+     {Opacity[0]}, {}}}, {{}, {{}, {InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{0.20421767111310898`, 
+               0.22596469205188513`}, {-0.1349782998954033, 
+               0.12835317668999496`}, {0.058448455578944215`, 
+               0.2639061910313858}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.16445021627521456`, 0.37124638765726137`}, {
+               0.6669748466752055, 0.740090059472394}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237093}, \
+{-0.48061784081086145`, 
+               0.08487208521905971}, {-0.45648387887286823`, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{0.6669748466752056, 0.740090059472394}, {
+               0.16445021627521453`, 0.3712463876572613}, {0.4047963030531671,
+                0.6787563172654127}}], 
+              
+              Polygon[{{0.35828564325107787`, -0.6451706255077867}, {
+               0.5666828735588137, -0.7254467512007058}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905942}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.3291604540021025, 
+               0.45385681606375183`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{35., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-100.0967788696289, -100.54360961914062}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905942}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.3291604540021025, 
+               0.45385681606375183`}}], 
+              
+              Polygon[{{-0.4543957981235043, 0.692216890849106}, {
+               0.028870040283872647`, 
+               0.2984773985129519}, {-0.32916045400210264`, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.17920944446140882`, 0.28918842150788515`}, {
+               0.028870040283872557`, 0.29847739851295196`}, {
+               0.47978421742626587`, 0.5146226485959853}}], 
+              
+              Polygon[{{-0.4585216402496288, 
+               0.6900031693312085}, {-0.4806178408108614, 
+               0.08487208521905942}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{0.028870040283872758`, 
+               0.29847739851295185`}, {-0.45439579812350434`, 
+               0.692216890849106}, {0.2863705125995156, 0.7271216228280346}}], 
+              
+              Polygon[{{-0.533015639002476, 
+               0.9005365541090429}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{-0.4543957981235045, 
+               0.692216890849106}, {-0.3693206119352175, 
+               0.8987014535922544}, {0.2863705125995156, 
+               0.7271216228280346}}], 
+              
+              Polygon[{{-0.3693206119352175, 
+               0.8987014535922544}, {-0.06865638476446129, 
+               1.3193842160328768`}, {0.2863705125995156, 
+               0.7271216228280346}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{27., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-45.231292724609375, 211.6888885498047}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237093}, \
+{-0.48061784081086145`, 
+               0.08487208521905971}, {-0.45648387887286823`, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+              
+              Polygon[{{0.17920944446140882`, 0.28918842150788515`}, {
+               0.028870040283872557`, 0.29847739851295196`}, {
+               0.47978421742626587`, 0.5146226485959853}}], 
+              
+              Polygon[{{-0.4806178408108615, 
+               0.08487208521905976}, {-0.8236676779391067, \
+-0.4141155702237093}, {-0.8062777362959905, -0.14542056357391192`}}], 
+              
+              Polygon[{{-0.8736442746687554, -0.6317758599770837}, \
+{-0.8236676779391067, -0.4141155702237093}, {-0.4564838788728681, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.14556115612207338`, -0.865735456691173}, \
+{-0.0692393712177054, -0.3543178687418801}, {
+               0.5163931551336055, -0.7201779803159598}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237094}, \
+{-1.03080581281407, 
+               0.17382188518905767`}, {-0.8062777362959905, \
+-0.14542056357391187`}}], 
+              
+              Polygon[{{-0.8236676779391067, -0.4141155702237093}, \
+{-0.8736442746687554, -0.6317758599770837}, {-1.5486202100815185`, \
+-0.5703106199436646}}], 
+              
+              Polygon[{{-1.03080581281407, 
+               0.17382188518905778`}, {-0.8236676779391068, \
+-0.4141155702237095}, {-1.4740067397622552`, -0.057727899163525595`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {10., 19.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-22.090890884399414, -374.4704895019531}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905942}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.3291604540021025, 
+               0.45385681606375183`}}], 
+              
+              Polygon[{{-0.4585216402496288, 
+               0.6900031693312085}, {-0.4806178408108614, 
+               0.08487208521905942}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{-0.4585216402496288, 0.6900031693312085}, {
+               0.031517757292904514`, 
+               0.3047265839371975}, {-0.3291604540021025, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905937}, {-1.0633304769805172`, 
+               0.235092072415272}, {-0.8592629506344247, 
+               0.6361109303495434}}], 
+              
+              Polygon[{{-0.533015639002476, 
+               0.9005365541090429}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{0.03151775729290463, 
+               0.3047265839371974}, {-0.45852164024962894`, 
+               0.6900031693312085}, {0.28152572143220084`, 
+               0.7377836034489272}}], 
+              
+              Polygon[{{-1.0633304769805172`, 
+               0.23509207241527197`}, {-1.2730612404207862`, 
+               0.7077293233610933}, {-0.8592629506344247, 
+               0.6361109303495432}}], 
+              
+              Polygon[{{-0.4585216402496288, 
+               0.6900031693312085}, {-0.533015639002476, 
+               0.9005365541090429}, {0.06972825070610801, 
+               1.210488635143623}}], 
+              
+              Polygon[{{0.16082484105433117`, 0.3819787659864618}, {
+               0.03151775729290466, 0.30472658393719754`}, {
+               0.2815257214322007, 0.7377836034489272}}], 
+              
+              Polygon[{{-1.273061240420786, 
+               0.7077293233610934}, {-1.063330476980517, 
+               0.2350920724152719}, {-1.7538325434850868`, 
+               0.2299956702984736}}], 
+              
+              Polygon[{{0.7931698349940008, 0.2740602179924938}, {
+               0.16082484105433115`, 0.38197876598646185`}, {
+               0.28152572143220067`, 0.7377836034489271}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {9., 18.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-45.54082489013672, 7.634821891784668}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.16445021627521456`, 0.37124638765726137`}, {
+               0.6669748466752055, 0.740090059472394}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.6669748466752055, 0.7400900594723941}, {
+               0.8454625663579731, 0.6058671259675472}, {0.5146524473764413, 
+               0.01431395481712161}}], 
+              
+              Polygon[{{0.6669748466752056, 0.740090059472394}, {
+               0.16445021627521453`, 0.3712463876572613}, {0.4047963030531671,
+                0.6787563172654127}}], 
+              Polygon[{{-0.04947743073372394, 
+               0.4713637751361074}, {-0.20226710385634397`, 
+               0.7844334372671342}, {0.16445021627521456`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.06923937121770596, -0.3543178687418801}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.8454625663579731, 0.6058671259675472}, {
+               0.6669748466752055, 0.740090059472394}, {0.9710710150181302, 
+               1.006592389050451}}], 
+              
+              Polygon[{{0.16445021627521453`, 0.37124638765726126`}, {
+               0.08569812866271267, 0.9180582744578831}, {
+               0.40479630305316716`, 0.6787563172654127}}], 
+              
+              Polygon[{{0.08990753004188842, 0.9235708026352929}, {
+               0.6669748466752056, 0.740090059472394}, {0.40479630305316705`, 
+               0.6787563172654126}}], 
+              
+              Polygon[{{0.6669748466752056, 0.7400900594723943}, {
+               0.3507638309196522, 1.2565031349776796`}, {0.9710710150181301, 
+               1.006592389050451}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{33., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-299.9474792480469, 67.71321868896484}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.16445021627521456`, 0.37124638765726137`}, {
+               0.6669748466752055, 0.740090059472394}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.6669748466752055, 0.7400900594723941}, {
+               0.8454625663579731, 0.6058671259675472}, {0.5146524473764413, 
+               0.01431395481712161}}], 
+              
+              Polygon[{{0.6669748466752056, 0.740090059472394}, {
+               0.16445021627521453`, 0.3712463876572613}, {0.4047963030531671,
+                0.6787563172654127}}], 
+              
+              Polygon[{{-0.04947743073372394, 
+               0.4713637751361074}, {-0.20226710385634397`, 
+               0.7844334372671342}, {0.16445021627521456`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.8454625663579732, 0.6058671259675471}, {
+               1.1771143800901518`, 0.20915559530198016`}, {
+               0.5146524473764411, 0.014313954817121693`}}], 
+              
+              Polygon[{{0.8454625663579731, 0.6058671259675472}, {
+               0.6669748466752055, 0.740090059472394}, {0.9710710150181302, 
+               1.006592389050451}}], 
+              
+              Polygon[{{0.16445021627521453`, 0.37124638765726126`}, {
+               0.08569812866271267, 0.9180582744578831}, {
+               0.40479630305316716`, 0.6787563172654127}}], 
+              
+              Polygon[{{0.08990753004188842, 0.9235708026352929}, {
+               0.6669748466752056, 0.740090059472394}, {0.40479630305316705`, 
+               0.6787563172654126}}], 
+              
+              Polygon[{{1.1771143800901518`, 0.20915559530198014`}, {
+               0.8454625663579731, 0.6058671259675471}, {1.262997959249884, 
+               0.6508383893506436}}], 
+              
+              Polygon[{{0.6669748466752056, 0.7400900594723943}, {
+               0.3507638309196522, 1.2565031349776796`}, {0.9710710150181301, 
+               1.006592389050451}}], 
+              
+              Polygon[{{1.7786692927641, 0.2250221621284327}, {
+               1.1771143800901518`, 0.2091555953019801}, {1.262997959249884, 
+               0.6508383893506436}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {11., 20.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {254.6508331298828, -55.32960510253906}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{0.20421767111310898`, 
+               0.22596469205188513`}, {-0.1349782998954033, 
+               0.12835317668999496`}, {0.058448455578944215`, 
+               0.2639061910313858}}], 
+              
+              Polygon[{{0.204217671113109, 0.22596469205188519`}, {
+               0.05844845557894422, 0.26390619103138585`}, {
+               0.5424389121050716, 0.3895867474953404}}], 
+              
+              Polygon[{{-0.1349782998954034, 
+               0.1283531766899949}, {-0.48254202012387404`, 
+               0.1519488953842406}, {0.0584484555789443, 
+               0.26390619103138585`}}], 
+              
+              Polygon[{{0.058448455578944264`, 
+               0.26390619103138585`}, {-0.010821369654947191`, 
+               0.8834046572996914}, {0.5424389121050713, 
+               0.3895867474953404}}], 
+              
+              Polygon[{{0.5709671346320818, -0.300344566246154}, {
+               0.20421767111310907`, 0.22596469205188519`}, {
+               0.5424389121050714, 0.38958674749534034`}}], 
+              
+              Polygon[{{0.05844845557894443, 
+               0.26390619103138585`}, {-0.48254202012387426`, 
+               0.15194889538424056`}, {-0.2631484328656015, 
+               0.48504876852353646`}}], 
+              Polygon[{{-0.48254202012387415`, 
+               0.1519488953842406}, {-0.13497829989540333`, 
+               0.1283531766899949}, {-0.16300243194627176`, \
+-0.35796728644597703`}}], 
+              
+              Polygon[{{-0.010821369654947302`, 0.8834046572996915}, {
+               0.19450676089837032`, 0.9712341555316673}, {0.5424389121050714,
+                0.3895867474953403}}], 
+              
+              Polygon[{{-0.010821369654947212`, 0.8834046572996916}, {
+               0.058448455578944285`, 
+               0.2639061910313858}, {-0.08833464222482315, 
+               0.6255459571470815}}], 
+              
+              Polygon[{{1.0362141130011595`, -0.07469392203412424}, {
+               0.5709671346320818, -0.3003445662461543}, {0.5424389121050714, 
+               0.3895867474953406}}], 
+              
+              Polygon[{{-0.4825420201238741, 
+               0.15194889538424053`}, {-0.34483284004565545`, 
+               0.7416166431542643}, {-0.26314843286560147`, 
+               0.4850487685235365}}], 
+              
+              Polygon[{{-0.48254202012387426`, 
+               0.15194889538424083`}, {-0.16300243194627156`, \
+-0.3579672864459772}, {-0.5869943917845626, -0.5086009404559821}}], 
+              
+              Polygon[{{0.19450676089837027`, 
+               0.9712341555316671}, {-0.010821369654947295`, 
+               0.8834046572996915}, {-0.09027776060814091, 
+               1.279869855278118}}], 
+              
+              Polygon[{{0.5709671346320817, -0.3003445662461544}, {
+               1.0362141130011593`, -0.07469392203412424}, {
+               0.9786807625584955, -0.49068446571813135`}}], 
+              
+              Polygon[{{-0.3448328400456555, 
+               0.7416166431542643}, {-0.4825420201238742, 
+               0.15194889538424045`}, {-0.7484721943732251, 
+               0.7655591348667625}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {169.15274047851562, 36.686676025390625}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905942}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.3291604540021025, 
+               0.45385681606375183`}}], 
+              
+              Polygon[{{-0.4543957981235043, 0.692216890849106}, {
+               0.028870040283872647`, 
+               0.2984773985129519}, {-0.32916045400210264`, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.17920944446140882`, 0.28918842150788515`}, {
+               0.028870040283872557`, 0.29847739851295196`}, {
+               0.47978421742626587`, 0.5146226485959853}}], 
+              
+              Polygon[{{-0.14556115612207338`, -0.865735456691173}, \
+{-0.0692393712177054, -0.3543178687418801}, {
+               0.5163931551336055, -0.7201779803159598}}], 
+              
+              Polygon[{{-0.4585216402496288, 
+               0.6900031693312085}, {-0.4806178408108614, 
+               0.08487208521905942}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{0.028870040283872758`, 
+               0.29847739851295185`}, {-0.45439579812350434`, 
+               0.692216890849106}, {0.2863705125995156, 0.7271216228280346}}], 
+              
+              Polygon[{{-0.533015639002476, 
+               0.9005365541090429}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.8592629506344245, 
+               0.6361109303495431}}], 
+              
+              Polygon[{{-0.4543957981235045, 
+               0.692216890849106}, {-0.3693206119352175, 
+               0.8987014535922544}, {0.2863705125995156, 
+               0.7271216228280346}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{33., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {47.55296325683594, 308.2659912109375}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012723`}, {
+               0.5666828735588137, -0.7254467512007059}, {0.5146524473764418, 
+               0.014313954817121721`}}], 
+              
+              Polygon[{{0.35828564325107787`, -0.6451706255077867}, {
+               0.5666828735588137, -0.7254467512007058}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.06923937121770596, -0.3543178687418801}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.8711447127167391, -0.10434121632272947`}, {
+               0.9491383512185186, -0.23320243584012723`}, {
+               0.5146524473764418, 0.014313954817121721`}}], 
+              
+              Polygon[{{0.5666828735588136, -0.725446751200706}, {
+               0.9491383512185187, -0.23320243584012715`}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007059}, {
+               1.0121015004600862`, -1.1356590350823224`}, {
+               0.3470904667727315, -1.0649716341669997`}}], 
+              
+              Polygon[{{0.8711447127167391, -0.10434121632272947`}, {
+               1.1822937853812456`, -0.2709790549419029}, {
+               0.9491383512185185, -0.23320243584012723`}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012712`}, {
+               1.174471727724115, -0.7376129831945327}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{1.1719308941549378`, -0.7440667566373711}, {
+               0.5666828735588135, -0.7254467512007059}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{1.1822937853812459`, -0.2709790549419029}, {
+               1.4148983321776931`, -0.5303097750067884}, {
+               0.9491383512185185, -0.2332024358401272}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {10., 19.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {132.70042419433594, 245.53692626953125}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.028870040283872606`, 
+               0.29847739851295196`}, {-0.48061784081086134`, 
+               0.08487208521905942}, {-0.3291604540021026, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237093}, \
+{-0.48061784081086145`, 
+               0.08487208521905971}, {-0.45648387887286823`, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905942}, {-0.4585216402496288, 
+               0.6900031693312084}, {-0.3291604540021025, 
+               0.45385681606375183`}}], 
+              
+              Polygon[{{-0.4543957981235043, 0.692216890849106}, {
+               0.028870040283872647`, 
+               0.2984773985129519}, {-0.32916045400210264`, 
+               0.4538568160637517}}], 
+              
+              Polygon[{{0.17920944446140882`, 0.28918842150788515`}, {
+               0.028870040283872557`, 0.29847739851295196`}, {
+               0.47978421742626587`, 0.5146226485959853}}], 
+              
+              Polygon[{{-0.8736442746687554, -0.6317758599770837}, \
+{-0.8236676779391067, -0.4141155702237093}, {-0.4564838788728681, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.14556115612207338`, -0.865735456691173}, \
+{-0.0692393712177054, -0.3543178687418801}, {
+               0.5163931551336055, -0.7201779803159598}}], 
+              
+              Polygon[{{0.028870040283872758`, 
+               0.29847739851295185`}, {-0.45439579812350434`, 
+               0.692216890849106}, {0.2863705125995156, 0.7271216228280346}}], 
+              
+              Polygon[{{-0.8236676779391067, -0.4141155702237093}, \
+{-0.8736442746687554, -0.6317758599770837}, {-1.5486202100815185`, \
+-0.5703106199436646}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {12., 21.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-72.71351623535156, -439.48809814453125}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012723`}, {
+               0.5666828735588137, -0.7254467512007059}, {0.5146524473764418, 
+               0.014313954817121721`}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.06923937121770596, -0.3543178687418801}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.35828564325107776`, -0.6451706255077867}, {
+               0.36796508878221723`, -0.8682848794011913}, \
+{-0.031020675651177, -0.8026470012295129}}], 
+              
+              Polygon[{{0.5666828735588136, -0.725446751200706}, {
+               0.9491383512185187, -0.23320243584012715`}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{-0.6435076802984252, -0.5341399199219059}, \
+{-0.5325660178972412, -0.20391386840050546`}, {-0.06923937121770574, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.3430168707206109, -1.0598557598937075`}, \
+{-0.643507680298425, -0.5341399199219057}, {-0.031020675651176943`, \
+-0.8026470012295129}}], 
+              
+              Polygon[{{-0.5325660178972412, -0.20391386840050543`}, \
+{-0.6435076802984254, -0.5341399199219059}, {-0.614651335330076, 
+               0.01755967424583689}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.3430168707206108, -1.0598557598937075`}, {-0.5774976437334515, \
+-0.9274994840463325}}], 
+              
+              Polygon[{{-0.614651335330076, 
+               0.017559674245837015`}, {-0.6435076802984253, \
+-0.5341399199219059}, {-0.9101023583552554, -0.23746442506726934`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {13., 22.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-177.16444396972656, 97.8382339477539}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012723`}, {
+               0.5666828735588137, -0.7254467512007059}, {0.5146524473764418, 
+               0.014313954817121721`}}], 
+              
+              Polygon[{{0.35828564325107787`, -0.6451706255077867}, {
+               0.5666828735588137, -0.7254467512007058}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              
+              Polygon[{{0.8711447127167391, -0.10434121632272947`}, {
+               0.9491383512185186, -0.23320243584012723`}, {
+               0.5146524473764418, 0.014313954817121721`}}], 
+              
+              Polygon[{{0.5666828735588136, -0.725446751200706}, {
+               0.9491383512185187, -0.23320243584012715`}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007059}, {
+               1.0121015004600862`, -1.1356590350823224`}, {
+               0.3470904667727315, -1.0649716341669997`}}], 
+              
+              Polygon[{{-0.07916541768735215, -0.9208688906432483}, {
+               0.3582856432510778, -0.6451706255077868}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              Polygon[{{0.8711447127167391, -0.10434121632272947`}, {
+               1.1822937853812456`, -0.2709790549419029}, {
+               0.9491383512185185, -0.23320243584012723`}}], 
+              
+              Polygon[{{1.0121015004600862`, -1.1356590350823224`}, {
+               0.5191147976642296, -1.4807447806173837`}, {
+               0.3470904667727315, -1.0649716341669997`}}], 
+              
+              Polygon[{{1.0121015004600862`, -1.1356590350823224`}, {
+               0.5666828735588137, -0.7254467512007059}, {
+               0.8302127486304028, -0.7806864254723584}}], 
+              
+              Polygon[{{1.0121015004600864`, -1.1356590350823221`}, {
+               1.0062313354632195`, -1.4839733166193587`}, {
+               0.5191147976642294, -1.4807447806173837`}}], 
+              
+              Polygon[{{1.1810435047258205`, -0.6096706986674735}, {
+               1.0121015004600862`, -1.1356590350823224`}, {
+               0.8302127486304027, -0.7806864254723584}}], 
+              
+              Polygon[{{1.0062313354632197`, -1.483973316619359}, {
+               1.0121015004600864`, -1.1356590350823221`}, {
+               1.151456187254822, -1.6702480380725866`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{30., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {131.1194610595703, 369.1589050292969}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{-0.04947743073372394, 
+               0.4713637751361074}, {-0.20226710385634397`, 
+               0.7844334372671342}, {0.16445021627521456`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012723`}, {
+               0.5666828735588137, -0.7254467512007059}, {0.5146524473764418, 
+               0.014313954817121721`}}], 
+              
+              Polygon[{{0.35828564325107787`, -0.6451706255077867}, {
+               0.5666828735588137, -0.7254467512007058}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.06923937121770596, -0.3543178687418801}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.5666828735588136, -0.725446751200706}, {
+               0.9491383512185187, -0.23320243584012715`}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007059}, {
+               1.0121015004600862`, -1.1356590350823224`}, {
+               0.3470904667727315, -1.0649716341669997`}}], 
+              
+              Polygon[{{0.9491383512185187, -0.23320243584012712`}, {
+               1.174471727724115, -0.7376129831945327}, {
+               0.8020822896332195, -0.5947312908269822}}], 
+              
+              Polygon[{{1.1719308941549378`, -0.7440667566373711}, {
+               0.5666828735588135, -0.7254467512007059}, {
+               0.8020822896332195, -0.5947312908269822}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{40., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {71.60282135009766, -70.49549102783203}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{
+               0.3582856432510778, -0.6451706255077867}, \
+{-0.06923937121770596, -0.3543178687418802}, {0.5146524473764417, 
+               0.014313954817121777`}}], 
+              
+              Polygon[{{0.16445021627521456`, 0.37124638765726137`}, {
+               0.6669748466752055, 0.740090059472394}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007058}, {
+               0.35828564325107776`, -0.6451706255077867}, {
+               0.5146524473764417, 0.014313954817121666`}}], 
+              
+              Polygon[{{-0.06923937121770601, -0.3543178687418802}, {
+               0.3582856432510778, -0.6451706255077867}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.6669748466752056, 0.740090059472394}, {
+               0.16445021627521453`, 0.3712463876572613}, {0.4047963030531671,
+                0.6787563172654127}}], 
+              
+              Polygon[{{-0.04947743073372394, 
+               0.4713637751361074}, {-0.20226710385634397`, 
+               0.7844334372671342}, {0.16445021627521456`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.35828564325107787`, -0.6451706255077867}, {
+               0.5666828735588137, -0.7254467512007058}, {
+               0.34709046677273137`, -1.0649716341669997`}}], 
+              
+              Polygon[{{-0.643507680298425, -0.5341399199219057}, \
+{-0.06923937121770596, -0.3543178687418801}, {-0.031020675651177, \
+-0.8026470012295128}}], 
+              
+              Polygon[{{0.16445021627521453`, 0.37124638765726126`}, {
+               0.08569812866271267, 0.9180582744578831}, {
+               0.40479630305316716`, 0.6787563172654127}}], 
+              
+              Polygon[{{0.08990753004188842, 0.9235708026352929}, {
+               0.6669748466752056, 0.740090059472394}, {0.40479630305316705`, 
+               0.6787563172654126}}], 
+              
+              Polygon[{{0.5666828735588137, -0.7254467512007059}, {
+               1.0121015004600862`, -1.1356590350823224`}, {
+               0.3470904667727315, -1.0649716341669997`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{34., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {63.41759490966797, -155.6385040283203}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{-0.4806178408108613, 
+               0.08487208521905952}, {-0.13497829989540328`, 
+               0.12835317668999496`}, {-0.06923937121770568, \
+-0.3543178687418801}}], 
+              
+              Polygon[{{-0.13497829989540322`, 
+               0.12835317668999496`}, {-0.4806178408108613, 
+               0.08487208521905952}, {0.028870040283872467`, 
+               0.2984773985129519}}], 
+              
+              Polygon[{{-0.48061784081086145`, 
+               0.08487208521905969}, {-0.06923937121770549, \
+-0.3543178687418802}, {-0.4564838788728681, -0.5834496452785077}}], 
+              
+              Polygon[{{0.1792094444614088, 
+               0.28918842150788515`}, {-0.13497829989540328`, 
+               0.1283531766899949}, {0.028870040283872557`, 
+               0.298477398512952}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237093}, \
+{-0.48061784081086145`, 
+               0.08487208521905971}, {-0.45648387887286823`, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+              
+              Polygon[{{-0.4806178408108615, 
+               0.08487208521905976}, {-0.8236676779391067, \
+-0.4141155702237093}, {-0.8062777362959905, -0.14542056357391192`}}], 
+              
+              Polygon[{{-0.8736442746687554, -0.6317758599770837}, \
+{-0.8236676779391067, -0.4141155702237093}, {-0.4564838788728681, \
+-0.5834496452785077}}], 
+              
+              Polygon[{{-0.14556115612207338`, -0.865735456691173}, \
+{-0.0692393712177054, -0.3543178687418801}, {
+               0.5163931551336055, -0.7201779803159598}}], 
+              
+              Polygon[{{-1.0252206469874503`, 
+               0.1776778735857829}, {-0.48061784081086134`, 
+               0.08487208521905978}, {-0.8062777362959905, \
+-0.14542056357391192`}}], 
+              
+              Polygon[{{-0.8236676779391068, -0.4141155702237094}, \
+{-1.03080581281407, 
+               0.17382188518905767`}, {-0.8062777362959905, \
+-0.14542056357391187`}}], 
+              
+              Polygon[{{-0.8236676779391067, -0.4141155702237093}, \
+{-0.8736442746687554, -0.6317758599770837}, {-1.5486202100815185`, \
+-0.5703106199436646}}], 
+              
+              Polygon[{{-1.03080581281407, 
+               0.17382188518905778`}, {-0.8236676779391068, \
+-0.4141155702237095}, {-1.4740067397622552`, -0.057727899163525595`}}], 
+              
+              Polygon[{{-1.1813759734296947`, 
+               0.17792655015008826`}, {-1.0308058128140702`, 
+               0.17382188518905772`}, {-1.4740067397622554`, \
+-0.05772789916352555}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{42., {8., 17.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->0], {-27.646203994750977, -273.6886901855469}, {0, 0}], 
+      InsetBox[
+       PaneBox[
+        FrameBox[
+         StyleBox[
+          DynamicModuleBox[{Charting`ChartLabelingDump`g$$ = Graphics[{
+             Hue[0.94, 0.22, 1.], 
+             EdgeForm[{
+               Thickness[Tiny], 
+               RGBColor[1, 0.5, 0.5]}], {
+              
+              Polygon[{{-0.13497829989540328`, 0.12835317668999496`}, {
+               0.20421767111310896`, 
+               0.22596469205188513`}, {-0.06923937121770568, \
+-0.35431786874188004`}}], 
+              
+              Polygon[{{-0.06923937121770572, -0.35431786874188004`}, {
+               0.20421767111310896`, 0.22596469205188513`}, {
+               0.5146524473764416, 0.014313954817121645`}}], 
+              
+              Polygon[{{0.20421767111310898`, 0.22596469205188505`}, {
+               0.1644502162752145, 0.3712463876572614}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.16445021627521456`, 0.37124638765726137`}, {
+               0.6669748466752055, 0.740090059472394}, {0.5146524473764413, 
+               0.014313954817121666`}}], 
+              
+              Polygon[{{0.20421767111310896`, 
+               0.22596469205188502`}, {-0.04947743073372385, 
+               0.4713637751361073}, {0.16445021627521447`, 
+               0.37124638765726137`}}], 
+              
+              Polygon[{{0.6669748466752055, 0.7400900594723941}, {
+               0.8454625663579731, 0.6058671259675472}, {0.5146524473764413, 
+               0.01431395481712161}}], 
+              
+              Polygon[{{0.6669748466752056, 0.740090059472394}, {
+               0.16445021627521453`, 0.3712463876572613}, {0.4047963030531671,
+                0.6787563172654127}}], 
+              
+              Polygon[{{0.8454625663579732, 0.6058671259675471}, {
+               1.1771143800901518`, 0.20915559530198016`}, {
+               0.5146524473764411, 0.014313954817121693`}}], 
+              
+              Polygon[{{0.8454625663579731, 0.6058671259675472}, {
+               0.6669748466752055, 0.740090059472394}, {0.9710710150181302, 
+               1.006592389050451}}], 
+              
+              Polygon[{{0.16445021627521453`, 0.37124638765726126`}, {
+               0.08569812866271267, 0.9180582744578831}, {
+               0.40479630305316716`, 0.6787563172654127}}], 
+              
+              Polygon[{{0.08990753004188842, 0.9235708026352929}, {
+               0.6669748466752056, 0.740090059472394}, {0.40479630305316705`, 
+               0.6787563172654126}}], 
+              
+              Polygon[{{1.1771143800901518`, 0.20915559530198014`}, {
+               0.8454625663579731, 0.6058671259675471}, {1.262997959249884, 
+               0.6508383893506436}}], 
+              
+              Polygon[{{0.040947302501821825`, 0.5725808350820678}, {
+               0.08569812866271265, 0.9180582744578831}, {
+               0.16445021627521458`, 0.37124638765726115`}}], 
+              
+              Polygon[{{0.6669748466752057, 0.740090059472394}, {
+               0.08990753004188837, 0.9235708026352928}, {0.7224650110511006, 
+               1.1406132334947168`}}], 
+              
+              Polygon[{{0.08569812866271266, 0.9180582744578831}, {
+               0.04094730250182187, 0.5725808350820677}, {-0.4427584362659152,
+                0.6302150534349551}}], 
+              
+              Polygon[{{0.08990753004188838, 0.9235708026352927}, {
+               0.39081529109204505`, 1.4446989828796555`}, {
+               0.7224650110511008, 1.1406132334947165`}}]}}]}, 
+           TagBox[
+            TooltipBox[
+             DynamicBox[ToBoxes[
+               Pane[Charting`ChartLabelingDump`g$$, {
+                 UpTo[30], 
+                 UpTo[30]}, ImageSizeAction -> "ResizeToFit"], 
+               TraditionalForm],
+              ImageSizeCache->{40., {17., 25.}}],
+             DynamicBox[
+              ToBoxes[
+               Charting`noShow[
+               Charting`ChartLabelingDump`g$$, ImageSize -> 225], 
+               TraditionalForm]]],
+            Annotation[#, 
+             Dynamic[
+              Charting`noShow[
+              Charting`ChartLabelingDump`g$$, ImageSize -> 225]], 
+             "Tooltip"]& ],
+           DynamicModuleValues:>{}],
+          StripOnInput->False,
+          LineOpacity->1,
+          FrontFaceOpacity->1,
+          BackFaceOpacity->1,
+          Opacity->1,
+          FontOpacity->1],
+         LabelStyle -> {},
+         Frame -> True,
+         Background->None,
+         BaselinePosition->Automatic,
+         ContentPadding->False,
+         FrameMargins->2,
+         FrameStyle->None,
+         RoundingRadius->4,
+         StripOnInput->False],
+        FrameMargins->
+         0], {-79.76543426513672, 125.13074493408203}, {0, 0}]}}}},
+  AspectRatio->1,
+  Axes->{False, False},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->All,
+  PlotRangePadding->{{
+     Scaled[0.05], 
+     Scaled[0.05]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7717566009475884`*^9},
+ CellLabel->
+  "Out[170]=",ExpressionUUID->"8886141d-ad85-44cb-8d29-d602e1c2e45a"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{
+  3.771756358956343*^9},ExpressionUUID->"993313be-a34f-4ee7-8240-\
+cc1e3742bf80"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Rasterize", "@", 
+  GraphicsBox[
+   {Hue[0.94, 0.22, 1.], EdgeForm[{RGBColor[1, 0.5, 0.5], Thickness[Tiny]}], 
+    PolygonBox[{{-0.13497829989540328`, 0.12835317668999496`}, {
+     0.20421767111310896`, 
+     0.22596469205188513`}, {-0.06923937121770568, -0.35431786874188004`}}], 
+    PolygonBox[{{-0.06923937121770572, -0.35431786874188004`}, {
+     0.20421767111310896`, 0.22596469205188513`}, {0.5146524473764416, 
+     0.014313954817121645`}}], 
+    PolygonBox[{{-0.4806178408108613, 
+     0.08487208521905952}, {-0.13497829989540328`, 
+     0.12835317668999496`}, {-0.06923937121770568, -0.3543178687418801}}], 
+    PolygonBox[{{-0.13497829989540322`, 
+     0.12835317668999496`}, {-0.4806178408108613, 0.08487208521905952}, {
+     0.028870040283872467`, 0.2984773985129519}}], 
+    PolygonBox[{{-0.48061784081086145`, 
+     0.08487208521905969}, {-0.06923937121770549, -0.3543178687418802}, \
+{-0.4564838788728681, -0.5834496452785077}}], 
+    PolygonBox[{{0.028870040283872606`, 
+     0.29847739851295196`}, {-0.48061784081086134`, 
+     0.08487208521905942}, {-0.3291604540021026, 0.4538568160637517}}], 
+    PolygonBox[{{0.1792094444614088, 
+     0.28918842150788515`}, {-0.13497829989540328`, 0.1283531766899949}, {
+     0.028870040283872557`, 0.298477398512952}}], 
+    PolygonBox[{{-0.8236676779391068, -0.4141155702237093}, \
+{-0.48061784081086145`, 
+     0.08487208521905971}, {-0.45648387887286823`, -0.5834496452785077}}], 
+    PolygonBox[{{-0.0692393712177054, -0.3543178687418802}, \
+{-0.14556115612207343`, -0.865735456691173}, {-0.4564838788728681, \
+-0.5834496452785078}}], 
+    PolygonBox[{{-0.4806178408108613, 
+     0.08487208521905942}, {-0.4585216402496288, 
+     0.6900031693312084}, {-0.3291604540021025, 0.45385681606375183`}}], 
+    PolygonBox[{{-0.4543957981235043, 0.692216890849106}, {
+     0.028870040283872647`, 0.2984773985129519}, {-0.32916045400210264`, 
+     0.4538568160637517}}], 
+    PolygonBox[{{0.17920944446140882`, 0.28918842150788515`}, {
+     0.028870040283872557`, 0.29847739851295196`}, {0.47978421742626587`, 
+     0.5146226485959853}}], 
+    PolygonBox[{{-0.8736442746687554, -0.6317758599770837}, \
+{-0.8236676779391067, -0.4141155702237093}, {-0.4564838788728681, \
+-0.5834496452785077}}], 
+    PolygonBox[{{-0.14556115612207338`, -0.865735456691173}, \
+{-0.0692393712177054, -0.3543178687418801}, {
+     0.5163931551336055, -0.7201779803159598}}], 
+    PolygonBox[{{0.028870040283872758`, 
+     0.29847739851295185`}, {-0.45439579812350434`, 0.692216890849106}, {
+     0.2863705125995156, 0.7271216228280346}}], 
+    PolygonBox[{{-0.8236676779391067, -0.4141155702237093}, \
+{-0.8736442746687554, -0.6317758599770837}, {-1.5486202100815185`, \
+-0.5703106199436646}}]},
+   ImageSize->{464.28571428571513`, Automatic}]}]], "Input",
+ CellChangeTimes->{{3.7717583970884714`*^9, 3.7717583992346992`*^9}},
+ CellLabel->"In[31]:=",ExpressionUUID->"3da2685b-9b9a-4adf-8e44-f3a101f1e84d"],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[RasterBox[CompressedData["
+1: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
+AAAAgPTg/wFd0ee+
+    "], {{0, 281}, {360, 0}}, {0, 255},
+    ColorFunction->RGBColor],
+   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+   Selectable->False],
+  DefaultBaseStyle->"ImageGraphics",
+  ImageSizeRaw->{360, 281},
+  PlotRange->{{0, 360}, {0, 281}}]], "Output",
+ CellChangeTimes->{3.771761981405135*^9},
+ CellLabel->"Out[31]=",ExpressionUUID->"2463dfac-e72c-4502-8772-db04e0e7dfb5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ GraphicsBox[
+  {Hue[0.94, 0.22, 1.], EdgeForm[{RGBColor[1, 0.5, 0.5], Thickness[Tiny]}], 
+   PolygonBox[{{-0.14039006264185638`, 0.11348878346153368`}, {
+    0.2818485045396346, 
+    0.05172407834858306}, {-0.14145844189777812`, -0.16521286181011677`}}], 
+   PolygonBox[{{-0.3987875608757969, -0.44092373402162377`}, \
+{-0.1403900626418564, 
+    0.1134887834615338}, {-0.14145844189777812`, -0.16521286181011685`}}], 
+   PolygonBox[{{-0.14039006264185633`, 
+    0.1134887834615339}, {-0.39878756087579703`, -0.4409237340216239}, \
+{-0.7378970747733633, 0.33765651209909675`}}], 
+   PolygonBox[{{-0.3987875608757969, -0.44092373402162394`}, \
+{-0.8271301073856676, -0.10033789662743858`}, {-0.7378970747733634, 
+    0.3376565120990968}}], 
+   PolygonBox[{{-0.398787560875797, -0.44092373402162405`}, \
+{-0.7920138665157116, -0.24228081613415972`}, {-0.8271301073856676, \
+-0.1003378966274387}}], 
+   PolygonBox[{{-0.7920138665157116, -0.24228081613415975`}, \
+{-1.5850683714845415`, -0.15776341785814785`}, {-0.8271301073856675, \
+-0.10033789662743858`}}], 
+   PolygonBox[{{-0.398787560875797, -0.4409237340216241}, \
+{-1.376016996540664, -0.7308112464280414}, {-0.7920138665157117, \
+-0.2422808161341598}}], 
+   PolygonBox[{{-1.5850683714845415`, -0.15776341785814785`}, \
+{-1.5554534245505185`, 
+    0.014255055272487771`}, {-0.8271301073856672, -0.10033789662743853`}}], 
+   PolygonBox[{{-1.3961566979227116`, -0.7056738204637452}, \
+{-1.5850683714845415`, -0.15776341785814774`}, {-0.7920138665157117, \
+-0.24228081613415964`}}], 
+   PolygonBox[{{-0.9069086649594401, -1.1000429020345703`}, \
+{-1.376016996540664, -0.7308112464280414}, {-0.39878756087579703`, \
+-0.440923734021624}}], 
+   PolygonBox[{{-0.8271301073856672, -0.1003378966274386}, \
+{-1.5554534245505187`, 0.014255055272487813`}, {-0.9068998697810704, 
+    0.3394784527643015}}], 
+   PolygonBox[{{-1.5554534245505183`, 
+    0.014255055272487716`}, {-1.5850683714845415`, -0.15776341785814807`}, \
+{-1.9241032592212606`, -0.2523677696630213}}], 
+   PolygonBox[{{-1.5850683714845415`, -0.15776341785814774`}, \
+{-1.3961566979227118`, -0.7056738204637452}, {-1.5305311441603313`, \
+-0.5054994230673543}}], 
+   PolygonBox[{{-0.90690866495944, -1.1000429020345703`}, \
+{-0.3987875608757971, -0.4409237340216242}, {-0.5488481811621164, \
+-0.786924558831217}}], 
+   PolygonBox[{{-1.5554534245505187`, 
+    0.014255055272487827`}, {-1.1809613085523192`, 
+    0.6613065212635296}, {-0.9068998697810704, 0.33947845276430144`}}], 
+   PolygonBox[{{-2.527692942771568, 
+    0.041065091881106186`}, {-1.5554534245505185`, 
+    0.014255055272487743`}, {-1.9241032592212606`, -0.2523677696630213}}], 
+   PolygonBox[{{-1.3961566979227118`, -0.7056738204637452}, \
+{-1.84645193480402, -1.0976289733867095`}, {-1.530531144160331, \
+-0.5054994230673543}}], 
+   PolygonBox[{{-1.1809613085523192`, 
+    0.6613065212635296}, {-1.0884183995774668`, 
+    0.9512928228549368}, {-0.9068998697810703, 0.3394784527643012}}], 
+   PolygonBox[{{-1.180961308552319, 
+    0.6613065212635297}, {-1.5554534245505187`, 
+    0.014255055272487827`}, {-1.557686022419559, 0.2736742546365767}}], 
+   PolygonBox[{{-1.5554534245505185`, 
+    0.01425505527248766}, {-2.5276929427715684`, 
+    0.04106509188110616}, {-1.8138245109966835`, 0.037657772648424126`}}], 
+   PolygonBox[{{-1.479526267552888, 1.121982371512403}, {-1.0884183995774666`,
+     0.9512928228549368}, {-1.1809613085523192`, 0.6613065212635296}}], 
+   PolygonBox[{{-1.624785720693253, 0.9843903570295548}, {-1.180961308552319, 
+    0.6613065212635296}, {-1.557686022419559, 
+    0.2736742546365768}}]}]], "Input",
+ CellLabel->"In[78]:=",ExpressionUUID->"1cd896e2-c045-4c3e-ab9b-278fd92df52c"],
+
+Cell[BoxData[
+ GraphicsBox[
+  {Hue[0.94, 0.22, 1.], EdgeForm[{RGBColor[1, 0.5, 0.5], Thickness[Tiny]}], 
+   PolygonBox[{{-0.14039006264185638`, 0.11348878346153368`}, {
+    0.2818485045396346, 
+    0.05172407834858306}, {-0.14145844189777812`, -0.16521286181011677`}}], 
+   PolygonBox[{{-0.3987875608757969, -0.44092373402162377`}, \
+{-0.1403900626418564, 
+    0.1134887834615338}, {-0.14145844189777812`, -0.16521286181011685`}}], 
+   PolygonBox[{{-0.14039006264185633`, 
+    0.1134887834615339}, {-0.39878756087579703`, -0.4409237340216239}, \
+{-0.7378970747733633, 0.33765651209909675`}}], 
+   PolygonBox[{{-0.3987875608757969, -0.44092373402162394`}, \
+{-0.8271301073856676, -0.10033789662743858`}, {-0.7378970747733634, 
+    0.3376565120990968}}], 
+   PolygonBox[{{-0.398787560875797, -0.44092373402162405`}, \
+{-0.7920138665157116, -0.24228081613415972`}, {-0.8271301073856676, \
+-0.1003378966274387}}], 
+   PolygonBox[{{-0.7920138665157116, -0.24228081613415975`}, \
+{-1.5850683714845415`, -0.15776341785814785`}, {-0.8271301073856675, \
+-0.10033789662743858`}}], 
+   PolygonBox[{{-0.398787560875797, -0.4409237340216241}, \
+{-1.376016996540664, -0.7308112464280414}, {-0.7920138665157117, \
+-0.2422808161341598}}], 
+   PolygonBox[{{-1.5850683714845415`, -0.15776341785814785`}, \
+{-1.5554534245505185`, 
+    0.014255055272487771`}, {-0.8271301073856672, -0.10033789662743853`}}], 
+   PolygonBox[{{-1.3961566979227116`, -0.7056738204637452}, \
+{-1.5850683714845415`, -0.15776341785814774`}, {-0.7920138665157117, \
+-0.24228081613415964`}}], 
+   PolygonBox[{{-0.9069086649594401, -1.1000429020345703`}, \
+{-1.376016996540664, -0.7308112464280414}, {-0.39878756087579703`, \
+-0.440923734021624}}], 
+   PolygonBox[{{-0.8271301073856672, -0.1003378966274386}, \
+{-1.5554534245505187`, 0.014255055272487813`}, {-0.9068998697810704, 
+    0.3394784527643015}}], 
+   PolygonBox[{{-1.5554534245505183`, 
+    0.014255055272487716`}, {-1.5850683714845415`, -0.15776341785814807`}, \
+{-1.9241032592212606`, -0.2523677696630213}}], 
+   PolygonBox[{{-1.5850683714845415`, -0.15776341785814774`}, \
+{-1.3961566979227118`, -0.7056738204637452}, {-1.5305311441603313`, \
+-0.5054994230673543}}], 
+   PolygonBox[{{-0.90690866495944, -1.1000429020345703`}, \
+{-0.3987875608757971, -0.4409237340216242}, {-0.5488481811621164, \
+-0.786924558831217}}], 
+   PolygonBox[{{-1.5554534245505187`, 
+    0.014255055272487827`}, {-1.1809613085523192`, 
+    0.6613065212635296}, {-0.9068998697810704, 0.33947845276430144`}}], 
+   PolygonBox[{{-2.527692942771568, 
+    0.041065091881106186`}, {-1.5554534245505185`, 
+    0.014255055272487743`}, {-1.9241032592212606`, -0.2523677696630213}}], 
+   PolygonBox[{{-1.3961566979227118`, -0.7056738204637452}, \
+{-1.84645193480402, -1.0976289733867095`}, {-1.530531144160331, \
+-0.5054994230673543}}], 
+   PolygonBox[{{-1.1809613085523192`, 
+    0.6613065212635296}, {-1.0884183995774668`, 
+    0.9512928228549368}, {-0.9068998697810703, 0.3394784527643012}}], 
+   PolygonBox[{{-1.180961308552319, 
+    0.6613065212635297}, {-1.5554534245505187`, 
+    0.014255055272487827`}, {-1.557686022419559, 0.2736742546365767}}], 
+   PolygonBox[{{-1.5554534245505185`, 
+    0.01425505527248766}, {-2.5276929427715684`, 
+    0.04106509188110616}, {-1.8138245109966835`, 0.037657772648424126`}}], 
+   PolygonBox[{{-1.479526267552888, 1.121982371512403}, {-1.0884183995774666`,
+     0.9512928228549368}, {-1.1809613085523192`, 0.6613065212635296}}], 
+   PolygonBox[{{-1.624785720693253, 0.9843903570295548}, {-1.180961308552319, 
+    0.6613065212635296}, {-1.557686022419559, 
+    0.2736742546365768}}]}]], "Output",
+ CellChangeTimes->{3.7717737376423645`*^9},
+ CellLabel->"Out[78]=",ExpressionUUID->"7c2be1ee-586f-45d2-8b9c-7c077d95eac3"]
+}, Open  ]]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.4 Inherited,
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 11, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 4994, 180, 275, "Input",ExpressionUUID->"42c3fc0f-2975-4372-89a3-7b0e9c979d95"],
+Cell[5558, 202, 2782, 61, 496, "Code",ExpressionUUID->"e69950e2-ef85-4786-af8b-dcaa6db9b247"],
+Cell[8343, 265, 1011, 22, 96, "Code",ExpressionUUID->"d782312f-9ff0-4dbe-8ed2-5f60b2d8d4aa"],
+Cell[9357, 289, 5112, 122, 571, "Code",ExpressionUUID->"f4e28692-b050-4765-8bc0-c1d614c18794"],
+Cell[14472, 413, 3366, 78, 446, "Code",ExpressionUUID->"2ae9432a-32f6-4a15-815d-74a3ecf24914"],
+Cell[17841, 493, 10637, 208, 1021, "Code",ExpressionUUID->"271f6dcb-037f-4931-b0eb-8845c8464935"],
+Cell[28481, 703, 644, 15, 70, "Code",ExpressionUUID->"bd2f519b-4f5a-48e3-9721-2a9ee060bcf0"],
+Cell[29128, 720, 8174, 145, 746, "Code",ExpressionUUID->"8d73e2cb-30bc-4caf-ac4e-3272c1b8f626"],
+Cell[37305, 867, 247, 4, 69, "Input",ExpressionUUID->"2da825c1-814a-4c6a-bb3a-aed951a52e4d"],
+Cell[37555, 873, 130, 3, 40, "Input",ExpressionUUID->"068710eb-4908-4055-bb76-2aecf32856e0"],
+Cell[CellGroupData[{
+Cell[37710, 880, 1229, 18, 40, "Input",ExpressionUUID->"9f07e1d7-9bfc-49b6-8db5-d4490063cc5d"],
+Cell[38942, 900, 10725, 208, 94, "Output",ExpressionUUID->"953364b4-ac5b-46bd-8fe4-fb1196d16e85"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49704, 1113, 268, 4, 40, "Input",ExpressionUUID->"b174fd92-a1b6-4628-aafb-7b523b55b4b6"],
+Cell[49975, 1119, 29696, 655, 366, "Output",ExpressionUUID->"10dd99ae-5db3-4c5a-b825-0b422a4ad1cc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[79708, 1779, 247, 5, 40, "Input",ExpressionUUID->"e284060e-a320-4947-a4b5-ad4bd4a299cb"],
+Cell[79958, 1786, 78458, 1877, 529, "Output",ExpressionUUID->"8886141d-ad85-44cb-8d29-d602e1c2e45a"]
+}, Open  ]],
+Cell[158431, 3666, 128, 3, 40, "Input",ExpressionUUID->"993313be-a34f-4ee7-8240-cc1e3742bf80"],
+Cell[CellGroupData[{
+Cell[158584, 3673, 2958, 54, 527, "Input",ExpressionUUID->"3da2685b-9b9a-4adf-8e44-f3a101f1e84d"],
+Cell[161545, 3729, 12985, 217, 417, "Output",ExpressionUUID->"2463dfac-e72c-4502-8772-db04e0e7dfb5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[174567, 3951, 3698, 68, 420, "Input",ExpressionUUID->"1cd896e2-c045-4c3e-ab9b-278fd92df52c"],
+Cell[178268, 4021, 3743, 69, 426, "Output",ExpressionUUID->"7c2be1ee-586f-45d2-8b9c-7c077d95eac3"]
+}, Open  ]]
+}
+]
+*)
+
