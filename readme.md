@@ -76,11 +76,12 @@ I then utilize the unfold function, which finds the intersection of two polygons
 
 		Block[{edgecoord1, edgecoord2, angle, rotation},
 
-			{edgecoord1, edgecoord2} = Intersection @@ meshlist[[{u, v}]]; 
-			angle = DihedralAngle[{edgecoord1, edgecoord2}, normals[[{u, v}]]];
-			rotation = RotationTransform[angle, edgecoord2 - edgecoord1, Mean[{edgecoord1, edgecoord2}]];
-			transformedrotation[u] = transformedrotation[v] @* rotation;
-			Sow[transformedrotation[u] @ meshlist[[u]], "flat"];
+		{edgecoord1, edgecoord2} = Intersection @@ meshlist[[{u, v}]]; 
+		angle = DihedralAngle[{edgecoord1, edgecoord2}, normals[[{u, v}]]];
+		rotation = RotationTransform[angle, edgecoord2 - edgecoord1, Mean[{edgecoord1, edgecoord2}]];
+		
+		transformedrotation[u] = transformedrotation[v] @* rotation;
+		Sow[transformedrotation[u] @ meshlist[[u]], "flat"];
 	]
     
 ## Generating Possible Nets
@@ -105,7 +106,7 @@ Finally, we put all the functions together. The program iterates through every s
 		    netsurfacearea = RegionMeasure[RegionUnion[Polygon /@ netcoords]];
 
 		    If[surfacearea == netsurfacearea,             
-		    AppendTo[goodnets, Graphics[{Hue[0.94, 0.22, 1.], EdgeForm[{Thin, Pink}], Polygon /@ netcoords}]]        
+		    	AppendTo[goodnets, Graphics[{Hue[0.94, 0.22, 1.], EdgeForm[{Thin, Pink}], Polygon /@ netcoords}]]        
 		    ];,  
 
 		    {treeposition, 1, Length[trees]} 
