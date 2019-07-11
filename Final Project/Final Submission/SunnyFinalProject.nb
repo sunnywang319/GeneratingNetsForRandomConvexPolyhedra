@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    239172,       5272]
-NotebookOptionsPosition[    234139,       5179]
-NotebookOutlinePosition[    235014,       5207]
-CellTagsIndexPosition[    234971,       5204]
+NotebookDataLength[    243164,       5343]
+NotebookOptionsPosition[    238126,       5250]
+NotebookOutlinePosition[    239001,       5278]
+CellTagsIndexPosition[    238958,       5275]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1959,11 +1959,15 @@ Cell["Generating coordinates of the net of the polyhedron", "Section",
 e41a0e5ddbaa"],
 
 Cell[TextData[StyleBox["To create the net of the polyhedron, I had to \
-implement an unfolding algorithm. ",
+implement an unfolding algorithm. My first approach was to extract each face \
+individually, but that ended up complicating the transformations. My final \
+algorithm consisted of applying one transformation to move one face to the xy \
+plane, then unfolding using the vertices on the spanning tree.",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.7718144047416925`*^9, 3.7718144517162127`*^9}, 
-   3.7718395949841857`*^9, {3.7718405668263173`*^9, 
-   3.7718405829562807`*^9}},ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-\
+   3.7718395949841857`*^9, {3.7718405668263173`*^9, 3.7718405829562807`*^9}, {
+   3.7718577036494536`*^9, 3.7718578173940105`*^9}, {3.7718578694079723`*^9, 
+   3.771857956236359*^9}},ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-\
 228981904122"],
 
 Cell[TextData[StyleBox["Create a function to get the normal vector to a \
@@ -2004,12 +2008,12 @@ Cell[BoxData[{
 
 Cell["\<\
 Create a function to generate transformations according to the spanning tree, \
-similar to physically unfolding an object.\
+similar to physically unfolding an object. \
 \>", "CodeText",
  CellChangeTimes->{{3.771840692266791*^9, 3.771840692890333*^9}, {
-  3.7718407464624004`*^9, 3.771840748794826*^9}, {3.7718449159060397`*^9, 
-  3.7718449413388157`*^9}, {3.771845153533147*^9, 3.771845192513386*^9}, {
-  3.771845230978182*^9, 3.7718452475765514`*^9}},
+   3.7718407464624004`*^9, 3.771840748794826*^9}, {3.7718449159060397`*^9, 
+   3.7718449413388157`*^9}, {3.771845153533147*^9, 3.771845192513386*^9}, {
+   3.771845230978182*^9, 3.7718452475765514`*^9}, 3.7718568691203547`*^9},
  FontSize->16,ExpressionUUID->"6f70666b-2e14-40ff-a942-24173ed35c1e"],
 
 Cell[BoxData[{
@@ -2077,7 +2081,7 @@ Cell[BoxData[{
    3.7718406419455433`*^9, 3.771840645337018*^9}, {3.7718406779055233`*^9, 
    3.771840682974772*^9}, {3.7718407258015766`*^9, 3.7718407441410756`*^9}, {
    3.7718446780926323`*^9, 3.7718446784396544`*^9}, {3.7718448193684845`*^9, 
-   3.771844893710971*^9}, 3.771844975144621*^9},
+   3.771844893710971*^9}, 3.771844975144621*^9, 3.771857965497159*^9},
  FontSize->16,
  CellLabel->"In[7]:=",ExpressionUUID->"3fb4986e-528d-46c7-b8c1-4f5350903d39"],
 
@@ -2087,12 +2091,15 @@ Cell[TextData[{
  StyleBox["xy",
   IgnoreSpellCheck->True,
   FontSize->16],
- StyleBox[" plane, and uses unfold to ",
+ StyleBox[" plane,  then apply unfold using the list of spanning trees.",
   FontSize->16]
 }], "CodeText",
  CellChangeTimes->{{3.7718449835405693`*^9, 3.771844991047453*^9}, {
   3.771845036693636*^9, 3.7718450696028385`*^9}, {3.7718451966350064`*^9, 
-  3.771845213656419*^9}},ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-\
+  3.771845213656419*^9}, {3.771858022630238*^9, 3.771858044114953*^9}, {
+  3.7718583950445523`*^9, 3.7718584044008036`*^9}, {3.7718584408910046`*^9, 
+  3.771858451787882*^9}, {3.771861445087376*^9, 
+  3.7718614457823453`*^9}},ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-\
 690fab07ea40"],
 
 Cell[BoxData[{
@@ -2123,7 +2130,11 @@ Cell[BoxData[{
             RowBox[{"[", 
              RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", 
           "\t\t    ", "\n", "\t\t\t", 
-          RowBox[{"transformations", " ", "=", " ", "\n", "\t\t\t", 
+          RowBox[{"transformations", " ", "=", "      ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Creates", " ", "a", " ", "transformation", " ", "matrix"}], " ", 
+            "*)"}], "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"RotationTransform", "[", 
              RowBox[{"{", 
@@ -2133,8 +2144,14 @@ Cell[BoxData[{
                  RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
                RowBox[{"{", 
                 RowBox[{"0", ",", " ", "0", ",", " ", 
-                 RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", "\n",
-             "\t\t\t", 
+                 RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", 
+            "     ", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "rotates", " ", "the", " ", "normal", " ", "vector", " ", "of", 
+              " ", "the", " ", "face", " ", "so", " ", "that", " ", "it", " ",
+               "is", " ", "pointing", " ", "down"}], " ", "*)"}], "\n", 
+            "\t\t\t", 
             RowBox[{"TranslationTransform", "[", 
              RowBox[{"-", 
               RowBox[{"PropertyValue", "[", 
@@ -2143,24 +2160,39 @@ Cell[BoxData[{
                  RowBox[{"mesh", ",", " ", 
                   RowBox[{"{", 
                    RowBox[{"2", ",", " ", "1"}], "}"}]}], "}"}], ",", " ", 
-                "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "\n", "\t\t\t",
-           "\n", "\t\t\t", 
+                "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "   ", 
+          RowBox[{"(*", " ", 
+           RowBox[{"translates", " ", "the", " ", "face"}], " ", "*)"}], "\n",
+           "\t\t\t", "\n", "\t\t\t", 
           RowBox[{"transformedmesh", " ", "=", " ", 
            RowBox[{"TransformedRegion", "[", 
-            RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", "\n",
-           "\t\t\t", "\n", "\t\t\t", 
+            RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", 
+          "      ", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Applies", " ", "the", " ", "transformation", " ", "matrix"}], " ",
+            "*)"}], "\n", "\t\t\t", "\n", "\t\t\t", 
           RowBox[{"transformedmeshlist", " ", "=", " ", 
            RowBox[{
             RowBox[{"MeshPrimitives", "[", 
              RowBox[{"transformedmesh", ",", " ", "2"}], "]"}], "[", 
             RowBox[{"[", 
-             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", 
-          "\t\t\t", "\n", "\t\t\t", 
+             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "      ", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Creates", " ", "mesh", " ", "primitives", " ", "for", " ", "the", 
+            " ", "transformed", " ", "mesh"}], " ", "*)"}], "\n", "\t\t\t", 
+          "\n", "\t\t\t", 
           RowBox[{"normals", " ", "=", " ", 
            RowBox[{
             RowBox[{
              RowBox[{"normvector", "[", "#", "]"}], " ", "&"}], "/@", " ", 
-            "transformedmeshlist"}]}], ";", "\n", "\n", "\t\t\t", 
+            "transformedmeshlist"}]}], ";", "     ", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Finds", " ", "all", " ", "the", " ", "normal", " ", "vectors", 
+            " ", "for", " ", "the", " ", "faces"}], " ", "*)"}], "\n", "\n", 
+          "\t\t\t", 
           RowBox[{"Sow", "[", 
            RowBox[{
             RowBox[{"transformedmeshlist", "[", 
@@ -2177,9 +2209,12 @@ Cell[BoxData[{
              RowBox[{"unfold", "[", 
               RowBox[{
               "transformedmeshlist", ",", " ", "normals", ",", " ", 
-               "transformedrotation"}], "]"}]}]}], "]"}], ";"}], "\n", 
-         "\t\t\t", ",", " ", 
-         RowBox[{"{", "\"\<flat\>\"", "}"}]}], "]"}], "\n", "\t\t", "[", 
+               "transformedrotation"}], "]"}]}]}], "]"}], ";"}], ",", "   ", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Runs", " ", "unfold", " ", "on", " ", "each", " ", "discovered", 
+           " ", "vertex"}], " ", "*)"}], "\n", "\t\t\t ", 
+         RowBox[{"{", "\"\<flat\>\"", "}"}]}], "]"}], "[", 
        RowBox[{"[", 
         RowBox[{
          RowBox[{"-", "1"}], ",", " ", "All", ",", " ", "1"}], "]"}], "]"}]}],
@@ -2193,9 +2228,11 @@ Cell[BoxData[{
    3.771840682974772*^9}, {3.7718407258015766`*^9, 3.7718407441410756`*^9}, {
    3.7718446780926323`*^9, 3.7718446784396544`*^9}, {3.7718448193684845`*^9, 
    3.771844893710971*^9}, 3.771844975144621*^9, {3.77184511221352*^9, 
-   3.7718451134500494`*^9}},
- FontSize->16,
- CellLabel->"In[9]:=",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
+   3.7718451134500494`*^9}, {3.771858055515955*^9, 3.771858189485072*^9}, {
+   3.771858346018916*^9, 3.77185834675434*^9}, {3.771858379602936*^9, 
+   3.7718583839443026`*^9}, {3.7718584619639482`*^9, 3.771858592563614*^9}, {
+   3.7718614348365407`*^9, 3.7718614358751535`*^9}},
+ FontSize->16,ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2209,11 +2246,16 @@ Cell["Generating a list of all possible nets", "Section",
 Cell[TextData[StyleBox["All of the functions are put together in \
 generateallnets. This function first defines local variables using the \
 previous functions, then iterates through every spanning tree to produce a \
-net using unfold for each one, and returns them as a list.",
+net using unfold. Each net is tested for overlap by calculating the surface \
+area of the original polyhedron and comparing it to the surface area of the \
+net. Only nets where the two surface areas are equal are appended to the list \
+that is returned.",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.771844567279682*^9, 3.7718446374428587`*^9}, {
   3.7718453809628544`*^9, 3.77184539272886*^9}, {3.7718455417017603`*^9, 
-  3.7718455651910725`*^9}},ExpressionUUID->"30d14a36-0afc-49a3-bb7e-\
+  3.7718455651910725`*^9}, {3.771857067362105*^9, 3.7718571045757575`*^9}, {
+  3.7718571799650726`*^9, 
+  3.7718572391373534`*^9}},ExpressionUUID->"30d14a36-0afc-49a3-bb7e-\
 39307dc050d9"],
 
 Cell[BoxData[{
@@ -2226,55 +2268,80 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"{", 
      RowBox[{
-     "netcoords2D", ",", " ", "trees", ",", " ", "graph", ",", " ", "mesh", 
-      ",", " ", "surfacearea", ",", " ", "netsurfacearea", ",", " ", 
-      "goodnets"}], "}"}], ",", "\n", "\n", 
+     "netcoords", ",", " ", "trees", ",", " ", "graph", ",", " ", "mesh", ",",
+       " ", "surfacearea", ",", " ", "netsurfacearea", ",", " ", "goodnets"}],
+      "}"}], ",", "\n", "\n", 
     RowBox[{
      RowBox[{"mesh", " ", "=", " ", 
       RowBox[{"BoundaryDiscretizeGraphics", "[", "polyhedron", "]"}]}], ";", 
-     " ", "\n", 
+     "    ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Assign", " ", "values", " ", "using", " ", "other", " ", "functions"}],
+       " ", "*)"}], "\n", 
      RowBox[{"graph", " ", "=", " ", 
       RowBox[{"polyhedronfacegraph", "[", "polyhedron", "]"}]}], ";", "\n", 
      RowBox[{"trees", " ", "=", " ", 
       RowBox[{"generatetrees", "[", "graph", "]"}]}], ";", "\n", "\n", 
      RowBox[{"goodnets", " ", "=", " ", 
-      RowBox[{"{", "}"}]}], ";", "\n", "\n", 
-     RowBox[{"Table", "[", "\n", "\n", 
+      RowBox[{"{", "}"}]}], ";", "   ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Start", " ", "with", " ", "an", " ", "empty", " ", "list", " ", "of", 
+       " ", "non", " ", "overlapping", " ", "nets"}], " ", "*)"}], "\n", "\n", 
+     RowBox[{"Table", "[", "     ", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Iterate", " ", "through", " ", "every", " ", "spanning", " ", "tree", 
+        " ", "in", " ", "the", " ", "list", " ", "of", " ", "trees"}], " ", 
+       "*)"}], "\n", "\n", 
       RowBox[{
        RowBox[{
-        RowBox[{"netcoords2D", " ", "=", " ", 
+        RowBox[{"netcoords", " ", "=", " ", 
          RowBox[{"First", "@", 
           RowBox[{"generatenetcoords", "[", 
            RowBox[{"mesh", ",", " ", 
             RowBox[{"trees", "[", 
              RowBox[{"[", "treeposition", "]"}], "]"}]}], "]"}]}]}], ";", 
+        "        ", 
+        RowBox[{"(*", " ", 
+         RowBox[{"generates", " ", "coordinates", " ", "for"}], "  ", "*)"}], 
         "\n", 
-        RowBox[{"netcoords2D", " ", "=", " ", 
+        RowBox[{"netcoords", " ", "=", " ", 
          RowBox[{"Table", "[", 
           RowBox[{
            RowBox[{"Delete", "[", 
             RowBox[{
-             RowBox[{"netcoords2D", "[", 
+             RowBox[{"netcoords", "[", 
               RowBox[{"[", 
                RowBox[{"n", ",", " ", "m"}], "]"}], "]"}], ",", " ", 
              RowBox[{"{", "3", "}"}]}], "]"}], ",", " ", 
            RowBox[{"{", 
             RowBox[{"n", ",", " ", "1", ",", " ", 
-             RowBox[{"Length", "[", "netcoords2D", "]"}]}], "}"}], ",", " ", 
+             RowBox[{"Length", "[", "netcoords", "]"}]}], "}"}], ",", " ", 
            RowBox[{"{", 
             RowBox[{"m", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], 
-        ";", "\n", "\n", 
+        ";", "        ", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Delete", " ", "the", " ", "third", " ", "element", " ", "of", " ", 
+          "each", " ", "coordinate", " ", "so", " ", "it", " ", "becomes", 
+          " ", "two", " ", "dimensional"}], " ", "*)"}], "\n", "\n", 
         RowBox[{"surfacearea", " ", "=", " ", 
          RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
         RowBox[{"netsurfacearea", " ", "=", " ", 
          RowBox[{"RegionMeasure", "[", 
           RowBox[{"RegionUnion", "[", 
-           RowBox[{"Polygon", " ", "/@", " ", "netcoords2D"}], "]"}], "]"}]}],
-         ";", "\n", "\n", 
+           RowBox[{"Polygon", " ", "/@", " ", "netcoords"}], "]"}], "]"}]}], 
+        ";", "\n", "\n", 
         RowBox[{"If", "[", 
          RowBox[{
           RowBox[{"surfacearea", " ", "\[Equal]", " ", "netsurfacearea"}], 
-          ",", "\n", 
+          ",", "             ", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Check", " ", "if", " ", "the", " ", "two", " ", "surface", " ", 
+            "areas", " ", "are", " ", "equal"}], " ", "*)"}], "\n", 
           RowBox[{"AppendTo", "[", 
            RowBox[{"goodnets", ",", " ", 
             RowBox[{"Graphics", "[", 
@@ -2286,12 +2353,15 @@ Cell[BoxData[{
                RowBox[{"EdgeForm", "[", 
                 RowBox[{"{", 
                  RowBox[{"Thin", ",", " ", "Pink"}], "}"}], "]"}], ",", " ", 
-               RowBox[{"Polygon", " ", "/@", " ", "netcoords2D"}]}], "}"}], 
-             "]"}]}], "]"}]}], "\n", "]"}], ";"}], ",", " ", "\n", "\n", 
+               RowBox[{"Polygon", " ", "/@", " ", "netcoords"}]}], "}"}], 
+             "]"}]}], "]"}]}], "         ", 
+         RowBox[{"(*", " ", 
+          RowBox[{"Append", " ", "it", " ", "to", " ", "the", " ", "list"}], 
+          " ", "*)"}], "\n", "]"}], ";"}], ",", "  ", "\n", "\n", 
        RowBox[{"{", 
         RowBox[{"treeposition", ",", " ", "1", ",", " ", 
-         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], "]"}], ";", "\n", 
-     "\n", 
+         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], "]"}], ";", "    ",
+      "\n", "\n", 
      RowBox[{"Row", "[", 
       RowBox[{"{", 
        RowBox[{
@@ -2300,9 +2370,10 @@ Cell[BoxData[{
  CellChangeTimes->{
   3.7718066708054657`*^9, 3.7718112779991508`*^9, {3.7718445418855553`*^9, 
    3.7718445602364025`*^9}, {3.7718446543452015`*^9, 3.77184465677579*^9}, 
-   3.771844798453882*^9},
- FontSize->16,
- CellLabel->"In[11]:=",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
+   3.771844798453882*^9, {3.771857494194248*^9, 3.771857544162608*^9}, {
+   3.771857609081113*^9, 3.7718576804058547`*^9}, {3.771861481302491*^9, 
+   3.77186161086602*^9}, {3.7718616843305693`*^9, 3.7718616848738832`*^9}},
+ FontSize->16,ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -5168,13 +5239,13 @@ Cell[TextData[StyleBox["I would like to sincerely thank my mentor, Jeremy \
 Stratton-Smith, for providing advice and help throughout the entire project \
 process. I would also like to thank Chip Hurst for his unfolding algorithm \
 and tips for 3D transformations. Lastly, I would like to thank the Wolfram \
-Summer Camp team for providing me this invaluable opportunity. ",
+Summer Camp team for providing me with this invaluable opportunity. ",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.7718144593946295`*^9, 3.7718147230733633`*^9}, {
-  3.771814760135313*^9, 
-  3.7718148114052973`*^9}},ExpressionUUID->"231c14f8-da68-480d-9cf0-\
+  3.771814760135313*^9, 3.7718148114052973`*^9}, {3.771856454930142*^9, 
+  3.771856456542981*^9}},ExpressionUUID->"231c14f8-da68-480d-9cf0-\
 a447ef401e5c"]
-}, Closed]]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1536, 781},
@@ -5240,39 +5311,39 @@ Cell[89071, 1946, 152, 3, 28, "Input",ExpressionUUID->"d8225d3f-afd4-4283-8e09-1
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[89260, 1954, 295, 4, 67, "Section",ExpressionUUID->"9358a5c6-0b70-4b1a-a672-e41a0e5ddbaa"],
-Cell[89558, 1960, 342, 6, 38, "Text",ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-228981904122"],
-Cell[89903, 1968, 344, 6, 38, "CodeText",ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-d0c82ef77f53"],
-Cell[90250, 1976, 1008, 26, 128, "Code",ExpressionUUID->"266065bb-34ca-4ad3-ac4b-a76c78a48d50"],
-Cell[91261, 2004, 487, 8, 38, "CodeText",ExpressionUUID->"6f70666b-2e14-40ff-a942-24173ed35c1e"],
-Cell[91751, 2014, 2771, 67, 296, "Code",ExpressionUUID->"3fb4986e-528d-46c7-b8c1-4f5350903d39"],
-Cell[94525, 2083, 463, 12, 38, "CodeText",ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-690fab07ea40"],
-Cell[94991, 2097, 4522, 100, 680, "Code",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
+Cell[89558, 1960, 708, 10, 64, "Text",ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-228981904122"],
+Cell[90269, 1972, 344, 6, 38, "CodeText",ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-d0c82ef77f53"],
+Cell[90616, 1980, 1008, 26, 128, "Code",ExpressionUUID->"266065bb-34ca-4ad3-ac4b-a76c78a48d50"],
+Cell[91627, 2008, 515, 8, 38, "CodeText",ExpressionUUID->"6f70666b-2e14-40ff-a942-24173ed35c1e"],
+Cell[92145, 2018, 2793, 67, 296, "Code",ExpressionUUID->"3fb4986e-528d-46c7-b8c1-4f5350903d39"],
+Cell[94941, 2087, 697, 15, 38, "CodeText",ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-690fab07ea40"],
+Cell[95641, 2104, 6034, 130, 656, "Code",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[99550, 2202, 238, 4, 67, "Section",ExpressionUUID->"9410e860-5f5f-4db9-8f02-50237a87edb0"],
-Cell[99791, 2208, 530, 8, 64, "Text",ExpressionUUID->"30d14a36-0afc-49a3-bb7e-39307dc050d9"],
-Cell[100324, 2218, 3666, 86, 680, "Code",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
+Cell[101712, 2239, 238, 4, 67, "Section",ExpressionUUID->"9410e860-5f5f-4db9-8f02-50237a87edb0"],
+Cell[101953, 2245, 829, 13, 90, "Text",ExpressionUUID->"30d14a36-0afc-49a3-bb7e-39307dc050d9"],
+Cell[102785, 2260, 5141, 115, 680, "Code",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[104027, 2309, 154, 3, 67, "Section",ExpressionUUID->"ca0188df-ddbe-4bee-9957-4400265db344"],
-Cell[104184, 2314, 421, 12, 38, "Text",ExpressionUUID->"1c624274-8424-40e9-a447-a66e8cd986c9"],
+Cell[107963, 2380, 154, 3, 67, "Section",ExpressionUUID->"ca0188df-ddbe-4bee-9957-4400265db344"],
+Cell[108120, 2385, 421, 12, 38, "Text",ExpressionUUID->"1c624274-8424-40e9-a447-a66e8cd986c9"],
 Cell[CellGroupData[{
-Cell[104630, 2330, 226, 3, 28, "Input",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
-Cell[104859, 2335, 127134, 2785, 262, "Output",ExpressionUUID->"23224260-2978-4a01-a850-587fa1de56e4"]
+Cell[108566, 2401, 226, 3, 28, "Input",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
+Cell[108795, 2406, 127134, 2785, 262, "Output",ExpressionUUID->"23224260-2978-4a01-a850-587fa1de56e4"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[232042, 5126, 208, 4, 67, "Section",ExpressionUUID->"4fe6e45d-fe3d-4de9-a196-2004c7cdbbc0"],
-Cell[232253, 5132, 439, 7, 38, "Text",ExpressionUUID->"c2e88ab8-b17a-4286-8fda-a292e70e60ec"]
+Cell[235978, 5197, 208, 4, 67, "Section",ExpressionUUID->"4fe6e45d-fe3d-4de9-a196-2004c7cdbbc0"],
+Cell[236189, 5203, 439, 7, 38, "Text",ExpressionUUID->"c2e88ab8-b17a-4286-8fda-a292e70e60ec"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[232729, 5144, 156, 3, 67, "Section",ExpressionUUID->"34dba623-f0c6-4917-94dc-b8e1337517f6"],
-Cell[232888, 5149, 444, 7, 64, "Text",ExpressionUUID->"89ce3c3a-d145-46c8-8f09-c1b47509a929"]
+Cell[236665, 5215, 156, 3, 67, "Section",ExpressionUUID->"34dba623-f0c6-4917-94dc-b8e1337517f6"],
+Cell[236824, 5220, 444, 7, 64, "Text",ExpressionUUID->"89ce3c3a-d145-46c8-8f09-c1b47509a929"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[233369, 5161, 160, 3, 67, "Section",ExpressionUUID->"74553846-b316-4174-b5f8-4031c2721bc6"],
-Cell[233532, 5166, 579, 9, 64, "Text",ExpressionUUID->"231c14f8-da68-480d-9cf0-a447ef401e5c"]
-}, Closed]]
+Cell[237305, 5232, 160, 3, 67, "Section",ExpressionUUID->"74553846-b316-4174-b5f8-4031c2721bc6"],
+Cell[237468, 5237, 630, 9, 64, "Text",ExpressionUUID->"231c14f8-da68-480d-9cf0-a447ef401e5c"]
+}, Open  ]]
 }, Open  ]]
 }
 ]
