@@ -25,8 +25,6 @@ The first step was to create a graph that captures the relationship between face
 	        Graph[UndirectedEdge@@@sortedvertices,VertexLabels -> "Name"] 
     ]
     
-    
-[PUT IMAGE HERE]
 
 ## Generating Spanning Trees 
 <br>
@@ -119,7 +117,6 @@ Finally, we put all the functions together. The program iterates through every s
 ## Outputs
 <br>
 Upon taking a polyhedron object in as its argument, the final output of the function is a 3D graphic of the original polyhedron and a list of all possible nets.
-[INSERT Image]
 
 ## Summary 
 <br>
