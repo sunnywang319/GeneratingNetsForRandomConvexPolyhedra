@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    245261,       5369]
-NotebookOptionsPosition[    240192,       5275]
-NotebookOutlinePosition[    241088,       5304]
-CellTagsIndexPosition[    241045,       5301]
+NotebookDataLength[    247288,       5403]
+NotebookOptionsPosition[    241695,       5304]
+NotebookOutlinePosition[    242672,       5335]
+CellTagsIndexPosition[    242629,       5332]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -54,17 +54,18 @@ Cell["Abstract", "Section",
   3.77180861749463*^9}},ExpressionUUID->"9a17fa75-1b19-4eed-ad4f-\
 0d62c915ae69"],
 
-Cell[TextData[StyleBox["This project is essentially a visualization of \
-Shephard\[CloseCurlyQuote]s conjecture, which states that every convex \
-polyhedron admits a self-nonoverlapping unfolding. Currently, there exists \
-unfolding data for several predefined polyhedra, and my goal is to create a \
-function that do this for any random convex polyhedron. I chose this project \
-because of my love for origami and interest in 3D modeling.",
+Cell[TextData[StyleBox["This project is a visualization of Shephard\
+\[CloseCurlyQuote]s conjecture, which states that every convex polyhedron \
+admits a self-nonoverlapping unfolding. The conjecture remains unsolved to \
+this day. Currently, there exists unfolding data for several predefined \
+polyhedra in the Wolfram Language, and my goal is to create a function that \
+can do this for any random convex polyhedron. I chose this project because of \
+my love for origami and art, and my interest in 3D visualization.",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.7718082593092422`*^9, 3.7718082783084173`*^9}, {
-  3.7718083326660633`*^9, 3.7718084434271483`*^9}, {3.771808522551241*^9, 
-  3.7718085354062276`*^9}, {3.771809649759699*^9, 
-  3.771809690047129*^9}},ExpressionUUID->"fce853e8-8137-4d3d-837e-\
+   3.7718083326660633`*^9, 3.7718084434271483`*^9}, {3.771808522551241*^9, 
+   3.7718085354062276`*^9}, {3.771809649759699*^9, 3.771809690047129*^9}, 
+   3.7719265318798695`*^9},ExpressionUUID->"fce853e8-8137-4d3d-837e-\
 dbbe514450e2"]
 }, Open  ]],
 
@@ -79,298 +80,50 @@ Cell[TextData[StyleBox["Generating a graph for the faces of the polyhedron", \
 e3a0b59e71bb"],
 
 Cell["\<\
-My first step was to create a graph that captures the relationship between \
+The first step was to create a graph that captures the relationship between \
 faces of the polyhedron so that it could be used later to generate the net. \
-The built in function DualPolyhedron converts the polyhedron to one where \
+The built-in function DualPolyhedron converts the polyhedron to one where \
 each vertex corresponds to a face on the original. I then extracted the \
-vertices of the dual polyhedron, and partitioned and sorted them, allowing me \
+vertices of the dual polyhedron and partitioned and sorted them, allowing me \
 to create a graph using those vertices.\
 \>", "Text",
  CellChangeTimes->{{3.771809270273173*^9, 3.77180928954809*^9}, {
-  3.7718121982883396`*^9, 3.7718124263977165`*^9}, {3.7718409330373063`*^9, 
-  3.7718409469742165`*^9}},
+   3.7718121982883396`*^9, 3.7718124263977165`*^9}, {3.7718409330373063`*^9, 
+   3.7718409469742165`*^9}, 3.771926556078681*^9},
  FontSize->18,ExpressionUUID->"0e6f341a-3bfa-4ebb-9f7f-f95ea2649a0c"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"polyhedron", " ", "=", " ", 
-  RowBox[{"RandomPolyhedron", "[", 
-   RowBox[{"{", 
-    RowBox[{"\"\<ConvexHull\>\"", ",", "25"}], "}"}], "]"}]}]], "Input",
- CellChangeTimes->{{3.7718141739305773`*^9, 3.7718141910388145`*^9}, {
-  3.771814262121845*^9, 3.7718142643967648`*^9}},
- CellLabel->"In[15]:=",ExpressionUUID->"4f8c9095-b524-46de-94b5-2bf3d3ff84a7"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox["Polyhedron",
-    "SummaryHead"], "[", 
-   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready", 
-    Typeset`spolyhedron$$ = Quiet[
-     Polyhedron[CompressedData["
-1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
-0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
-V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
-P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
-YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
-kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
-7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
-h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
-uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
-      "], {{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {14, 7, 15}, {8, 1, 
-      4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 12,
-       13}, {13, 10, 11}, {4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 
-      1, 5}, {13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 15}, {6,
-       5, 15}, {5, 14, 15}, {10, 4, 11}}]]}, 
-    TemplateBox[{PaneSelectorBox[{False -> GridBox[{{
-            PaneBox[
-             ButtonBox[
-              DynamicBox[
-               FEPrivate`FrontEndResource[
-               "FEBitmaps", "SquarePlusIconMedium"]], 
-              ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
-              Evaluator -> Automatic, Method -> "Preemptive"], 
-             Alignment -> {Center, Center}, ImageSize -> 
-             Dynamic[{
-               Automatic, 
-                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                 Magnification])}]], 
-            Graphics3DBox[{
-              Directive[
-               Hue[0.58, 0.4, 1], 
-               Opacity[0.5], 
-               EdgeForm[
-                GrayLevel[1]]], 
-              TagBox[
-               GraphicsComplex3DBox[CompressedData["
-1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
-0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
-V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
-P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
-YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
-kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
-7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
-h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
-uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
-                "], 
-                
-                Polygon3DBox[{{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {
-                 14, 7, 15}, {8, 1, 4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {
-                 8, 14, 2}, {14, 1, 2}, {6, 12, 13}, {13, 10, 11}, {4, 13, 
-                 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1, 5}, {13, 4, 
-                 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 15}, {6, 5, 
-                 15}, {5, 14, 15}, {10, 4, 11}}]], "Polyhedron"]}, ImageSize -> 
-             Dynamic[{5.25, 3.5} (CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification])], Boxed -> False, 
-             Lighting -> {{"Ambient", 
-                RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{2, 0, 2}]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{2, 2, 2}]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
-            GridBox[{{
-               RowBox[{
-                 TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox["15", "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox["26", "SummaryItem"]}]}}, 
-             GridBoxAlignment -> {
-              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
-             False, 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
-              BaseStyle -> {
-              ShowStringCharacters -> False, NumberMarks -> False, 
-               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
-          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
-          GridBoxItemSize -> {
-           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-          BaselinePosition -> {1, 1}], True -> GridBox[{{
-            PaneBox[
-             ButtonBox[
-              DynamicBox[
-               FEPrivate`FrontEndResource[
-               "FEBitmaps", "SquareMinusIconMedium"]], 
-              ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
-              Evaluator -> Automatic, Method -> "Preemptive"], 
-             Alignment -> {Center, Center}, ImageSize -> 
-             Dynamic[{
-               Automatic, 
-                3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
-                 Magnification])}]], 
-            Graphics3DBox[{
-              Directive[
-               Hue[0.58, 0.4, 1], 
-               Opacity[0.5], 
-               EdgeForm[
-                GrayLevel[1]]], 
-              TagBox[
-               GraphicsComplex3DBox[CompressedData["
-1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
-0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
-V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
-P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
-YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
-kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
-7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
-h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
-uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
-                "], 
-                
-                Polygon3DBox[{{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {
-                 14, 7, 15}, {8, 1, 4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {
-                 8, 14, 2}, {14, 1, 2}, {6, 12, 13}, {13, 10, 11}, {4, 13, 
-                 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1, 5}, {13, 4, 
-                 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 15}, {6, 5, 
-                 15}, {5, 14, 15}, {10, 4, 11}}]], "Polyhedron"]}, ImageSize -> 
-             Dynamic[{5.25, 3.5} (CurrentValue["FontCapHeight"]/
-                AbsoluteCurrentValue[Magnification])], Boxed -> False, 
-             Lighting -> {{"Ambient", 
-                RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{2, 0, 2}]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{2, 2, 2}]}, {"Directional", 
-                RGBColor[0.24, 0.27, 0.3], 
-                ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
-            GridBox[{{
-               RowBox[{
-                 TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox["15", "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox["26", "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Embedding dimension: \"", "SummaryItemAnnotation"],
-                  "\[InvisibleSpace]", 
-                 TagBox["3", "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Type: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox[
-                  DynamicBox[
-                   ToBoxes[
-                    Quiet[
-                    Apply[Region`PolyhedronDump`polyhedronType, 
-                    Region`PolyhedronDump`computeType[
-                    Typeset`spolyhedron$$]]], StandardForm], 
-                   SynchronousUpdating -> False, TrackedSymbols :> {}, 
-                   CachedValue :> 
-                   AnimatorBox[
-                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
-                    ImageSize -> 20]], "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Bounds: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox[
-                  DynamicBox[
-                   ToBoxes[
-                    Region`PolyhedronDump`iRegionBounds[
-                    Typeset`spolyhedron$$], StandardForm], 
-                   SynchronousUpdating -> False, TrackedSymbols :> {}, 
-                   CachedValue :> 
-                   AnimatorBox[
-                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
-                    ImageSize -> 20]], "SummaryItem"]}]}, {
-               RowBox[{
-                 TagBox["\"Volume: \"", "SummaryItemAnnotation"], 
-                 "\[InvisibleSpace]", 
-                 TagBox[
-                  DynamicBox[
-                   ToBoxes[
-                    Region`PolyhedronDump`iVolume[Typeset`spolyhedron$$], 
-                    StandardForm], SynchronousUpdating -> False, 
-                   TrackedSymbols :> {}, CachedValue :> 
-                   AnimatorBox[
-                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
-                    ImageSize -> 20]], "SummaryItem"]}]}}, 
-             GridBoxAlignment -> {
-              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
-             False, GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
-              BaseStyle -> {
-              ShowStringCharacters -> False, NumberMarks -> False, 
-               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
-          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
-          GridBoxItemSize -> {
-           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
-          BaselinePosition -> {1, 1}]}, 
-       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
-     "SummaryPanel"],
-    DynamicModuleValues:>{}], "]"}],
-  Polyhedron[CompressedData["
-1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
-0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
-V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
-P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
-YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
-kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
-7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
-h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
-uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
-   "], {{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {14, 7, 15}, {8, 1, 
-   4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 12, 
-   13}, {13, 10, 11}, {4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1, 
-   5}, {13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 15}, {6, 5, 
-   15}, {5, 14, 15}, {10, 4, 11}}],
-  Editable->False,
-  SelectWithContents->True,
-  Selectable->False]], "Output",
- CellChangeTimes->{3.771850808951907*^9},
- CellLabel->"Out[15]=",ExpressionUUID->"fb969ef7-74b1-491b-bbcd-9a6cd948353b"]
-}, Open  ]],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"ClearAll", "[", "polyhedronfacegraph", "]"}], ";"}], "\n"}], "\n", 
  RowBox[{
-  RowBox[{"polyhedronfacegraph", "[", "polyhedron_", "]"}], ":=", " ", 
-  "\[IndentingNewLine]", 
+  RowBox[{"polyhedronfacegraph", "[", "polyhedron_", "]"}], ":=", " ", "\n", 
+  "\n", "    ", 
   RowBox[{"Block", "[", 
    RowBox[{
     RowBox[{"{", 
      RowBox[{
      "dualpolyhedron", ",", " ", "vertexlist", ",", " ", "vertexpairings", 
-      ",", " ", "sortedvertices"}], "}"}], ",", "\[IndentingNewLine]", "\n", 
-    "\t ", 
+      ",", " ", "sortedvertices"}], "}"}], ",", "\n", "\n", "    ", 
     RowBox[{
      RowBox[{"dualpolyhedron", " ", "=", " ", 
-      RowBox[{"DualPolyhedron", "[", "polyhedron", "]"}]}], ";", "  ", 
-     RowBox[{"(*", " ", 
-      RowBox[{"Generate", " ", "the", " ", "dual", " ", "polyhedron"}], " ", 
-      "*)"}], "\[IndentingNewLine]", "     ", 
+      RowBox[{"DualPolyhedron", "[", "polyhedron", "]"}]}], ";", "  ", "\n", 
+     "    ", 
      RowBox[{"vertexlist", " ", "=", " ", 
       RowBox[{"dualpolyhedron", "[", 
-       RowBox[{"[", "2", "]"}], "]"}]}], ";", "   ", "\n", "     ", 
-     "\[IndentingNewLine]", "     ", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "   ", "\n", "\n", "    ", 
      RowBox[{"vertexpairings", " ", "=", " ", 
       RowBox[{"Flatten", "[", 
        RowBox[{
-        RowBox[{"Table", "[", "\n", "     ", 
+        RowBox[{"Table", "[", 
          RowBox[{
-          RowBox[{"Append", "[", "\n", "     ", 
+          RowBox[{"Append", "[", "\n", "\n", "       ", 
            RowBox[{
             RowBox[{"Partition", "[", 
              RowBox[{
               RowBox[{"vertexlist", "[", 
                RowBox[{"[", "n", "]"}], "]"}], ",", " ", "2", ",", " ", "1"}],
-              "]"}], ",", " ", 
-            RowBox[{"(*", " ", 
-             RowBox[{
-             "Partitions", " ", "into", " ", "groups", " ", "of", " ", 
-              "two"}], " ", "*)"}], "\n", "     ", 
+              "]"}], ",", " ", "\n", "       ", 
             RowBox[{"{", 
              RowBox[{
               RowBox[{"Last", "[", 
@@ -379,46 +132,278 @@ Cell[BoxData[{
               RowBox[{"First", "[", 
                RowBox[{"vertexlist", "[", 
                 RowBox[{"[", "n", "]"}], "]"}], "]"}]}], "}"}]}], "]"}], ",", 
-          "  ", 
-          RowBox[{"(*", " ", 
-           RowBox[{
-           "Appends", " ", "the", " ", "case", " ", "where", " ", "the", " ", 
-            "last", " ", "should", " ", "be", " ", "connected", " ", "to", 
-            " ", "the", " ", "first"}], " ", "*)"}], "\n", "     ", 
+          "  ", "\n", "       ", 
           RowBox[{"{", 
            RowBox[{"n", ",", " ", "1", ",", " ", 
             RowBox[{"Length", "[", "vertexlist", "]"}]}], "}"}]}], "]"}], ",",
-         " ", "\n", "     ", "1"}], "]"}]}], ";", "\n", "     ", 
-     "\[IndentingNewLine]", "     ", 
+         " ", "1"}], "]"}]}], ";", "\n", "\n", "    ", 
      RowBox[{"sortedvertices", " ", "=", " ", 
       RowBox[{
        RowBox[{"Sort", " ", "/@", " ", "vertexpairings"}], " ", "//", " ", 
-       "DeleteDuplicates"}]}], ";", " ", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Deletes", " ", "duplicates", " ", "by", " ", "sorting", " ", "them", 
-       " ", "first"}], " ", "*)"}], "\n", "\[IndentingNewLine]", 
+       "DeleteDuplicates"}]}], ";", " ", "\n", "\n", "    ", 
      RowBox[{"Graph", "[", 
       RowBox[{
        RowBox[{"UndirectedEdge", "@@@", "sortedvertices"}], ",", 
-       RowBox[{"VertexLabels", " ", "\[Rule]", " ", "\"\<Name\>\""}]}], 
-      "]"}]}]}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Graphs", " ", "the", " ", "sorted", " ", "vertices", " ", "and", " ", 
-     "labels", " ", "it"}], " ", "*)"}], "\[IndentingNewLine]", 
-   "]"}]}]}], "Code",
+       RowBox[{"VertexLabels", " ", "->", " ", "\"\<Name\>\""}]}], "]"}]}]}], 
+   " ", "\n", "]"}]}]}], "Code",
  CellChangeTimes->{{3.7718087032589645`*^9, 3.7718087058057456`*^9}, {
   3.771811295625101*^9, 3.771811312170521*^9}, {3.7718122103909626`*^9, 
   3.771812210702182*^9}, {3.7718123342748823`*^9, 3.7718123373476667`*^9}, {
   3.7718124417885838`*^9, 3.771812479129757*^9}, {3.7718125157847958`*^9, 
   3.771812615440461*^9}, {3.771814212748831*^9, 3.7718142130878873`*^9}, {
   3.7718143393764153`*^9, 3.7718143443002205`*^9}, {3.771845611403036*^9, 
-  3.7718456227031183`*^9}},
+  3.7718456227031183`*^9}, {3.771926582983011*^9, 3.7719266107458487`*^9}},
  FontFamily->"Consolas",
  FontSize->16,
  FontWeight->"Bold",
  CellLabel->"In[1]:=",ExpressionUUID->"30c99486-5004-480a-a088-28d65f1e5733"],
+
+Cell[TextData[StyleBox["A random polyhedron :",
+ FontSize->16]], "CodeText",
+ CellChangeTimes->{{3.771928396713561*^9, 
+  3.7719284283026943`*^9}},ExpressionUUID->"b5651655-24da-45d1-abfd-\
+014caa5b1fcb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyhedron", " ", "=", " ", 
+   InterpretationBox[
+    RowBox[{
+     TagBox["Polyhedron",
+      "SummaryHead"], "[", 
+     DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready",
+       Typeset`spolyhedron$$ = Quiet[
+       Polyhedron[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
+0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
+V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
+P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
+YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
+kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
+7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
+h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
+uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
+        "], {{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {14, 7, 15}, {8, 1,
+         4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 
+        12, 13}, {13, 10, 11}, {4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 
+        3}, {6, 1, 5}, {13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 
+        6, 15}, {6, 5, 15}, {5, 14, 15}, {10, 4, 11}}]]}, 
+      TemplateBox[{PaneSelectorBox[{False -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquarePlusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = True), Appearance -> None,
+                 Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]], 
+              Graphics3DBox[{
+                Directive[
+                 Hue[0.58, 0.4, 1], 
+                 Opacity[0.5], 
+                 EdgeForm[
+                  GrayLevel[1]]], 
+                TagBox[
+                 GraphicsComplex3DBox[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
+0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
+V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
+P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
+YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
+kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
+7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
+h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
+uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
+                  "], 
+                  
+                  Polygon3DBox[{{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 
+                   13}, {14, 7, 15}, {8, 1, 4}, {4, 1, 11}, {1, 13, 11}, {14, 
+                   8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 12, 13}, {13, 10, 11}, {
+                   4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1, 5}, {
+                   13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 
+                   15}, {6, 5, 15}, {5, 14, 15}, {10, 4, 11}}]], 
+                 "Polyhedron"]}, ImageSize -> 
+               Dynamic[{5.25, 3.5} (CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification])], Boxed -> False, 
+               Lighting -> {{"Ambient", 
+                  RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{2, 0, 2}]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{2, 2, 2}]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["15", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["26", "SummaryItem"]}]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}], True -> GridBox[{{
+              PaneBox[
+               ButtonBox[
+                DynamicBox[
+                 FEPrivate`FrontEndResource[
+                 "FEBitmaps", "SquareMinusIconMedium"]], 
+                ButtonFunction :> (Typeset`open$$ = False), Appearance -> 
+                None, Evaluator -> Automatic, Method -> "Preemptive"], 
+               Alignment -> {Center, Center}, ImageSize -> 
+               Dynamic[{
+                 Automatic, 
+                  3.5 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                   Magnification])}]], 
+              Graphics3DBox[{
+                Directive[
+                 Hue[0.58, 0.4, 1], 
+                 Opacity[0.5], 
+                 EdgeForm[
+                  GrayLevel[1]]], 
+                TagBox[
+                 GraphicsComplex3DBox[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
+0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
+V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
+P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
+YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
+kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
+7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
+h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
+uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
+                  "], 
+                  
+                  Polygon3DBox[{{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 
+                   13}, {14, 7, 15}, {8, 1, 4}, {4, 1, 11}, {1, 13, 11}, {14, 
+                   8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 12, 13}, {13, 10, 11}, {
+                   4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1, 5}, {
+                   13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 
+                   15}, {6, 5, 15}, {5, 14, 15}, {10, 4, 11}}]], 
+                 "Polyhedron"]}, ImageSize -> 
+               Dynamic[{5.25, 3.5} (CurrentValue["FontCapHeight"]/
+                  AbsoluteCurrentValue[Magnification])], Boxed -> False, 
+               Lighting -> {{"Ambient", 
+                  RGBColor[0.4, 0.45, 0.5]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{2, 0, 2}]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{2, 2, 2}]}, {"Directional", 
+                  RGBColor[0.24, 0.27, 0.3], 
+                  ImageScaled[{0, 2, 2}]}}, Method -> {"ShrinkWrap" -> True}], 
+              GridBox[{{
+                 RowBox[{
+                   TagBox["\"Number of points: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["15", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Number of faces: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["26", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox[
+                   "\"Embedding dimension: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox["3", "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Type: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox[
+                    DynamicBox[
+                    ToBoxes[
+                    Quiet[
+                    Apply[Region`PolyhedronDump`polyhedronType, 
+                    Region`PolyhedronDump`computeType[
+                    Typeset`spolyhedron$$]]], StandardForm], 
+                    SynchronousUpdating -> False, TrackedSymbols :> {}, 
+                    CachedValue :> 
+                    AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Bounds: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox[
+                    DynamicBox[
+                    ToBoxes[
+                    Region`PolyhedronDump`iRegionBounds[
+                    Typeset`spolyhedron$$], StandardForm], 
+                    SynchronousUpdating -> False, TrackedSymbols :> {}, 
+                    CachedValue :> 
+                    AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}, {
+                 RowBox[{
+                   TagBox["\"Volume: \"", "SummaryItemAnnotation"], 
+                   "\[InvisibleSpace]", 
+                   TagBox[
+                    DynamicBox[
+                    ToBoxes[
+                    Region`PolyhedronDump`iVolume[Typeset`spolyhedron$$], 
+                    StandardForm], SynchronousUpdating -> False, 
+                    TrackedSymbols :> {}, CachedValue :> 
+                    AnimatorBox[
+                    0, {0, Infinity}, AppearanceElements -> "ProgressSlider", 
+                    ImageSize -> 20]], "SummaryItem"]}]}}, 
+               GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+               False, GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               GridBoxSpacings -> {
+                "Columns" -> {{2}}, "Rows" -> {{Automatic}}}, 
+               BaseStyle -> {
+                ShowStringCharacters -> False, NumberMarks -> False, 
+                 PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+            GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            BaselinePosition -> {1, 1}]}, 
+         Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+       "SummaryPanel"],
+      DynamicModuleValues:>{}], "]"}],
+    Polyhedron[CompressedData["
+1:eJwBeQGG/iFib1JlAgAAAA8AAAADAAAA2A0KsS/T7D8mY65jEf3uPya9fy4n
+0+0//OGQ7AIs6T9k0Y7g2djsP/x7Btl2HNk/hvH2OGaG7D+gcTSFJ4q1PwDB
+V8RHMnU/cHn/YgQM7z9IFgmooyjNP9wuNL0LXt0/kDM21CwfwD8SJ8K7D0Lt
+P3ybXJia3OI/0LAAPiO4uj/aAygsEALnPzr98fRCj+s/0FwYhF5w4j+8KOUq
+YNrYP9BTbICUDro/XEr+oSgM7T/uxklBnzvoP0Cy506IBtE/jN0kf2P35j+A
+kavyjgiDPxQdPWJVid4/KFw1NfDw6T98Et0S1iPQPzyAF6cDWeU/WPCoVJZn
+7D+AUCbd6NDiP0r5oPVEiOg//MB36/L01T9g5hHjQwWvPxiw6P25md4/mDHN
+h/vF4T+AsuoMc/yqP0Av9uJH0ug/gPneGUSG0j+6TOOH3lHvP/iMa1JvutU/
+uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
+     "], {{1, 14, 5}, {8, 4, 3}, {1, 8, 2}, {1, 6, 13}, {14, 7, 15}, {8, 1, 
+     4}, {4, 1, 11}, {1, 13, 11}, {14, 8, 7}, {8, 14, 2}, {14, 1, 2}, {6, 12, 
+     13}, {13, 10, 11}, {4, 13, 9}, {7, 12, 15}, {12, 7, 3}, {7, 8, 3}, {6, 1,
+      5}, {13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 9}, {12, 6, 15}, {6, 5,
+      15}, {5, 14, 15}, {10, 4, 11}}],
+    Editable->False,
+    SelectWithContents->True,
+    Selectable->False]}], ";"}]], "Input",
+ CellChangeTimes->{{3.771928793668334*^9, 3.771928809788451*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"ad0e9f5f-65af-4cae-9a9d-5642c691c91a"],
+
+Cell[TextData[StyleBox["The graph of the dual of the polyhedron:",
+ FontSize->16]], "CodeText",
+ CellChangeTimes->{{3.7719283231281877`*^9, 3.771928368599141*^9}, {
+  3.771928434454788*^9, 
+  3.771928445348089*^9}},ExpressionUUID->"a3755c91-afd5-4df5-b9c4-\
+0221a6a99aee"],
 
 Cell[CellGroupData[{
 
@@ -428,7 +413,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.771814204121849*^9, 3.771814210688335*^9}, {
   3.771814247039185*^9, 3.7718142591757216`*^9}, {3.771841060047239*^9, 
   3.7718410647649207`*^9}},
- CellLabel->"In[16]:=",ExpressionUUID->"5b033a56-56fd-442d-b185-7209f95cbaee"],
+ CellLabel->"In[17]:=",ExpressionUUID->"5b033a56-56fd-442d-b185-7209f95cbaee"],
 
 Cell[BoxData[
  GraphicsBox[
@@ -605,8 +590,9 @@ puZ18off9gkrHtd1SzNi8NHzH7o8eviiq0d3P7p70MMfXR7dfACL+T63
   FrameTicks->None]], "Output",
  CellChangeTimes->{
   3.771814267655099*^9, 3.7718376003294587`*^9, {3.771841062168352*^9, 
-   3.7718410654519677`*^9}, 3.7718456908252554`*^9, 3.7718508139235077`*^9},
- CellLabel->"Out[16]=",ExpressionUUID->"7fdce324-79fb-4020-a0cc-a3b369e98414"]
+   3.7718410654519677`*^9}, 3.7718456908252554`*^9, 3.7718508139235077`*^9, 
+   3.771928812654166*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"9e5c4585-0db2-4433-884b-f098de86967d"]
 }, Open  ]]
 }, Open  ]],
 
@@ -620,27 +606,26 @@ Cell["Creating a Function for Generating Spanning Trees ", "Section",
 
 Cell[TextData[StyleBox["I then used the graph to generate different paths in \
 which a polyhedron could unfold. One way to do this is by using a spanning \
-tree, a tree generated from a graph that retains the same amount of vertices \
-while having the minimum amount of edges. This essentially creates a simple \
-version of what the final net should look like. Each vertex represents a \
-face, and connections between them signify that they are adjacent. It is \
-important to note that not every spanning tree will correspond to a non \
-overlapping net, which is why I generate a spanning tree from every possible \
-vertex.",
+tree, a tree generated from a graph that retains the same  vertices while \
+having the minimum amount of edges. This essentially creates a simple version \
+of what the final net should look like. Each vertex represents a face, and \
+edges between them signify that they are adjacent. It is important to note \
+that not every spanning tree will correspond to a non-overlapping net, which \
+is why I generate a spanning tree from every possible vertex.",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.771813562497595*^9, 3.7718137159445066`*^9}, {
   3.7718137594562674`*^9, 3.7718139480661583`*^9}, {3.7718144191981173`*^9, 
-  3.771814419435457*^9}, {3.771839409974388*^9, 
-  3.771839410957076*^9}},ExpressionUUID->"348dffea-e744-492d-8124-\
+  3.771814419435457*^9}, {3.771839409974388*^9, 3.771839410957076*^9}, {
+  3.771926668126115*^9, 3.771926682003435*^9}, {3.7719290603866014`*^9, 
+  3.77192908178629*^9}},ExpressionUUID->"348dffea-e744-492d-8124-\
 431aee26ce8e"],
 
 Cell[TextData[StyleBox["Iterate through every vertex as a possible starting \
 point.",
  FontSize->16]], "CodeText",
  CellChangeTimes->{
-  3.7718401693595886`*^9, {3.7718404161668377`*^9, 
-   3.771840428367979*^9}},ExpressionUUID->"64f4a8c5-ffe4-4536-9f82-\
-91e5f890c165"],
+  3.7718401693595886`*^9, {3.7718404161668377`*^9, 3.771840428367979*^9}},
+ FontSize->24,ExpressionUUID->"64f4a8c5-ffe4-4536-9f82-91e5f890c165"],
 
 Cell[BoxData[{
  RowBox[{
@@ -662,6 +647,10 @@ Cell[BoxData[{
  FontSize->16,
  CellLabel->"In[3]:=",ExpressionUUID->"c439427d-f27b-48d5-99ac-6f75ecca4f9e"],
 
+Cell["Several spanning trees for the polyhedron:", "CodeText",
+ CellChangeTimes->{{3.7719284606301517`*^9, 3.771928505310935*^9}},
+ FontSize->16,ExpressionUUID->"3ee1e90b-8d04-4ce0-ae44-23bf6051068d"],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
@@ -671,7 +660,7 @@ Cell[BoxData[
    RowBox[{"1", ";;", "7"}], "]"}], "]"}]], "Input",
  CellChangeTimes->{{3.771841068791551*^9, 3.7718410904546185`*^9}, {
   3.7718456991386504`*^9, 3.7718457036590414`*^9}},
- CellLabel->"In[17]:=",ExpressionUUID->"4db9e0f7-7b48-46f8-9333-8b963ea0c025"],
+ CellLabel->"In[18]:=",ExpressionUUID->"4db9e0f7-7b48-46f8-9333-8b963ea0c025"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1942,8 +1931,9 @@ TrtTMg==
     FormatType->TraditionalForm,
     FrameTicks->None]}], "}"}]], "Output",
  CellChangeTimes->{{3.771841074467966*^9, 3.7718410909139705`*^9}, {
-   3.7718456946343365`*^9, 3.7718457041867695`*^9}, 3.77185082038042*^9},
- CellLabel->"Out[17]=",ExpressionUUID->"184ab2aa-6940-4186-933a-769cc6b76d19"]
+   3.7718456946343365`*^9, 3.7718457041867695`*^9}, 3.77185082038042*^9, 
+   3.7719288221604624`*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"734a301a-0174-4004-9c20-003982a3fc3c"]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -1963,22 +1953,26 @@ e41a0e5ddbaa"],
 Cell[TextData[StyleBox["To create the net of the polyhedron, I had to \
 implement an unfolding algorithm. My first approach was to extract each face \
 individually, but that ended up complicating the transformations. My final \
-algorithm consisted of applying one transformation to move one face to the xy \
-plane, then unfolding using the vertices on the spanning tree.",
+algorithm consisted of applying one transformation to move one face to the \
+x-y plane, then unfolding using connections between vertices from the \
+spanning tree. ",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.7718144047416925`*^9, 3.7718144517162127`*^9}, 
    3.7718395949841857`*^9, {3.7718405668263173`*^9, 3.7718405829562807`*^9}, {
    3.7718577036494536`*^9, 3.7718578173940105`*^9}, {3.7718578694079723`*^9, 
-   3.771857956236359*^9}},ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-\
+   3.771857956236359*^9}, {3.771926694318512*^9, 3.771926725245245*^9}, {
+   3.771926835253377*^9, 3.7719268773841963`*^9}, {3.7719273859625196`*^9, 
+   3.7719273870264797`*^9}, 
+   3.771929333981928*^9},ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-\
 228981904122"],
 
-Cell[TextData[StyleBox["Create a function to get the normal vector to a \
-plane.",
- FontSize->16]], "CodeText",
+Cell[TextData[StyleBox["I first created a function to find the normal vector \
+to a plane using the cross product.", "Text",
+ FontSize->18]], "Text",
  CellChangeTimes->{{3.7718406050588098`*^9, 3.7718406073317304`*^9}, {
   3.7718406558314323`*^9, 3.7718406731364603`*^9}, {3.7718407073502035`*^9, 
-  3.7718407091917453`*^9}},ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-\
-d0c82ef77f53"],
+  3.7718407091917453`*^9}, {3.7719267274902153`*^9, 3.7719267306276464`*^9}},
+ FontSize->16,ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-d0c82ef77f53"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1987,7 +1981,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"normvector", "[", "coords_", "]"}], " ", ":=", "\n", 
+    RowBox[{"normvector", "[", "coords_", "]"}], " ", ":=", " ", 
     RowBox[{"Cross", "[", 
      RowBox[{
       RowBox[{
@@ -2004,19 +1998,162 @@ Cell[BoxData[{
   3.771720546019202*^9, 3.771806504048412*^9, {3.771837623923479*^9, 
    3.7718376363867617`*^9}, {3.771837673631872*^9, 3.7718376768709097`*^9}, {
    3.7718406419455433`*^9, 3.771840645337018*^9}, {3.7718406779055233`*^9, 
-   3.771840682974772*^9}},
+   3.771840682974772*^9}, {3.7719266315283766`*^9, 3.7719266323973145`*^9}},
  FontSize->16,
  CellLabel->"In[5]:=",ExpressionUUID->"266065bb-34ca-4ad3-ac4b-a76c78a48d50"],
 
-Cell["\<\
-Create a function to generate transformations according to the spanning tree, \
-similar to physically unfolding an object. \
-\>", "CodeText",
- CellChangeTimes->{{3.771840692266791*^9, 3.771840692890333*^9}, {
-   3.7718407464624004`*^9, 3.771840748794826*^9}, {3.7718449159060397`*^9, 
-   3.7718449413388157`*^9}, {3.771845153533147*^9, 3.771845192513386*^9}, {
-   3.771845230978182*^9, 3.7718452475765514`*^9}, 3.7718568691203547`*^9},
- FontSize->16,ExpressionUUID->"6f70666b-2e14-40ff-a942-24173ed35c1e"],
+Cell[TextData[{
+ StyleBox["Using transformation matrices, I rotated the polyhedron so that \
+one face is lying on the x-y plane.  I used the function RotationTransform to \
+rotate the normal vector of the face so that it is flat on the plane, and use \
+TranslationTransform to move it to the correct place. The transformed mesh is \
+converted into a list of its primitives. The next step is to begin unfolding \
+the polyhedron from its bottom face using the list of spanning trees. To \
+perform the unfolding on the polyhedron, I use the function BreadthFirstScan, \
+which calls ", "Text",
+  FontSize->18],
+ StyleBox["unfold", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox[" (discussed next) on each newly discovered vertex. Finally, the \
+function returns a list of coordinates of the completed net.", "Text",
+  FontSize->18]
+}], "Text",
+ CellChangeTimes->{{3.771931922453514*^9, 3.771931932875496*^9}, {
+  3.7719332190480633`*^9, 3.7719332388606987`*^9}},
+ FontSize->48,ExpressionUUID->"5fdebb12-a2de-49f1-ac6c-6478f9fcbbf9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generatenetcoords", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"generatenetcoords", "[", 
+   RowBox[{"mesh_", ",", " ", "tree_"}], "]"}], ":=", "\n", "\n", "    ", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "transformations", ",", " ", "transformedmesh", ",", " ", "meshlist", 
+      ",", " ", "transformedmeshlist", ",", " ", "normals", ",", " ", 
+      "polygonfaces", ",", " ", "transformedrotation"}], "}"}], ",", "\n", 
+    "\n", "       ", 
+    RowBox[{
+     RowBox[{"polygonfaces", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"Reap", "[", "\n", "\n", "         ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"meshlist", " ", "=", " ", 
+           RowBox[{
+            RowBox[{"MeshPrimitives", "[", 
+             RowBox[{"mesh", ",", " ", "2"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", "\n", 
+          "         ", 
+          RowBox[{"transformations", " ", "=", "      ", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{"RotationTransform", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"normvector", "[", 
+                RowBox[{"meshlist", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", " ", "0", ",", " ", 
+                 RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", " ", 
+            "\n", "\t\t\t\t", 
+            RowBox[{"TranslationTransform", "[", 
+             RowBox[{"-", 
+              RowBox[{"PropertyValue", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"mesh", ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"2", ",", " ", "1"}], "}"}]}], "}"}], ",", " ", 
+                "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "  ", "\n", 
+          "\n", "         ", 
+          RowBox[{"transformedmesh", " ", "=", " ", 
+           RowBox[{"TransformedRegion", "[", 
+            RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", 
+          "      ", "\n", "         ", 
+          RowBox[{"transformedmeshlist", " ", "=", " ", 
+           RowBox[{
+            RowBox[{"MeshPrimitives", "[", 
+             RowBox[{"transformedmesh", ",", " ", "2"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "     ", 
+          "\n", "\n", "         ", 
+          RowBox[{"normals", " ", "=", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"normvector", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+            "transformedmeshlist"}]}], ";", "    ", "\n", "\n", "         ", 
+          RowBox[{"Sow", "[", 
+           RowBox[{
+            RowBox[{"transformedmeshlist", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", " ", "\"\<flat\>\""}], 
+           "]"}], ";", "\n", "\n", "         ", 
+          RowBox[{
+           RowBox[{"transformedrotation", "[", "1", "]"}], " ", "=", " ", 
+           RowBox[{"TransformationFunction", "[", 
+            RowBox[{"IdentityMatrix", "[", "4", "]"}], "]"}]}], ";", "\n", 
+          "\n", "         ", 
+          RowBox[{"BreadthFirstScan", "[", 
+           RowBox[{"tree", ",", " ", "1", ",", " ", 
+            RowBox[{"\"\<DiscoverVertex\>\"", " ", "->", " ", 
+             RowBox[{"unfold", "[", 
+              RowBox[{
+              "transformedmeshlist", ",", " ", "normals", ",", " ", 
+               "transformedrotation"}], "]"}]}]}], "]"}], ";"}], ",", "  ", 
+         "\n", "         ", 
+         RowBox[{"{", "\"\<flat\>\"", "}"}]}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", " ", "All", ",", " ", "1"}], "]"}], "]"}]}],
+      ";", "\n", "       ", 
+     RowBox[{"Chop", "[", "polygonfaces", "]"}]}]}], "\n", "]"}]}]}], "Code",
+ CellChangeTimes->{
+  3.771720546019202*^9, 3.771806504048412*^9, {3.771837623923479*^9, 
+   3.7718376363867617`*^9}, {3.771837673631872*^9, 3.7718376768709097`*^9}, {
+   3.7718406419455433`*^9, 3.771840645337018*^9}, {3.7718406779055233`*^9, 
+   3.771840682974772*^9}, {3.7718407258015766`*^9, 3.7718407441410756`*^9}, {
+   3.7718446780926323`*^9, 3.7718446784396544`*^9}, {3.7718448193684845`*^9, 
+   3.771844893710971*^9}, 3.771844975144621*^9, {3.77184511221352*^9, 
+   3.7718451134500494`*^9}, {3.771858055515955*^9, 3.771858189485072*^9}, {
+   3.771858346018916*^9, 3.77185834675434*^9}, {3.771858379602936*^9, 
+   3.7718583839443026`*^9}, {3.7718584619639482`*^9, 3.771858592563614*^9}, {
+   3.7718614348365407`*^9, 3.7718614358751535`*^9}, 3.7718821959634056`*^9, 
+   3.771927225085475*^9, {3.77193131311875*^9, 3.771931335172892*^9}},
+ FontSize->16,
+ CellLabel->"In[7]:=",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"],
+
+Cell[TextData[{
+ StyleBox["The ", "Text",
+  FontSize->18],
+ StyleBox["unfold", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox[" function operates by finding the coordinates of the shared edge \
+using Intersection, calculating the angle between them using DihedralAngle, \
+and applying transformations using their normal vectors to unfold the face. \
+Each vertex inherits the rotation transformations of its parent nodes in the \
+tree, resulting in composed rotations, and allowing each \
+\[OpenCurlyDoubleQuote]branch\[CloseCurlyDoubleQuote] of the net to \
+effectively move together in each iteration. This simulates how a physical \
+unfolding would operate. The function returns coordinates of the transformed \
+polygons. ", "Text",
+  FontSize->18]
+}], "Text",
+ CellChangeTimes->{
+  3.771927249267728*^9, 3.7719273634732604`*^9, {3.771927658526058*^9, 
+   3.7719276994042673`*^9}, {3.771929656292554*^9, 3.7719299198071337`*^9}, {
+   3.7719299816118526`*^9, 3.7719300131611786`*^9}, {3.771930066673259*^9, 
+   3.77193007114102*^9}, {3.771930220610531*^9, 3.7719302492939816`*^9}, {
+   3.771930563381039*^9, 3.7719306420843215`*^9}, {3.771931722631901*^9, 
+   3.771931723809908*^9}, {3.7719331550727835`*^9, 
+   3.7719331589058604`*^9}},ExpressionUUID->"47620d73-e06d-4d30-8811-\
+29be9c8f903c"],
 
 Cell[BoxData[{
  RowBox[{
@@ -2037,7 +2174,7 @@ Cell[BoxData[{
     RowBox[{"{", 
      RowBox[{
      "edgecoord1", ",", " ", "edgecoord2", ",", " ", "angle", ",", " ", 
-      "rotation"}], "}"}], ",", "\n", "\t\t", 
+      "rotation"}], "}"}], ",", "\n", "\t", "\n", "\t\t", 
     RowBox[{
      RowBox[{
       RowBox[{"{", 
@@ -2077,165 +2214,8 @@ Cell[BoxData[{
         "meshlist", "\[LeftDoubleBracket]", "u", "\[RightDoubleBracket]"}]}], 
        ",", " ", "\"\<flat\>\""}], "]"}], ";"}]}], "\n", "\t", 
    "]"}]}]}], "Code",
- CellChangeTimes->{
-  3.771720546019202*^9, 3.771806504048412*^9, {3.771837623923479*^9, 
-   3.7718376363867617`*^9}, {3.771837673631872*^9, 3.7718376768709097`*^9}, {
-   3.7718406419455433`*^9, 3.771840645337018*^9}, {3.7718406779055233`*^9, 
-   3.771840682974772*^9}, {3.7718407258015766`*^9, 3.7718407441410756`*^9}, {
-   3.7718446780926323`*^9, 3.7718446784396544`*^9}, {3.7718448193684845`*^9, 
-   3.771844893710971*^9}, 3.771844975144621*^9, 3.771857965497159*^9},
  FontSize->16,
- CellLabel->"In[7]:=",ExpressionUUID->"3fb4986e-528d-46c7-b8c1-4f5350903d39"],
-
-Cell[TextData[{
- StyleBox["Transform the polyhedron so that one face is lying on the ",
-  FontSize->16],
- StyleBox["xy",
-  IgnoreSpellCheck->True,
-  FontSize->16],
- StyleBox[" plane,  then apply unfold using the list of spanning trees.",
-  FontSize->16]
-}], "CodeText",
- CellChangeTimes->{{3.7718449835405693`*^9, 3.771844991047453*^9}, {
-  3.771845036693636*^9, 3.7718450696028385`*^9}, {3.7718451966350064`*^9, 
-  3.771845213656419*^9}, {3.771858022630238*^9, 3.771858044114953*^9}, {
-  3.7718583950445523`*^9, 3.7718584044008036`*^9}, {3.7718584408910046`*^9, 
-  3.771858451787882*^9}, {3.771861445087376*^9, 
-  3.7718614457823453`*^9}},ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-\
-690fab07ea40"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{
-   RowBox[{"ClearAll", "[", "generatenetcoords", "]"}], ";"}], "\n"}], "\n", 
- RowBox[{
-  RowBox[{"generatenetcoords", "[", 
-   RowBox[{"mesh_", ",", " ", "tree_"}], "]"}], ":=", "\n", "\t", 
-  RowBox[{"Block", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-     "transformations", ",", " ", "transformedmesh", ",", " ", "meshlist", 
-      ",", " ", "transformedmeshlist", ",", " ", "normals", ",", " ", 
-      "polygonfaces", ",", " ", "transformedrotation"}], "}"}], ",", "\n", 
-    "\t\t", 
-    RowBox[{
-     RowBox[{"polygonfaces", " ", "=", " ", 
-      RowBox[{
-       RowBox[{"Reap", "[", "\n", "\t\t", "\n", "\t\t    ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"meshlist", " ", "=", " ", 
-           RowBox[{
-            RowBox[{"MeshPrimitives", "[", 
-             RowBox[{"mesh", ",", " ", "2"}], "]"}], "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", 
-          "\t\t    ", "\n", "\t\t\t", 
-          RowBox[{"transformations", " ", "=", "      ", 
-           RowBox[{"(*", " ", 
-            RowBox[{
-            "Creates", " ", "a", " ", "transformation", " ", "matrix"}], " ", 
-            "*)"}], "\n", "\t\t\t", 
-           RowBox[{
-            RowBox[{"RotationTransform", "[", 
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"normvector", "[", 
-                RowBox[{"meshlist", "[", 
-                 RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
-               RowBox[{"{", 
-                RowBox[{"0", ",", " ", "0", ",", " ", 
-                 RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", 
-            "     ", 
-            RowBox[{"(*", " ", 
-             RowBox[{
-             "rotates", " ", "the", " ", "normal", " ", "vector", " ", "of", 
-              " ", "the", " ", "face", " ", "so", " ", "that", " ", "it", " ",
-               "is", " ", "pointing", " ", "down"}], " ", "*)"}], "\n", 
-            "\t\t\t", 
-            RowBox[{"TranslationTransform", "[", 
-             RowBox[{"-", 
-              RowBox[{"PropertyValue", "[", 
-               RowBox[{
-                RowBox[{"{", 
-                 RowBox[{"mesh", ",", " ", 
-                  RowBox[{"{", 
-                   RowBox[{"2", ",", " ", "1"}], "}"}]}], "}"}], ",", " ", 
-                "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "   ", 
-          RowBox[{"(*", " ", 
-           RowBox[{"translates", " ", "the", " ", "face"}], " ", "*)"}], "\n",
-           "\t\t\t", "\n", "\t\t\t", 
-          RowBox[{"transformedmesh", " ", "=", " ", 
-           RowBox[{"TransformedRegion", "[", 
-            RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", 
-          "      ", 
-          RowBox[{"(*", " ", 
-           RowBox[{
-           "Applies", " ", "the", " ", "transformation", " ", "matrix"}], " ",
-            "*)"}], "\n", "\t\t\t", "\n", "\t\t\t", 
-          RowBox[{"transformedmeshlist", " ", "=", " ", 
-           RowBox[{
-            RowBox[{"MeshPrimitives", "[", 
-             RowBox[{"transformedmesh", ",", " ", "2"}], "]"}], "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "      ", 
-          RowBox[{"(*", " ", 
-           RowBox[{
-           "Creates", " ", "mesh", " ", "primitives", " ", "for", " ", "the", 
-            " ", "transformed", " ", "mesh"}], " ", "*)"}], "\n", "\t\t\t", 
-          "\n", "\t\t\t", 
-          RowBox[{"normals", " ", "=", " ", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"normvector", "[", "#", "]"}], " ", "&"}], "/@", " ", 
-            "transformedmeshlist"}]}], ";", "     ", 
-          RowBox[{"(*", " ", 
-           RowBox[{
-           "Finds", " ", "all", " ", "the", " ", "normal", " ", "vectors", 
-            " ", "for", " ", "the", " ", "faces"}], " ", "*)"}], "\n", "\n", 
-          "\t\t\t", 
-          RowBox[{"Sow", "[", 
-           RowBox[{
-            RowBox[{"transformedmeshlist", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], ",", " ", "\"\<flat\>\""}], 
-           "]"}], ";", "\n", "\t\t\t", "\n", "\t\t\t", 
-          RowBox[{
-           RowBox[{"transformedrotation", "[", "1", "]"}], " ", "=", " ", 
-           RowBox[{"TransformationFunction", "[", 
-            RowBox[{"IdentityMatrix", "[", "4", "]"}], "]"}]}], ";", "\n", 
-          "\t\t\t", "\n", "\t\t\t", 
-          RowBox[{"BreadthFirstScan", "[", 
-           RowBox[{"tree", ",", " ", "1", ",", " ", 
-            RowBox[{"\"\<DiscoverVertex\>\"", " ", "\[Rule]", " ", 
-             RowBox[{"unfold", "[", 
-              RowBox[{
-              "transformedmeshlist", ",", " ", "normals", ",", " ", 
-               "transformedrotation"}], "]"}]}]}], "]"}], ";"}], ",", "   ", 
-         RowBox[{"(*", " ", 
-          RowBox[{
-          "Runs", " ", "unfold", " ", "on", " ", "each", " ", "discovered", 
-           " ", "vertex"}], " ", "*)"}], "\n", "\t\t\t ", 
-         RowBox[{"{", "\"\<flat\>\"", "}"}]}], "]"}], "[", 
-       RowBox[{"[", 
-        RowBox[{
-         RowBox[{"-", "1"}], ",", " ", "All", ",", " ", "1"}], "]"}], "]"}]}],
-      ";", "\n", "\t\t\t ", "\n", "\t\t", 
-     RowBox[{"Chop", "[", "polygonfaces", "]"}]}]}], "\n", "\t", 
-   "]"}]}]}], "Code",
- CellChangeTimes->{
-  3.771720546019202*^9, 3.771806504048412*^9, {3.771837623923479*^9, 
-   3.7718376363867617`*^9}, {3.771837673631872*^9, 3.7718376768709097`*^9}, {
-   3.7718406419455433`*^9, 3.771840645337018*^9}, {3.7718406779055233`*^9, 
-   3.771840682974772*^9}, {3.7718407258015766`*^9, 3.7718407441410756`*^9}, {
-   3.7718446780926323`*^9, 3.7718446784396544`*^9}, {3.7718448193684845`*^9, 
-   3.771844893710971*^9}, 3.771844975144621*^9, {3.77184511221352*^9, 
-   3.7718451134500494`*^9}, {3.771858055515955*^9, 3.771858189485072*^9}, {
-   3.771858346018916*^9, 3.77185834675434*^9}, {3.771858379602936*^9, 
-   3.7718583839443026`*^9}, {3.7718584619639482`*^9, 3.771858592563614*^9}, {
-   3.7718614348365407`*^9, 3.7718614358751535`*^9}, 3.7718821959634056`*^9},
- FontSize->16,
- CellLabel->"In[9]:=",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
+ CellLabel->"In[9]:=",ExpressionUUID->"e6bc852c-7bd0-4155-b295-f1ca919a57f0"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2246,20 +2226,81 @@ Cell["Generating a list of all possible nets", "Section",
   3.7718139885380015`*^9}},ExpressionUUID->"9410e860-5f5f-4db9-8f02-\
 50237a87edb0"],
 
-Cell[TextData[StyleBox["Finally, we put all the functions together. The \
-program iterates through every spanning tree to produce nets using \
-netcoordinates. The third element of each coordinate is deleted to convert \
-the net to 2D. Each net is then tested for overlap by calculating the surface \
-area of the original polyhedron and comparing it to the surface area of the \
-net. Only nets where the two surface areas are equal are appended to the list \
-that is returned.",
- FontSize->18]], "Text",
+Cell[TextData[{
+ "To test for overlap in the final net, I create a function ",
+ StyleBox["testforoverlap", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
+ " to calculate the ",
+ StyleBox["surface area of the original polyhedron and compare it to the \
+surface area of the net. The function returns a true or false statement.",
+  FontSize->18]
+}], "Text",
+ CellChangeTimes->{{3.7719329044382544`*^9, 3.7719330276193266`*^9}},
+ FontSize->18,ExpressionUUID->"4ab75779-cbea-4e1a-b2cc-727b6e47dbc2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"testforoverlap", "[", 
+   RowBox[{"polyhedron_", ",", " ", "netcoords_"}], "]"}], " ", ":=", " ", 
+  "\n", "\n", "\t\t", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"surfacearea", ",", " ", "netsurfacearea"}], "}"}], ",", "\n", 
+    "\t\t", "\n", "            ", 
+    RowBox[{
+     RowBox[{"surfacearea", " ", "=", " ", 
+      RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
+     "            ", 
+     RowBox[{"netsurfacearea", " ", "=", " ", 
+      RowBox[{"RegionMeasure", "[", 
+       RowBox[{"RegionUnion", "[", 
+        RowBox[{"Polygon", " ", "/@", " ", "netcoords"}], "]"}], "]"}]}], ";",
+      "\n", "            ", 
+     RowBox[{"Return", "[", 
+      RowBox[{"surfacearea", " ", "\[Equal]", " ", "netsurfacearea"}], "]"}], 
+     ";"}]}], "\n", "            ", "\n", "        ", "]"}]}]], "Code",
+ CellChangeTimes->{{3.7719320048968086`*^9, 3.7719321046739516`*^9}, {
+  3.771932167074483*^9, 3.771932301770792*^9}, {3.7719323352196484`*^9, 
+  3.771932350461934*^9}},
+ FontSize->16,
+ CellLabel->"In[11]:=",ExpressionUUID->"186f62f9-0f08-496c-bdca-f47808164f6d"],
+
+Cell[TextData[{
+ StyleBox["Finally, I put all the functions together in ",
+  FontSize->18],
+ StyleBox["generateallnets", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox[" ",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox["iterates through every spanning tree to produce nets using ",
+  FontSize->18],
+ StyleBox["netcoordinates", "Program",
+  IgnoreSpellCheck->True,
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox[". Since the third element of each coordinate in the net is zero, \
+it is deleted to convert the net to 2D. Each net is then tested using ",
+  FontSize->18],
+ StyleBox["testforoverlap", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox[". Only nets where the two surface areas are equal are appended to \
+the list that is returned.",
+  FontSize->18]
+}], "Text",
  CellChangeTimes->{{3.771844567279682*^9, 3.7718446374428587`*^9}, {
   3.7718453809628544`*^9, 3.77184539272886*^9}, {3.7718455417017603`*^9, 
   3.7718455651910725`*^9}, {3.771857067362105*^9, 3.7718571045757575`*^9}, {
   3.7718571799650726`*^9, 3.7718572391373534`*^9}, {3.7718888102034035`*^9, 
-  3.771888811181983*^9}, {3.771888952494421*^9, 
-  3.771888953224429*^9}},ExpressionUUID->"30d14a36-0afc-49a3-bb7e-\
+  3.771888811181983*^9}, {3.771888952494421*^9, 3.771888953224429*^9}, {
+  3.7719276263364487`*^9, 3.7719276318390303`*^9}, {3.771930678643797*^9, 
+  3.7719307190754766`*^9}, {3.771932849055852*^9, 3.771932858904829*^9}, {
+  3.771933041937381*^9, 
+  3.7719330750215883`*^9}},ExpressionUUID->"30d14a36-0afc-49a3-bb7e-\
 39307dc050d9"],
 
 Cell[BoxData[{
@@ -2268,37 +2309,26 @@ Cell[BoxData[{
    RowBox[{"ClearAll", "[", "generateallnets", "]"}], ";"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{"generateallnets", "[", "polyhedron_", "]"}], " ", ":=", " ", "\n", 
+  "\n", "    ", 
   RowBox[{"Block", "[", 
    RowBox[{
     RowBox[{"{", 
      RowBox[{
      "netcoords", ",", " ", "trees", ",", " ", "graph", ",", " ", "mesh", ",",
        " ", "surfacearea", ",", " ", "netsurfacearea", ",", " ", "goodnets"}],
-      "}"}], ",", "\n", "\n", 
+      "}"}], ",", "\n", "\n", "    ", 
     RowBox[{
      RowBox[{"mesh", " ", "=", " ", 
       RowBox[{"BoundaryDiscretizeGraphics", "[", "polyhedron", "]"}]}], ";", 
-     "    ", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Assign", " ", "values", " ", "using", " ", "other", " ", "functions"}],
-       " ", "*)"}], "\n", 
+     "   ", "\n", "    ", 
      RowBox[{"graph", " ", "=", " ", 
       RowBox[{"polyhedronfacegraph", "[", "polyhedron", "]"}]}], ";", "\n", 
+     "    ", 
      RowBox[{"trees", " ", "=", " ", 
-      RowBox[{"generatetrees", "[", "graph", "]"}]}], ";", "\n", "\n", 
+      RowBox[{"generatetrees", "[", "graph", "]"}]}], ";", "\n", "\n", "    ", 
      RowBox[{"goodnets", " ", "=", " ", 
-      RowBox[{"{", "}"}]}], ";", "   ", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Start", " ", "with", " ", "an", " ", "empty", " ", "list", " ", "of", 
-       " ", "non", " ", "overlapping", " ", "nets"}], " ", "*)"}], "\n", "\n", 
-     RowBox[{"Table", "[", "     ", 
-      RowBox[{"(*", " ", 
-       RowBox[{
-       "Iterate", " ", "through", " ", "every", " ", "spanning", " ", "tree", 
-        " ", "in", " ", "the", " ", "list", " ", "of", " ", "trees"}], " ", 
-       "*)"}], "\n", "\n", 
+      RowBox[{"{", "}"}]}], ";", "   ", "\n", "\n", "    ", 
+     RowBox[{"Table", "[", "     ", "\n", "    ", "\n", "        ", 
       RowBox[{
        RowBox[{
         RowBox[{"netcoords", " ", "=", " ", 
@@ -2307,9 +2337,7 @@ Cell[BoxData[{
            RowBox[{"mesh", ",", " ", 
             RowBox[{"trees", "[", 
              RowBox[{"[", "treeposition", "]"}], "]"}]}], "]"}]}]}], ";", 
-        "        ", 
-        RowBox[{"(*", " ", 
-         RowBox[{"generates", " ", "coordinates"}], " ", "*)"}], "\n", 
+        "    ", "\n", "        ", 
         RowBox[{"netcoords", " ", "=", " ", 
          RowBox[{"Table", "[", 
           RowBox[{
@@ -2324,27 +2352,22 @@ Cell[BoxData[{
              RowBox[{"Length", "[", "netcoords", "]"}]}], "}"}], ",", " ", 
            RowBox[{"{", 
             RowBox[{"m", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], 
-        ";", "        ", 
-        RowBox[{"(*", " ", 
-         RowBox[{
-         "Delete", " ", "the", " ", "third", " ", "element", " ", "of", " ", 
-          "each", " ", "coordinate", " ", "so", " ", "it", " ", "becomes", 
-          " ", "two", " ", "dimensional"}], " ", "*)"}], "\n", "\n", 
+        ";", "        ", "\n", "\n", "        ", 
         RowBox[{"surfacearea", " ", "=", " ", 
          RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
+        "        ", 
         RowBox[{"netsurfacearea", " ", "=", " ", 
          RowBox[{"RegionMeasure", "[", 
           RowBox[{"RegionUnion", "[", 
            RowBox[{"Polygon", " ", "/@", " ", "netcoords"}], "]"}], "]"}]}], 
-        ";", "\n", 
+        ";", "\n", "\n", "        ", 
         RowBox[{"If", "[", 
          RowBox[{
-          RowBox[{"surfacearea", " ", "\[Equal]", " ", "netsurfacearea"}], 
-          ",", "             ", 
-          RowBox[{"(*", " ", 
-           RowBox[{
-           "Check", " ", "if", " ", "the", " ", "two", " ", "surface", " ", 
-            "areas", " ", "are", " ", "equal"}], " ", "*)"}], "\n", 
+          RowBox[{
+           RowBox[{"testforoverlap", "[", 
+            RowBox[{"polyhedron", ",", " ", "netcoords"}], "]"}], " ", 
+           "\[Equal]", " ", "True"}], ",", "             ", "\n", 
+          "           ", 
           RowBox[{"AppendTo", "[", 
            RowBox[{"goodnets", ",", " ", 
             RowBox[{"Graphics", "[", 
@@ -2357,14 +2380,12 @@ Cell[BoxData[{
                 RowBox[{"{", 
                  RowBox[{"Thin", ",", " ", "Pink"}], "}"}], "]"}], ",", " ", 
                RowBox[{"Polygon", " ", "/@", " ", "netcoords"}]}], "}"}], 
-             "]"}]}], "]"}]}], "         ", 
-         RowBox[{"(*", " ", 
-          RowBox[{"Append", " ", "it", " ", "to", " ", "the", " ", "list"}], 
-          " ", "*)"}], "\n", "]"}], ";"}], ",", "  ", "\n", "\n", 
+             "]"}]}], "]"}]}], "        ", "\n", "        ", "]"}], ";"}], 
+       ",", "  ", "\n", "\n", "        ", 
        RowBox[{"{", 
         RowBox[{"treeposition", ",", " ", "1", ",", " ", 
-         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], "]"}], ";", "    ",
-      "\n", "\n", 
+         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], " ", "\n", "    ", 
+      "]"}], ";", "    ", "\n", "\n", "    ", 
      RowBox[{"Row", "[", 
       RowBox[{"{", 
        RowBox[{
@@ -2379,9 +2400,11 @@ Cell[BoxData[{
    3.7718820883565826`*^9, 3.771882089284585*^9}, {3.771882179539363*^9, 
    3.7718821849354277`*^9}, {3.7718822158409033`*^9, 
    3.7718822160888643`*^9}, {3.771882262872877*^9, 3.771882269176914*^9}, 
-   3.771882874000285*^9},
+   3.771882874000285*^9, 3.77192773968369*^9, 3.7719285830194087`*^9, {
+   3.77193226575556*^9, 3.771932267942294*^9}, {3.7719323617373757`*^9, 
+   3.771932382539461*^9}, 3.771932582143503*^9},
  FontSize->16,
- CellLabel->"In[19]:=",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
+ CellLabel->"In[14]:=",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2394,23 +2417,30 @@ Cell["Outputs", "Section",
 Cell[TextData[{
  StyleBox["Upon taking a polyhedron object in as its argument, ",
   FontSize->18],
- StyleBox["generateallnets",
-  IgnoreSpellCheck->True,
-  FontSize->18],
+ StyleBox["generateallnets", "Program",
+  FontSize->18,
+  FontWeight->"Bold"],
  StyleBox[" returns a 3D graphic of the original polyhedron and a list of all \
 possible nets.",
   FontSize->18]
 }], "Text",
- CellChangeTimes->{{3.771813421978134*^9, 
-  3.771813543262005*^9}},ExpressionUUID->"1c624274-8424-40e9-a447-\
+ CellChangeTimes->{{3.771813421978134*^9, 3.771813543262005*^9}, {
+  3.77193309210274*^9, 
+  3.7719330982984724`*^9}},ExpressionUUID->"1c624274-8424-40e9-a447-\
 a66e8cd986c9"],
+
+Cell[TextData[StyleBox["Generating all nets of the polyhedron:",
+ FontSize->16]], "CodeText",
+ CellChangeTimes->{{3.771928726083254*^9, 3.771928750557373*^9}, 
+   3.771928781580138*^9},ExpressionUUID->"26656ff3-3ef8-45a2-843d-\
+04eaa8be3257"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"generateallnets", "[", "polyhedron", "]"}]], "Input",
  CellChangeTimes->{{3.7718456575931826`*^9, 3.7718456786034946`*^9}},
- CellLabel->"In[18]:=",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
+ CellLabel->"In[23]:=",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
 
 Cell[BoxData[
  TemplateBox[{Graphics3DBox[
@@ -2431,8 +2461,7 @@ uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
        1, 2}, {6, 12, 13}, {13, 10, 11}, {4, 13, 9}, {7, 12, 15}, {12, 7, 
        3}, {7, 8, 3}, {6, 1, 5}, {13, 4, 10}, {13, 12, 9}, {12, 3, 9}, {3, 4, 
        9}, {12, 6, 15}, {6, 5, 15}, {5, 14, 15}, {10, 4, 11}}]], 
-     "Polyhedron"], ImageSize -> {138., Automatic}, 
-    ViewPoint -> {1.3, -2.4, 2.}, ViewVertical -> {0., 0., 1.}],RowBox[{"{", 
+     "Polyhedron"]],RowBox[{"{", 
      RowBox[{
        GraphicsBox[{
          Hue[0.94, 0.22, 1.], 
@@ -2505,7 +2534,6 @@ uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
           PolygonBox[{{0.2029630516349793, 1.2343393711516335`}, {
            0.41032032898062887`, 0.3774975549656149}, {0.23714422508917385`, 
            0.7546363006885701}}], 
-          
           PolygonBox[{{-0.32177469436510087`, 1.045507757787398}, {
            0.019830203519261846`, 1.0399016241721168`}, {0.2371442250891738, 
            0.7546363006885701}}], 
@@ -5199,8 +5227,9 @@ uOnJd2FIyT/kwyQCFsLgP2pbsbnwXuA/Iwi4lg==
            0.21920540292238644`, 1.7164402851070761`}, {-0.11618275399632383`,
             1.334295594331765}}]}}]}], "}"}]},
   "RowDefault"]], "Output",
- CellChangeTimes->{3.7718508467394753`*^9},
- CellLabel->"Out[18]=",ExpressionUUID->"23224260-2978-4a01-a850-587fa1de56e4"]
+ CellChangeTimes->{3.7718508467394753`*^9, 3.771928833363577*^9, 
+  3.7719323906915855`*^9},
+ CellLabel->"Out[23]=",ExpressionUUID->"90d9c3f3-0c7b-4be2-9aa2-5a8c595d03cf"]
 }, Open  ]]
 }, Open  ]],
 
@@ -5220,12 +5249,12 @@ every random polyhedron that I tested, although the program does run quite \
 slowly for polyhedra with high numbers of faces, as the complexity of the \
 graph and number of spanning trees increase drastically as the number of \
 faces increase. From this project, I acquired knowledge of many aspects of \
-three-dimensional modeling and geometric transformations, and I hope to work \
-on extensions of this project in the future.",
+three-dimensional modeling and geometric transformations.",
  FontSize->18]], "Text",
  CellChangeTimes->{{3.771813297815996*^9, 3.771813333798794*^9}, 
    3.771814049334543*^9, {3.771839686095993*^9, 3.771839784923648*^9}, 
-   3.771899335622609*^9},ExpressionUUID->"c2e88ab8-b17a-4286-8fda-\
+   3.771899335622609*^9, {3.7719312305798297`*^9, 
+   3.7719312407133713`*^9}},ExpressionUUID->"c2e88ab8-b17a-4286-8fda-\
 a292e70e60ec"]
 }, Open  ]],
 
@@ -5287,8 +5316,10 @@ DockedCells->{
       RGBColor[0.97, 0.83, 0.35], FontFamily -> "Source Sans Pro", FontSize -> 
       40]}], CellFrameMargins -> 10, Background -> 
    RGBColor[0.12, 0.14, 0.15]]},
-SpellingDictionaries->{"CorrectWords"->{"generateallnets"}},
-Magnification->1.25,
+SpellingDictionaries->{"CorrectWords"->{
+ "generateallnets", 
+  "branch\[CloseCurlyDoubleQuote] of the net to move together. This is done", 
+  "testforoverlap"}},
 FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 11, 2019)",
 StyleDefinitions->"Default.nb"
 ]
@@ -5304,71 +5335,74 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 337, 5, 120, "Title",ExpressionUUID->"49ab34ee-bfd5-49f5-beef-400d3cc456dd"],
-Cell[920, 29, 402, 6, 42, "Text",ExpressionUUID->"94536f76-3fd2-4bf6-b228-fa93ec9acae9"],
-Cell[1325, 37, 465, 10, 70, "Text",ExpressionUUID->"b70c649b-a958-4202-9f22-238ea1f9c7d4"],
+Cell[580, 22, 337, 5, 96, "Title",ExpressionUUID->"49ab34ee-bfd5-49f5-beef-400d3cc456dd"],
+Cell[920, 29, 402, 6, 34, "Text",ExpressionUUID->"94536f76-3fd2-4bf6-b228-fa93ec9acae9"],
+Cell[1325, 37, 465, 10, 56, "Text",ExpressionUUID->"b70c649b-a958-4202-9f22-238ea1f9c7d4"],
 Cell[CellGroupData[{
-Cell[1815, 51, 152, 3, 83, "Section",ExpressionUUID->"9a17fa75-1b19-4eed-ad4f-0d62c915ae69"],
-Cell[1970, 56, 746, 11, 112, "Text",ExpressionUUID->"fce853e8-8137-4d3d-837e-dbbe514450e2"]
+Cell[1815, 51, 152, 3, 67, "Section",ExpressionUUID->"9a17fa75-1b19-4eed-ad4f-0d62c915ae69"],
+Cell[1970, 56, 853, 12, 90, "Text",ExpressionUUID->"fce853e8-8137-4d3d-837e-dbbe514450e2"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2753, 72, 379, 6, 83, "Section",ExpressionUUID->"3c92e10f-adba-4adf-8074-e3a0b59e71bb"],
-Cell[3135, 80, 689, 11, 112, "Text",ExpressionUUID->"0e6f341a-3bfa-4ebb-9f7f-f95ea2649a0c"],
+Cell[2860, 73, 379, 6, 67, "Section",ExpressionUUID->"3c92e10f-adba-4adf-8074-e3a0b59e71bb"],
+Cell[3242, 81, 713, 11, 90, "Text",ExpressionUUID->"0e6f341a-3bfa-4ebb-9f7f-f95ea2649a0c"],
+Cell[3958, 94, 2869, 64, 488, "Code",ExpressionUUID->"30c99486-5004-480a-a088-28d65f1e5733"],
+Cell[6830, 160, 204, 4, 38, "CodeText",ExpressionUUID->"b5651655-24da-45d1-abfd-014caa5b1fcb"],
+Cell[7037, 166, 11943, 232, 67, "Input",ExpressionUUID->"ad0e9f5f-65af-4cae-9a9d-5642c691c91a"],
+Cell[18983, 400, 272, 5, 38, "CodeText",ExpressionUUID->"a3755c91-afd5-4df5-b9c4-0221a6a99aee"],
 Cell[CellGroupData[{
-Cell[3849, 95, 378, 7, 35, "Input",ExpressionUUID->"4f8c9095-b524-46de-94b5-2bf3d3ff84a7"],
-Cell[4230, 104, 11450, 226, 88, "Output",ExpressionUUID->"fb969ef7-74b1-491b-bbcd-9a6cd948353b"]
-}, Open  ]],
-Cell[15695, 333, 3827, 87, 610, "Code",ExpressionUUID->"30c99486-5004-480a-a088-28d65f1e5733"],
-Cell[CellGroupData[{
-Cell[19547, 424, 369, 6, 35, "Input",ExpressionUUID->"5b033a56-56fd-442d-b185-7209f95cbaee"],
-Cell[19919, 432, 8430, 176, 341, "Output",ExpressionUUID->"7fdce324-79fb-4020-a0cc-a3b369e98414"]
+Cell[19280, 409, 369, 6, 28, "Input",ExpressionUUID->"5b033a56-56fd-442d-b185-7209f95cbaee"],
+Cell[19652, 417, 8456, 177, 273, "Output",ExpressionUUID->"9e5c4585-0db2-4433-884b-f098de86967d"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28398, 614, 292, 4, 83, "Section",ExpressionUUID->"af3bca82-d599-48d9-b565-635a1e3ec40c"],
-Cell[28693, 620, 928, 14, 145, "Text",ExpressionUUID->"348dffea-e744-492d-8124-431aee26ce8e"],
-Cell[29624, 636, 271, 6, 47, "CodeText",ExpressionUUID->"64f4a8c5-ffe4-4536-9f82-91e5f890c165"],
-Cell[29898, 644, 777, 18, 130, "Code",ExpressionUUID->"c439427d-f27b-48d5-99ac-6f75ecca4f9e"],
+Cell[28157, 600, 292, 4, 67, "Section",ExpressionUUID->"af3bca82-d599-48d9-b565-635a1e3ec40c"],
+Cell[28452, 606, 1007, 14, 116, "Text",ExpressionUUID->"348dffea-e744-492d-8124-431aee26ce8e"],
+Cell[29462, 622, 280, 5, 38, "CodeText",ExpressionUUID->"64f4a8c5-ffe4-4536-9f82-91e5f890c165"],
+Cell[29745, 629, 777, 18, 104, "Code",ExpressionUUID->"c439427d-f27b-48d5-99ac-6f75ecca4f9e"],
+Cell[30525, 649, 200, 2, 38, "CodeText",ExpressionUUID->"3ee1e90b-8d04-4ce0-ae44-23bf6051068d"],
 Cell[CellGroupData[{
-Cell[30700, 666, 350, 7, 35, "Input",ExpressionUUID->"4db9e0f7-7b48-46f8-9333-8b963ea0c025"],
-Cell[31053, 675, 58393, 1270, 267, "Output",ExpressionUUID->"184ab2aa-6940-4186-933a-769cc6b76d19"]
+Cell[30750, 655, 350, 7, 28, "Input",ExpressionUUID->"4db9e0f7-7b48-46f8-9333-8b963ea0c025"],
+Cell[31103, 664, 58421, 1271, 214, "Output",ExpressionUUID->"734a301a-0174-4004-9c20-003982a3fc3c"]
 }, Open  ]],
-Cell[89461, 1948, 152, 3, 35, "Input",ExpressionUUID->"d8225d3f-afd4-4283-8e09-189bda1cf348"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[89650, 1956, 295, 4, 83, "Section",ExpressionUUID->"9358a5c6-0b70-4b1a-a672-e41a0e5ddbaa"],
-Cell[89948, 1962, 708, 10, 80, "Text",ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-228981904122"],
-Cell[90659, 1974, 344, 6, 47, "CodeText",ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-d0c82ef77f53"],
-Cell[91006, 1982, 1008, 26, 160, "Code",ExpressionUUID->"266065bb-34ca-4ad3-ac4b-a76c78a48d50"],
-Cell[92017, 2010, 515, 8, 47, "CodeText",ExpressionUUID->"6f70666b-2e14-40ff-a942-24173ed35c1e"],
-Cell[92535, 2020, 2793, 67, 370, "Code",ExpressionUUID->"3fb4986e-528d-46c7-b8c1-4f5350903d39"],
-Cell[95331, 2089, 697, 15, 47, "CodeText",ExpressionUUID->"c89e5d4b-6dd1-4465-b7c5-690fab07ea40"],
-Cell[96031, 2106, 6098, 131, 850, "Code",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"]
+Cell[89539, 1938, 152, 3, 28, "Input",ExpressionUUID->"d8225d3f-afd4-4283-8e09-189bda1cf348"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[102166, 2242, 238, 4, 83, "Section",ExpressionUUID->"9410e860-5f5f-4db9-8f02-50237a87edb0"],
-Cell[102407, 2248, 931, 14, 112, "Text",ExpressionUUID->"30d14a36-0afc-49a3-bb7e-39307dc050d9"],
-Cell[103341, 2264, 5367, 119, 795, "Code",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
+Cell[89728, 1946, 295, 4, 67, "Section",ExpressionUUID->"9358a5c6-0b70-4b1a-a672-e41a0e5ddbaa"],
+Cell[90026, 1952, 908, 14, 64, "Text",ExpressionUUID->"eabd42b0-33a8-47d5-8ecd-228981904122"],
+Cell[90937, 1968, 445, 6, 38, "Text",ExpressionUUID->"d4fdb5c6-c68d-45f1-af05-d0c82ef77f53"],
+Cell[91385, 1976, 1057, 26, 104, "Code",ExpressionUUID->"266065bb-34ca-4ad3-ac4b-a76c78a48d50"],
+Cell[92445, 2004, 1041, 19, 116, "Text",ExpressionUUID->"5fdebb12-a2de-49f1-ac6c-6478f9fcbbf9"],
+Cell[93489, 2025, 4852, 103, 680, "Code",ExpressionUUID->"4491fb46-aea1-42fb-9a57-77ac5474e76c"],
+Cell[98344, 2130, 1308, 25, 90, "Text",ExpressionUUID->"47620d73-e06d-4d30-8811-29be9c8f903c"],
+Cell[99655, 2157, 2334, 60, 320, "Code",ExpressionUUID->"e6bc852c-7bd0-4155-b295-f1ca919a57f0"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[108745, 2388, 154, 3, 83, "Section",ExpressionUUID->"ca0188df-ddbe-4bee-9957-4400265db344"],
-Cell[108902, 2393, 421, 12, 81, "Text",ExpressionUUID->"1c624274-8424-40e9-a447-a66e8cd986c9"],
+Cell[102026, 2222, 238, 4, 67, "Section",ExpressionUUID->"9410e860-5f5f-4db9-8f02-50237a87edb0"],
+Cell[102267, 2228, 497, 11, 64, "Text",ExpressionUUID->"4ab75779-cbea-4e1a-b2cc-727b6e47dbc2"],
+Cell[102767, 2241, 1143, 26, 248, "Code",ExpressionUUID->"186f62f9-0f08-496c-bdca-f47808164f6d"],
+Cell[103913, 2269, 1430, 34, 90, "Text",ExpressionUUID->"30d14a36-0afc-49a3-bb7e-39307dc050d9"],
+Cell[105346, 2305, 4634, 101, 728, "Code",ExpressionUUID->"24b2910e-8605-4bd6-aca5-35d899c2efce"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[109348, 2409, 226, 3, 35, "Input",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
-Cell[109577, 2414, 127406, 2788, 552, "Output",ExpressionUUID->"23224260-2978-4a01-a850-587fa1de56e4"]
+Cell[110017, 2411, 154, 3, 67, "Section",ExpressionUUID->"ca0188df-ddbe-4bee-9957-4400265db344"],
+Cell[110174, 2416, 478, 13, 38, "Text",ExpressionUUID->"1c624274-8424-40e9-a447-a66e8cd986c9"],
+Cell[110655, 2431, 242, 4, 38, "CodeText",ExpressionUUID->"26656ff3-3ef8-45a2-843d-04eaa8be3257"],
+Cell[CellGroupData[{
+Cell[110922, 2439, 226, 3, 28, "Input",ExpressionUUID->"78140a83-f465-4713-9a60-b8438569a0f3"],
+Cell[111151, 2444, 127347, 2787, 262, "Output",ExpressionUUID->"90d9c3f3-0c7b-4be2-9aa2-5a8c595d03cf"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[237032, 5208, 253, 4, 83, "Section",ExpressionUUID->"4fe6e45d-fe3d-4de9-a196-2004c7cdbbc0"],
-Cell[237288, 5214, 987, 14, 179, "Text",ExpressionUUID->"c2e88ab8-b17a-4286-8fda-a292e70e60ec"]
+Cell[238547, 5237, 253, 4, 67, "Section",ExpressionUUID->"4fe6e45d-fe3d-4de9-a196-2004c7cdbbc0"],
+Cell[238803, 5243, 975, 14, 116, "Text",ExpressionUUID->"c2e88ab8-b17a-4286-8fda-a292e70e60ec"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[238312, 5233, 156, 3, 83, "Section",ExpressionUUID->"34dba623-f0c6-4917-94dc-b8e1337517f6"],
-Cell[238471, 5238, 685, 10, 147, "Text",ExpressionUUID->"89ce3c3a-d145-46c8-8f09-c1b47509a929"]
+Cell[239815, 5262, 156, 3, 67, "Section",ExpressionUUID->"34dba623-f0c6-4917-94dc-b8e1337517f6"],
+Cell[239974, 5267, 685, 10, 90, "Text",ExpressionUUID->"89ce3c3a-d145-46c8-8f09-c1b47509a929"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[239193, 5253, 213, 4, 83, "Section",ExpressionUUID->"74553846-b316-4174-b5f8-4031c2721bc6"],
-Cell[239409, 5259, 755, 12, 114, "Text",ExpressionUUID->"231c14f8-da68-480d-9cf0-a447ef401e5c"]
+Cell[240696, 5282, 213, 4, 67, "Section",ExpressionUUID->"74553846-b316-4174-b5f8-4031c2721bc6"],
+Cell[240912, 5288, 755, 12, 64, "Text",ExpressionUUID->"231c14f8-da68-480d-9cf0-a447ef401e5c"]
 }, Open  ]]
 }, Open  ]]
 }

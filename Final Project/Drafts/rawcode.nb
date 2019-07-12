@@ -1,0 +1,394 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[     15380,        386]
+NotebookOptionsPosition[     15084,        373]
+NotebookOutlinePosition[     15428,        388]
+CellTagsIndexPosition[     15385,        385]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "polyhedronfacegraph", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"polyhedronfacegraph", "[", "polyhedron_", "]"}], ":=", " ", "\n", 
+   "\n", "    ", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dualpolyhedron", ",", " ", "vertexlist", ",", " ", "vertexpairings", 
+       ",", " ", "sortedvertices"}], "}"}], ",", "\n", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dualpolyhedron", " ", "=", " ", 
+       RowBox[{"DualPolyhedron", "[", "polyhedron", "]"}]}], ";", "  ", "\n", 
+      "    ", 
+      RowBox[{"vertexlist", " ", "=", " ", 
+       RowBox[{"dualpolyhedron", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "   ", "\n", "\n", "    ", 
+      RowBox[{"vertexpairings", " ", "=", " ", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Append", "[", "\n", "\n", "       ", 
+            RowBox[{
+             RowBox[{"Partition", "[", 
+              RowBox[{
+               RowBox[{"vertexlist", "[", 
+                RowBox[{"[", "n", "]"}], "]"}], ",", " ", "2", ",", " ", 
+               "1"}], "]"}], ",", " ", "\n", "       ", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Last", "[", 
+                RowBox[{"vertexlist", "[", 
+                 RowBox[{"[", "n", "]"}], "]"}], "]"}], ",", " ", 
+               RowBox[{"First", "[", 
+                RowBox[{"vertexlist", "[", 
+                 RowBox[{"[", "n", "]"}], "]"}], "]"}]}], "}"}]}], "]"}], ",",
+            "  ", "\n", "       ", 
+           RowBox[{"{", 
+            RowBox[{"n", ",", " ", "1", ",", " ", 
+             RowBox[{"Length", "[", "vertexlist", "]"}]}], "}"}]}], "]"}], 
+         ",", " ", "1"}], "]"}]}], ";", "\n", "\n", "    ", 
+      RowBox[{"sortedvertices", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Sort", " ", "/@", " ", "vertexpairings"}], " ", "//", " ", 
+        "DeleteDuplicates"}]}], ";", " ", "\n", "\n", "    ", 
+      RowBox[{"Graph", "[", 
+       RowBox[{
+        RowBox[{"UndirectedEdge", "@@@", "sortedvertices"}], ",", 
+        RowBox[{"VertexLabels", " ", "->", " ", "\"\<Name\>\""}]}], "]"}]}]}],
+     " ", "\n", "]"}]}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generatetrees", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"generatetrees", "[", "graph_", "]"}], " ", ":=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"FindSpanningTree", "[", 
+      RowBox[{"{", 
+       RowBox[{"graph", ",", " ", "n"}], "}"}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", " ", "1", ",", " ", 
+       RowBox[{"VertexCount", "[", "graph", "]"}]}], "}"}]}], "]"}]}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "normvector", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"normvector", "[", "coords_", "]"}], " ", ":=", " ", 
+    RowBox[{"Cross", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"coords", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], " ", "-", " ", 
+       RowBox[{"coords", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"coords", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], " ", "-", " ", 
+       RowBox[{"coords", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generatenetcoords", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"generatenetcoords", "[", 
+    RowBox[{"mesh_", ",", " ", "tree_"}], "]"}], ":=", "\n", "\n", "    ", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "transformations", ",", " ", "transformedmesh", ",", " ", "meshlist", 
+       ",", " ", "transformedmeshlist", ",", " ", "normals", ",", " ", 
+       "polygonfaces", ",", " ", "transformedrotation"}], "}"}], ",", "\n", 
+     "\n", "       ", 
+     RowBox[{
+      RowBox[{"polygonfaces", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Reap", "[", "\n", "\n", "         ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"meshlist", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"MeshPrimitives", "[", 
+              RowBox[{"mesh", ",", " ", "2"}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "\n", "\n",
+            "         ", 
+           RowBox[{"transformations", " ", "=", "      ", "\n", "\t\t\t", 
+            RowBox[{
+             RowBox[{"RotationTransform", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"normvector", "[", 
+                 RowBox[{"meshlist", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", " ", "0", ",", " ", 
+                  RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], " ", "@*", " ",
+              "\n", "\t\t\t\t", 
+             RowBox[{"TranslationTransform", "[", 
+              RowBox[{"-", 
+               RowBox[{"PropertyValue", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"mesh", ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"2", ",", " ", "1"}], "}"}]}], "}"}], ",", " ", 
+                 "MeshCellCentroid"}], "]"}]}], "]"}]}]}], ";", "  ", "\n", 
+           "\n", "         ", 
+           RowBox[{"transformedmesh", " ", "=", " ", 
+            RowBox[{"TransformedRegion", "[", 
+             RowBox[{"mesh", ",", " ", "transformations"}], "]"}]}], ";", 
+           "      ", "\n", "         ", 
+           RowBox[{"transformedmeshlist", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"MeshPrimitives", "[", 
+              RowBox[{"transformedmesh", ",", " ", "2"}], "]"}], "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";", "     ", 
+           "\n", "\n", "         ", 
+           RowBox[{"normals", " ", "=", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"normvector", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+             "transformedmeshlist"}]}], ";", "    ", "\n", "\n", "         ", 
+           RowBox[{"Sow", "[", 
+            RowBox[{
+             RowBox[{"transformedmeshlist", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", " ", "\"\<flat\>\""}], 
+            "]"}], ";", "\n", "\n", "         ", 
+           RowBox[{
+            RowBox[{"transformedrotation", "[", "1", "]"}], " ", "=", " ", 
+            RowBox[{"TransformationFunction", "[", 
+             RowBox[{"IdentityMatrix", "[", "4", "]"}], "]"}]}], ";", "\n", 
+           "\n", "         ", 
+           RowBox[{"BreadthFirstScan", "[", 
+            RowBox[{"tree", ",", " ", "1", ",", " ", 
+             RowBox[{"\"\<DiscoverVertex\>\"", " ", "->", " ", 
+              RowBox[{"unfold", "[", 
+               RowBox[{
+               "transformedmeshlist", ",", " ", "normals", ",", " ", 
+                "transformedrotation"}], "]"}]}]}], "]"}], ";"}], ",", "  ", 
+          "\n", "         ", 
+          RowBox[{"{", "\"\<flat\>\"", "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", " ", "All", ",", " ", "1"}], "]"}], 
+        "]"}]}], ";", "\n", "       ", 
+      RowBox[{"Chop", "[", "polygonfaces", "]"}]}]}], "\n", "\t\t", "]"}]}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "unfold", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"unfold", "[", 
+      RowBox[{
+      "meshlist_", ",", " ", "normals_", ",", " ", "transformedrotation_"}], 
+      "]"}], "[", 
+     RowBox[{"u_", ",", " ", "v_", ",", " ", "_"}], "]"}], " ", "/;", " ", 
+    RowBox[{"(", 
+     RowBox[{"u", " ", "=!=", " ", "v"}], ")"}]}], " ", ":=", "\n", "\n", 
+   "\t", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "edgecoord1", ",", " ", "edgecoord2", ",", " ", "angle", ",", " ", 
+       "rotation"}], "}"}], ",", "\n", "\t", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], " ", "=", " ", 
+       RowBox[{"Intersection", " ", "@@", " ", 
+        RowBox[{"meshlist", "\[LeftDoubleBracket]", 
+         RowBox[{"{", 
+          RowBox[{"u", ",", " ", "v"}], "}"}], "\[RightDoubleBracket]"}]}]}], 
+      ";", " ", "\n", "\t\t", 
+      RowBox[{"angle", " ", "=", " ", 
+       RowBox[{"DihedralAngle", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], ",", " ", 
+         RowBox[{"normals", "\[LeftDoubleBracket]", 
+          RowBox[{"{", 
+           RowBox[{"u", ",", " ", "v"}], "}"}], "\[RightDoubleBracket]"}]}], 
+        "]"}]}], ";", "\n", "\t\t", 
+      RowBox[{"rotation", " ", "=", " ", 
+       RowBox[{"RotationTransform", "[", 
+        RowBox[{"angle", ",", " ", 
+         RowBox[{"edgecoord2", " ", "-", " ", "edgecoord1"}], ",", " ", 
+         RowBox[{"Mean", "[", 
+          RowBox[{"{", 
+           RowBox[{"edgecoord1", ",", " ", "edgecoord2"}], "}"}], "]"}]}], 
+        "]"}]}], ";", "\n", "\t\t", 
+      RowBox[{
+       RowBox[{"transformedrotation", "[", "u", "]"}], " ", "=", " ", 
+       RowBox[{
+        RowBox[{"transformedrotation", "[", "v", "]"}], "@*", "rotation"}]}], 
+      ";", "\n", "\t\t", 
+      RowBox[{"Sow", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"transformedrotation", "[", "u", "]"}], " ", "@", " ", 
+         RowBox[{
+         "meshlist", "\[LeftDoubleBracket]", "u", "\[RightDoubleBracket]"}]}],
+         ",", " ", "\"\<flat\>\""}], "]"}], ";"}]}], "\n", "\t", "]"}]}], 
+  "\n", "\t"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"testforoverlap", "[", 
+    RowBox[{"polyhedron_", ",", " ", "netcoords_"}], "]"}], " ", ":=", " ", 
+   "\n", "\n", "\t\t", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"surfacearea", ",", " ", "netsurfacearea"}], "}"}], ",", "\n", 
+     "\t\t", "\n", "            ", 
+     RowBox[{
+      RowBox[{"surfacearea", " ", "=", " ", 
+       RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
+      "            ", 
+      RowBox[{"netsurfacearea", " ", "=", " ", 
+       RowBox[{"RegionMeasure", "[", 
+        RowBox[{"RegionUnion", "[", 
+         RowBox[{"Polygon", " ", "/@", " ", "netcoords"}], "]"}], "]"}]}], 
+      ";", "\n", "            ", 
+      RowBox[{"Return", "[", 
+       RowBox[{"surfacearea", " ", "\[Equal]", " ", "netsurfacearea"}], "]"}],
+       ";"}]}], "\n", "            ", "\n", "        ", "]"}]}], "\n", 
+  "       "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "generateallnets", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"generateallnets", "[", "polyhedron_", "]"}], " ", ":=", " ", "\n", 
+  "\n", "    ", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "netcoords", ",", " ", "trees", ",", " ", "graph", ",", " ", "mesh", ",",
+       " ", "surfacearea", ",", " ", "netsurfacearea", ",", " ", "goodnets"}],
+      "}"}], ",", "\n", "\n", "    ", 
+    RowBox[{
+     RowBox[{"mesh", " ", "=", " ", 
+      RowBox[{"BoundaryDiscretizeGraphics", "[", "polyhedron", "]"}]}], ";", 
+     "   ", "\n", "    ", 
+     RowBox[{"graph", " ", "=", " ", 
+      RowBox[{"polyhedronfacegraph", "[", "polyhedron", "]"}]}], ";", "\n", 
+     "    ", 
+     RowBox[{"trees", " ", "=", " ", 
+      RowBox[{"generatetrees", "[", "graph", "]"}]}], ";", "\n", "\n", "    ", 
+     RowBox[{"goodnets", " ", "=", " ", 
+      RowBox[{"{", "}"}]}], ";", "   ", "\n", "\n", "    ", 
+     RowBox[{"Table", "[", "     ", "\n", "    ", "\n", "        ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"netcoords", " ", "=", " ", 
+         RowBox[{"First", "@", 
+          RowBox[{"generatenetcoords", "[", 
+           RowBox[{"mesh", ",", " ", 
+            RowBox[{"trees", "[", 
+             RowBox[{"[", "treeposition", "]"}], "]"}]}], "]"}]}]}], ";", 
+        "    ", "\n", "        ", 
+        RowBox[{"netcoords", " ", "=", " ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Delete", "[", 
+            RowBox[{
+             RowBox[{"netcoords", "[", 
+              RowBox[{"[", 
+               RowBox[{"n", ",", " ", "m"}], "]"}], "]"}], ",", " ", 
+             RowBox[{"{", "3", "}"}]}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"n", ",", " ", "1", ",", " ", 
+             RowBox[{"Length", "[", "netcoords", "]"}]}], "}"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"m", ",", " ", "1", ",", " ", "3"}], "}"}]}], "]"}]}], 
+        ";", "        ", "\n", "\n", "        ", 
+        RowBox[{"surfacearea", " ", "=", " ", 
+         RowBox[{"SurfaceArea", "[", "polyhedron", "]"}]}], ";", "\n", 
+        "        ", 
+        RowBox[{"netsurfacearea", " ", "=", " ", 
+         RowBox[{"RegionMeasure", "[", 
+          RowBox[{"RegionUnion", "[", 
+           RowBox[{"Polygon", " ", "/@", " ", "netcoords"}], "]"}], "]"}]}], 
+        ";", "\n", "\n", "        ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"testforoverlap", "[", 
+            RowBox[{"polyhedron", ",", " ", "netcoords"}], "]"}], " ", 
+           "\[Equal]", " ", "True"}], ",", "             ", "\n", 
+          "           ", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"goodnets", ",", " ", 
+            RowBox[{"Graphics", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Hue", "[", 
+                RowBox[{"0.94", ",", " ", "0.22", ",", " ", "1."}], "]"}], 
+               ",", " ", 
+               RowBox[{"EdgeForm", "[", 
+                RowBox[{"{", 
+                 RowBox[{"Thin", ",", " ", "Pink"}], "}"}], "]"}], ",", " ", 
+               RowBox[{"Polygon", " ", "/@", " ", "netcoords"}]}], "}"}], 
+             "]"}]}], "]"}]}], "        ", "\n", "        ", "]"}], ";"}], 
+       ",", "  ", "\n", "\n", "        ", 
+       RowBox[{"{", 
+        RowBox[{"treeposition", ",", " ", "1", ",", " ", 
+         RowBox[{"Length", "[", "trees", "]"}]}], "}"}]}], " ", "\n", "    ", 
+      "]"}], ";", "    ", "\n", "\n", "    ", 
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Graphics3D", "[", "polyhedron", "]"}], ",", " ", 
+        "goodnets"}], "}"}], "]"}]}]}], "\n", "]"}]}]}], "Code",
+ CellChangeTimes->{{3.7719324220686207`*^9, 3.7719324947270594`*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"98753c7c-0a94-476d-b246-083d8987dd40"]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 11, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 14519, 351, 1977, "Code",ExpressionUUID->"98753c7c-0a94-476d-b246-083d8987dd40"]
+}
+]
+*)
+
